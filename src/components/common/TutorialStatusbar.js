@@ -1,4 +1,3 @@
-import { LinearGradient } from "expo-linear-gradient";
 import React from "react";
 
 const TutorialStatusbar = ({ status }) => {

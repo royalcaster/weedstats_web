@@ -69,11 +69,11 @@ const Intro = ({ onExit }) => {
 
             {showTutorial ? <Tutorial toggleNavbar={() => null} type={"first"} onDone={() => {setShowTutorial(false); handleStep()}}/> : null}
 
-            <View style={{height: responsiveHeight(5)}}></View>
+            <View style={{height: "5%"}}></View>
             <Image style={styles.logo} source={require("../../data/img/logo.png")}/>
             <Text style={styles.step_label}>{language.step} {step} {language.of_3}</Text>
             <IntroStatusbar progress={step}/>
-            <View style={{height: responsiveHeight(2.5)}}></View>
+            <View style={{height: "2.5%"}}></View>
             <Text style={styles.title}>{titles[step - 1]}</Text>
             {
                 step == 1 ? <>
@@ -111,8 +111,8 @@ const styles = StyleSheet.create({
         alignItems: "center"
     },
     logo: {
-        height: responsiveHeight(8),
-        width: responsiveWidth(12)
+        height: "8%",
+        width: "12&"
     },
     step_label: {
         color: "white",
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     title: {
         color: "white",
         fontFamily: "PoppinsMedium",
-        fontSize: responsiveFontSize(2.5),
+        fontSize: "2.5rem",
         maxWidth: "80%",
         textAlign: "center"
     }

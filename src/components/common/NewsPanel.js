@@ -11,9 +11,6 @@ import Button from "./Button";
 import { doc, updateDoc, getDoc, collection } from "@firebase/firestore";
 import { app, firestore } from "../../data/FirebaseConfig";
 
-//Expo
-import Constants from "expo-constants";
-
 LogBox.ignoreLogs(['Warning: Each child in a list should have a unique "key" prop.']);
 
 const NewsPanel = ({ language, onExit, refreshUser }) => {
@@ -64,12 +61,12 @@ const NewsPanel = ({ language, onExit, refreshUser }) => {
         <View style={{backgroundColor: "#1E2132", height: "80%", width: "95%", borderRadius: 25}}>
 
         <View style={{flex: 1}}>
-            <View style={{height: responsiveHeight(2)}}></View>
+            <View style={{height: "2%"}}></View>
             <View style={styles.knob}></View>
-            <View style={{height: responsiveHeight(2)}}></View>
+            <View style={{height: "2%"}}></View>
             <Text style={styles.heading}>What's new?</Text>
-            <View style={{height: responsiveHeight(0.5)}}></View>
-            <Text style={[styles.heading, {fontFamily: "PoppinsMedium", fontSize: responsiveFontSize(1.5)}]}>{app_version}</Text>
+            <View style={{height: "0.5%"}}></View>
+            <Text style={[styles.heading, {fontFamily: "PoppinsMedium", fontSize: "1.5rem"}]}>{app_version}</Text>
         </View>
 
         <View style={{flex: 3, width: "100%", alignSelf: "center"}}>
@@ -117,7 +114,7 @@ const styles = StyleSheet.create({
       },
     heading: {
         color: "white",
-        fontSize: responsiveFontSize(3),
+        fontSize: "3rem",
         fontFamily: "PoppinsBlack",
         marginLeft: 30
     },
@@ -126,13 +123,13 @@ const styles = StyleSheet.create({
     },
     title: {
         color: "white",
-        fontSize: responsiveFontSize(2),
+        fontSize: "2rem",
         fontFamily: "PoppinsBlack",
         marginHorizontal: 20
     },
     text: {
         color: "white",
-        fontSize: responsiveFontSize(1.5),
+        fontSize: "1.5rem",
         fontFamily: "PoppinsMedium",
         marginHorizontal: 20
     }

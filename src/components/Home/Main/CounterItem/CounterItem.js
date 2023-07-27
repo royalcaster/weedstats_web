@@ -15,31 +15,6 @@ const CounterItem = ({ type, counter, toggleCounter, toggleBorderColor }) => {
 
   const language = useContext(LanguageContext);
 
-  const fadeAnim = useRef(new Animated.Value(0)).current;
-  const scaleAnim = useRef(new Animated.Value(200)).current;
-
-  useEffect(() => {
-    Animated.timing(scaleAnim, {
-      toValue: 0,
-      useNativeDriver: true,
-      duration: 400,
-      easing: Easing.bezier(0, 1.02, 0.21, 0.97),
-    }).start();
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 200,
-      useNativeDriver: true,
-    }).start();
-  }, []);
-
-  React.useEffect(() => {
-    Animated.timing(fadeAnim, {
-      toValue: 1,
-      duration: 200,
-      useNativeDriver: true,
-    }).start();
-  }, [fadeAnim]);
-
   const calcLevelStatus = (counter) => {
 
     if (counter == null) {
@@ -89,45 +64,45 @@ const CounterItem = ({ type, counter, toggleCounter, toggleBorderColor }) => {
   }
 
   return (
-    <Animated.View style={[styles.container, { transform: [{ translateY: scaleAnim }], opacity: fadeAnim }]}>
+    <div style={[styles.container]}>
 
-      <View style={{position: "absolute", alignSelf: "center", zIndex: 10000, justifyContent: "center", width: "100%", top: -30}}>
-        <LevelImage index={Math.floor(counter / 70)} style={{width: responsiveHeight(8), height: responsiveHeight(8), alignSelf: "center"}}/>
-      </View>
+      <div style={{position: "absolute", alignSelf: "center", zIndex: 10000, justifyContent: "center", width: "100%", top: -30}}>
+        <LevelImage index={Math.floor(counter / 70)} style={{width: "8%", height: "8%", alignSelf: "center"}}/>
+      </div>
 
-      <Animated.View style={[styles.card_opener, {backgroundColor: convertToRGB(getGradientColors(counter)[0].substring(1,7), 0.4), borderColor: getGradientColors(counter)[0], borderWidth: 0.5, transform: [{translateX: scaleAnim}]}]}>
-        <View style={{backgroundColor: getGradientColors(counter)[0], height: responsiveHeight(6.5), width: responsiveHeight(6.5), justifyContent: "center", borderRadius: 10}}>
-          <TypeImage type={type} x={responsiveHeight(5)}/>
-        </View>
-      </Animated.View>
+      <div style={[styles.card_opener, {backgroundColor: convertToRGB(getGradientColors(counter)[0].substring(1,7), 0.4), borderColor: getGradientColors(counter)[0], borderWidth: 0.5 }]}>
+        <div style={{backgroundColor: getGradientColors(counter)[0], height: "6.5%", width: "6.5%", justifyContent: "center", borderRadius: 10}}>
+          <TypeImage type={type} x={50}/>
+        </div>
+      </div>
       
-      <View style={[styles.card_content]}>
-        <View style={{flex: 6}}>
-        <View style={styles.grab}></View>
-          <View style={{flex: 1, flexDirection: "row", padding: 5, paddingBottom: 0}}>
-            <View style={{flex: 2, alignItems: "center", flexGrow: 3}}>
-              <Text style={styles.counter_number}>{counter > 0 ? counter : "0"}</Text>
-            </View>
-            <View style={{flex: 5, padding: 5, maxHeight: responsiveHeight(7)}}>
+      <div style={[styles.card_content]}>
+        <div style={{flex: 6}}>
+        <div style={styles.grab}></div>
+          <div style={{flex: 1, flexDirection: "row", padding: 5, paddingBottom: 0}}>
+            <div style={{flex: 2, alignItems: "center", flexGrow: 3}}>
+              <p style={styles.counter_number}>{counter > 0 ? counter : "0"}</p>
+            </div>
+            <div style={{flex: 5, padding: 5, maxHeight: "7%"}}>
               <Statusbar status={calcLevelStatus(counter)} />
-            </View>
-          </View> 
-          <View style={{flex: 1, padding: 10, paddingTop: 5}}>
+            </div>
+          </div> 
+          <div style={{flex: 1, padding: 10, paddingTop: 5}}>
             <Slider firstColor={getGradientColors(counter)[0]} secondColor={getGradientColors(counter)[2]} onToggleCounter={() => {toggleCounter(type.toLowerCase(), getGradientColors(counter)[0]); toggleBorderColor(getGradientColors(counter)[0])}}/>
-          </View>
-        </View>  
-        <View style={{flex: 1, flexDirection: "column"}}>
+          </div>
+        </div>  
+        <div style={{flex: 1, flexDirection: "column"}}>
           <LevelBar index={Math.floor(counter / 70)} counter={counter}/>
-        </View>
-      </View> 
+        </div>
+      </div> 
 
-    </Animated.View>
+    </div>
   );
 };
 
 export default CounterItem;
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     margin: 5,
     marginVertical: 15,
@@ -135,9 +110,9 @@ const styles = StyleSheet.create({
   },
   counter_number: {
     color: "white",
-    fontSize: responsiveFontSize(6),
+    fontSize: "6rem",
     fontFamily: "PoppinsMedium",
-    marginBottom: responsiveHeight(1) * -1
+    marginBottom: "1%" * -1
   },
   card_opener: {
     flex: 1,
@@ -163,4 +138,4 @@ const styles = StyleSheet.create({
     marginVertical: 15,
     marginBottom: 5
   }
-});
+};

@@ -34,7 +34,7 @@ import Main from "./Main/Main";
       
       <>
         <Routes>
-          <Route path="/counter" element={<Main onWriteComplete={onWriteComplete} onSetUser={onSetUser} sendPushNotification={sendPushNotification} toggleNavbar={toggleNavbar} refreshUser={refreshUser}/>} />
+          <Route path="/counter" element={<Main onWriteComplete={onWriteComplete} onSetUser={onSetUser} refreshUser={refreshUser}/>} />
         </Routes>
       </>
   

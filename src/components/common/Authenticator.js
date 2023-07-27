@@ -98,12 +98,12 @@ const Authenticator = ({ first, onSubmit, onCancel, onExit }) => {
         {//Wenn Authenticator das erste mal aufgerufen wird, fragt er danach, ob die App in Zukunft mit Fingerabdruck etc entsperrt werden soll
         }
         <View style={{flex: 1, alignItems: "center", justifyContent: "center"}}>
-            <View style={{height: responsiveHeight(15)}}></View>
+            <View style={{height: "15%"}}></View>
             <IonIcons name="finger-print" style={styles.fingerprint}/>
-            <View style={{height: responsiveHeight(15)}}></View>
+            <View style={{height: "15%"}}></View>
             <Button title={language.activate_unlock} color={"#0080FF"} fontColor={"white"} hovercolor={"rgba(255,255,255,0.25)"} onPress={() => checkLocalAuth()}/>
             <Button onPress={() => {hide()}} title={language.later} color={"#484F78"} fontColor={"white"} hovercolor={"rgba(255,255,255,0.25)"} />
-            <View style={{height: responsiveHeight(5)}}></View>
+            <View style={{height: "5%"}}></View>
             <Text style={{fontFamily: "PoppinsLight", color: "#484F78", width: "80%", textAlign: "center"}}>Du kannst deine Entscheidung in den Einstellungen ändern.</Text>
         </View>
         </> 
@@ -120,20 +120,3 @@ const Authenticator = ({ first, onSubmit, onCancel, onExit }) => {
 }
 
 export default Authenticator
-
-/* const styles = StyleSheet.create({
-    container: {
-        flex: 1
-    },
-    title: {
-        color: "white",
-        fontFamily: "PoppinsBlack",
-        fontSize: responsiveFontSize(3),
-        textAlign: "center",
-        width: "80%"
-    },
-    fingerprint: {
-        color: "#0781E1",
-        fontSize: responsiveFontSize(15)
-      },
-}); */

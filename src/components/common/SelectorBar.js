@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     item_label: {
         color: "white",
         fontFamily: "PoppinsMedium",
-        fontSize: responsiveFontSize(1.5),
+        fontSize: "1.5rem",
         textAlignVertical: "center"
     }
 });

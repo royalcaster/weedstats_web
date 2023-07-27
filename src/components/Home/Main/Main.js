@@ -367,7 +367,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
             </Animated.View>
             <View>
               <Animated.Text style={[{ transform: [{ translateY: headingAnim }], textAlign: "center"},styles.main_heading,]}>{language.short == "de" ? "Hallo" : "Hello"}</Animated.Text>
-              <Animated.Text style={{fontSize: responsiveFontSize(2), fontFamily: "PoppinsBlack", textAlign: "center", color: "white", transform: [{ translateY: headingAnim }]}}>{user.username}</Animated.Text>
+              <Animated.Text style={{fontSize: "2rem", fontFamily: "PoppinsBlack", textAlign: "center", color: "white", transform: [{ translateY: headingAnim }]}}>{user.username}</Animated.Text>
             </View>
             <Animated.View
               style={{
@@ -495,7 +495,7 @@ const styles = StyleSheet.create({
   },
   main_heading: {
     color: "white",
-    fontSize: responsiveFontSize(1.5),
+    fontSize: "1.5rem",
     fontFamily: "PoppinsLight",
     position: "relative",
   },

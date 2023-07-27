@@ -1,5 +1,8 @@
 import react from 'react'
 
+//CSS
+import './TypeImage.css'
+
 const TypeImage = ({ type, backgroundColor, x }) => {
 
     const size = x;
@@ -7,64 +10,52 @@ const TypeImage = ({ type, backgroundColor, x }) => {
     switch(type){
         case "joint": 
         return (
-        <View style={[styles.container, {backgroundColor: backgroundColor ? backgroundColor : null, height: x}]}>
-            <Image style={[styles.image,{height: x*0.5, width: x*0.9}]} source={require('../../data/img/joint.png')}/>
-        </View>
+        <div className='container' style={{backgroundColor: backgroundColor ? backgroundColor : null, height: x}}>
+            <img src={require('../../data/img/joint.png')} alt={type + "-Image"} style={[{height: x*0.5, width: x*0.9, alignSelf: "center"}]} />
+        </div>
         )
         break;
 
         case "bong": 
         return (
-        <View style={[styles.container, {backgroundColor: backgroundColor ? backgroundColor : null, height: x}]}>
-            <Image style={[styles.image,{height: x*1.1, width: x*0.5}]} source={require('../../data/img/bong.png')}/>
-        </View>
+        <div className='container' style={{backgroundColor: backgroundColor ? backgroundColor : null, height: x}}>
+            <img src={require('../../data/img/bong.png')} alt={type + "-Image"}  style={[{height: x*1.1, width: x*0.5, alignSelf: "center"}]}/>
+        </div>
         )
         break;
 
         case "vape": 
         return (
-        <View style={[styles.container, {backgroundColor: backgroundColor ? backgroundColor : null, height: x}]}>
-            <Image style={[styles.image,{height: x*1.1, width: x*0.4}]} source={require('../../data/img/vape.png')}/>
-        </View>
+        <div className='container' style={{backgroundColor: backgroundColor ? backgroundColor : null, height: x}}>
+            <img src={require('../../data/img/vape.png')} alt={type + "-Image"}  style={[{height: x*1.1, width: x*0.4, alignSelf: "center"}]}/>
+        </div>
         )
         break;
 
         case "pipe": 
         return (
-        <View style={[styles.container, {backgroundColor: backgroundColor ? backgroundColor : null, height: x}]}>
-            <Image style={[styles.image,{height: x*0.5, width: x*0.9}]} source={require('../../data/img/pipe.png')}/>
-        </View>
+        <div className='container' style={{backgroundColor: backgroundColor ? backgroundColor : null, height: x}}>
+            <img src={require('../../data/img/pipe.png')} alt={type + "-Image"}  style={[{height: x*0.5, width: x*0.9, alignSelf: "center"}]}/>
+        </div>
         )
         break;
 
         case "cookie": 
         return (
-        <View style={[styles.container, {backgroundColor: backgroundColor ? backgroundColor : null, height: x}]}>
-            <Image style={[styles.image,{height: x*0.8, width: x*0.9}]} source={require('../../data/img/cookie.png')}/>
-        </View>
+        <div className='container' style={{backgroundColor: backgroundColor ? backgroundColor : null, height: x}}>
+            <img src={require('../../data/img/cookie.png')} alt={type + "-Image"}  style={[{height: x*0.8, width: x*0.9, alignSelf: "center"}]}/>
+        </div>
         )
         break;
         
         default: 
         return (
-        <View style={[styles.container, {backgroundColor: backgroundColor ? backgroundColor : null, height: x}]}>
-            <Image style={[styles.image,{height: x-10, width: x-15}]} source={require('../../data/img/logo.png')}/>
-        </View>
+        <div className='container' style={{backgroundColor: backgroundColor ? backgroundColor : null, height: x}}>
+            <img src={require('../../data/img/logo.png')} alt={"Logo-Image"}  style={[{height: x-10, width: x-15, alignSelf: "center"}]} source={require('../../data/img/logo.png')}/>
+        </div>
         )
     }
 
 }
 
 export default TypeImage
-
-const styles = StyleSheet.create({
-    container: {
-        justifyContent: "center",
-        alignItems: "center",
-        alignContent: "center",
-        backgroundColor: "green"
-    },
-    image: {
-        alignSelf: "center"
-    }
-});

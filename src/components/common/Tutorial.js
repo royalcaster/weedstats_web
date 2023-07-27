@@ -10,8 +10,6 @@ import IconButton from '../common/IconButton'
 import Levels from '../../data/Levels.json'
 import { LanguageContext } from "../../data/LanguageContext";
 
-//Expo
-import * as Linking from 'expo-linking'
 
 const Tutorial = ({ onDone, type}) => {
 
@@ -20,195 +18,173 @@ const Tutorial = ({ onDone, type}) => {
 
     //State
     const [consented, setConsented] = useState(false);
-    //ref
-    const touchRef = useRef(new Animated.Value(0)).current
 
     useEffect(() => {
       toggleTouchAnimation();
       show();
     },[]);
 
-    useBackHandler(() => {
-      if (type != "first") {
-        onDone();
-      }
-      return true
-    })
-
-const slide = useRef(new Animated.Value(0)).current;
+  
 
 const show = () => {
-    Animated.timing(slide,{
-        toValue: 1,
-        duration: 400,
-        useNativeDriver: true,
-    }).start()
+    
 }
 
 const hide = () => {
-    Animated.timing(slide,{
-        toValue: 0,
-        duration: 400,
-        useNativeDriver: true
-    }).start(({finished}) => {
-        finished ? onDone() : null;
-    })
+    
 }
 
   const toggleTouchAnimation = () => {
-    touchRef.setValue(0);
-    Animated.timing(touchRef, {
-      toValue: responsiveHeight(-20),
+    /* Animated.timing(touchRef, {
+      toValue: "20%" * -1,
       useNativeDriver: true,
       duration: 2000,
       easing: Easing.bezier(0.2, 1, 0.21, 0.97),
     }).start(({finished}) => {
       finished ? setTimeout(() => toggleTouchAnimation(), 500) : null;
-    });
+    }); */
   }
 
   const RenderItem = ( item ) => {
     return (
-      <View style={{width: "100%", justifyContent: "center", flexDirection: "column", height: Dimensions.get("window").height, bottom: 0, zIndex: 10, borderRadius: 25, overflow: "hidden", backgrounColor: item.backgroundColor}}>
+      <div style={{width: "100%", justifyContent: "center", flexDirection: "column", height: "100%", bottom: 0, zIndex: 10, borderRadius: 25, overflow: "hidden", backgrounColor: item.backgroundColor}}>
         {item.testComponent ? item.testComponent : null}
-      </View>
+      </div>
     );
   }
 
   const titleScreen = () => {
     return <>
-    <View style={styles.testComponentContainer}>
-      <View style={{flex: 1, justifyContent: "center"}}>
-        <Image style={{height: 100, width: 100, alignSelf: "center", borderRadius: 15}} source={require('../../../assets/icon.png')}/>
-        <View style={{height: 20}}></View>
-        <Text style={[styles.logo_heading,{position: "relative"}]}>WeedStats</Text>
-        <Text style={[styles.logo_heading,{position: "relative", color: "#F2338C", fontSize: responsiveFontSize(2.5)}]}>Tutorial</Text>
-      </View>
-      <View style={{flex: 1, justifyContent: "center"}}>
-      <Animated.View style={{
+    <div style={styles.testComponentContainer}>
+      <div style={{flex: 1, justifyContent: "center"}}>
+        <img style={{height: 100, width: 100, alignSelf: "center", borderRadius: 15}} src={require('../../data/img/logo.png')}/>
+        <div style={{height: 20}}></div>
+        <p style={[styles.logo_heading,{position: "relative"}]}>WeedStats</p>
+        <p style={[styles.logo_heading,{position: "relative", color: "#F2338C", fontSize: "2.5rem"}]}>Tutorial</p>
+      </div>
+      <div style={{flex: 1, justifyContent: "center"}}>
+      <div style={{
           alignSelf: "center",
-          transform: [
-            {translateY: touchRef}
-          ]
         }}>
-          <IonIcons name="finger-print" style={styles.fingerprint}/>
-        </Animated.View>
-        <View style={{height: responsiveHeight(2)}}></View>
-        <Text style={styles.swipe_up_text}>{language.tutorial_swipe_text}</Text>
-      </View>
-    </View>
+          {/* <IonIcons name="finger-print" style={styles.fingerprint}/> */}
+        </div>
+        <div style={{height: "2%"}}></div>
+        <p style={styles.swipe_up_text}>{language.tutorial_swipe_text}</p>
+      </div>
+    </div>
     </>
   }
 
   const welcomeScreen = () => {
-    return <View>
+    return <div>
 
-    <View style={{height: responsiveHeight(10)}}></View>
-    <Text style={styles.text}><Image style={styles.small_logo} source={require("../../../assets/icon.png")}/> WeedStats bietet verschiedenste Möglichkeiten zum <Text style={{color: Levels[0].colors[0]}}>Erfassen</Text>, <Text style={{color: Levels[2].colors[0]}}>Auswerten</Text> und <Text style={{color: Levels[6].colors[0]}}>Teilen</Text> deines Gras-Konsums. {"\n"}Diese kurze Tour wird dir die wesentlichen Funktionen der App beibringen.</Text>
-    <View style={{height: responsiveHeight(10)}}></View>
-    <Text style={styles.swipe_up_text}>{language.tutorial_are_you_ready}</Text>
+    <div style={{height: "10%"}}></div>
+    <p style={styles.text}><img style={styles.small_logo} src={require("../../data/img/logo.png")}/> WeedStats bietet verschiedenste Möglichkeiten zum <p style={{color: Levels[0].colors[0]}}>Erfassen</p>, <p style={{color: Levels[2].colors[0]}}>Auswerten</p> und <p style={{color: Levels[6].colors[0]}}>Teilen</p> deines Gras-Konsums. {"\n"}Diese kurze Tour wird dir die wesentlichen Funktionen der App beibringen.</p>
+    <div style={{height: "10%"}}></div>
+    <p style={styles.swipe_up_text}>{language.tutorial_are_you_ready}</p>
     
-    </View>
+    </div>
   }
       
   const counterScreen = () => {
     return <>
-      <Text style={styles.title2}>{language.tutorial_counter_title}</Text>
-      <Text style={styles.text2}>{language.tutorial_counter_text}</Text>
-      <View style={{height: responsiveHeight(5)}}></View>
-      <Image source={require('../../data/img/tutorial/counter.png')} style={styles.screenshot} />
+      <p style={styles.title2}>{language.tutorial_counter_title}</p>
+      <p style={styles.text2}>{language.tutorial_counter_text}</p>
+      <div style={{height: "5%"}}></div>
+      <img src={require('../../data/img/tutorial/counter.png')} style={styles.screenshot} />
     </>
   }
 
   const statsScreen = () => {
-    return <View>
-      <Text style={styles.title2}>{language.tutorial_stats_title}</Text>
-      <Text style={styles.text2}>{language.tutorial_stats_text}</Text>
-      <View style={{height: responsiveHeight(10)}}></View>
+    return <div>
+      <p style={styles.title2}>{language.tutorial_stats_title}</p>
+      <p style={styles.text2}>{language.tutorial_stats_text}</p>
+      <div style={{height: "5%"}}></div>
 
-      <Image source={require('../../data/img/tutorial/stats.png')} style={styles.screenshot} />
-    </View>
+      <img src={require('../../data/img/tutorial/stats.png')} style={styles.screenshot} />
+    </div>
   }
 
   const mapScreen = () => {
-    return <View style={{height: "100%", width: "100%", borderRadius: 10, overflow: "hidden"}}>
-      <Text style={styles.title2}>{language.tutorial_map_title}</Text>
-      <Text style={styles.text2}>{language.tutorial_map_text}</Text>
-      <View style={{height: responsiveHeight(10)}}></View>
-      <Image source={require('../../data/img/tutorial/map.png')} style={styles.screenshot} />
-    </View>
+    return <div style={{height: "100%", width: "100%", borderRadius: 10, overflow: "hidden"}}>
+      <p style={styles.title2}>{language.tutorial_map_title}</p>
+      <p style={styles.text2}>{language.tutorial_map_text}</p>
+      <div style={{height: "5%"}}></div>
+      <img src={require('../../data/img/tutorial/map.png')} style={styles.screenshot} />
+    </div>
   }
 
   const configScreen = () => {
-    return <View>
-      <Text style={styles.title2}>{language.tutorial_config_title}</Text>
-      <Text style={styles.text2}>{language.tutorial_config_text}</Text>
-      <View style={{height: responsiveHeight(10)}}></View>
-      <Image source={require('../../data/img/tutorial/config.png')} style={styles.screenshot} />
-    </View>
+    return <div>
+      <p style={styles.title2}>{language.tutorial_config_title}</p>
+      <p style={styles.text2}>{language.tutorial_config_text}</p>
+      <div style={{height: "5%"}}></div>
+      <img src={require('../../data/img/tutorial/config.png')} style={styles.screenshot} />
+    </div>
   }
 
   const friendsScreen = () => {
-    return <View>
-      <Text style={styles.title2}>{language.tutorial_friends_title}</Text>
-      <Text style={styles.text2}>{language.tutorial_friends_text}</Text>
-      <View style={{height: responsiveHeight(10)}}></View>
-      <Image source={require('../../data/img/tutorial/friends.png')} style={styles.screenshot} />
-    </View>
+    return <div>
+      <p style={styles.title2}>{language.tutorial_friends_title}</p>
+      <p style={styles.text2}>{language.tutorial_friends_text}</p>
+      <div style={{height: "5%"}}></div>
+      <img src={require('../../data/img/tutorial/friends.png')} style={styles.screenshot} />
+    </div>
   }
 
   const tippScreen = () => {
-    return <View style={{width: "100%", alignSelf: "center"}}>
-      <Text style={styles.text}><Text style={{color: "#0781E1"}}>{language.tutorial_tipp_title}</Text>{"\n"}{"\n"}{language.tutorial_tipp_text}</Text>
-    </View>
+    return <div style={{width: "100%", alignSelf: "center"}}>
+      <p style={styles.text}><p style={{color: "#0781E1"}}>{language.tutorial_tipp_title}</p>{"\n"}{"\n"}{language.tutorial_tipp_text}</p>
+    </div>
   }
 
   const warningScreen = () => {
-    return <View style={{width: "100%", alignSelf: "center"}}>
+    return <div style={{width: "100%", alignSelf: "center"}}>
 
-        <Text style={styles.title2}>{language.tutorial_pls_read_title}</Text>
-        <Text style={styles.text2}>{language.tutorial_pls_read_text}</Text>
+        <p style={styles.title2}>{language.tutorial_pls_read_title}</p>
+        <p style={styles.text2}>{language.tutorial_pls_read_text}</p>
 
-      </View>
+      </div>
   }
 
   const warningScreen2 = () => {
-    return <View style={{width: "100%", alignSelf: "center"}}>
+    return <div style={{width: "100%", alignSelf: "center"}}>
 
-        <Text style={styles.text2}>{language.tutorial_pls_read_text2}</Text>
+        <p style={styles.text2}>{language.tutorial_pls_read_text2}</p>
 
-        <View style={{height: responsiveHeight(5)}}></View>
-        <Button title={language.tutorial_show_policy} color={"#1E2132"} hovercolor={"rgba(255,255,255,0.25)"} fontColor={"white"} onPress={() => Linking.openURL('https://weedstats.de')}/>
+        <div style={{height: "5%"}}></div>
+        <Button title={language.tutorial_show_policy} color={"#1E2132"} hovercolor={"rgba(255,255,255,0.25)"} fontColor={"white"} onPress={() => console.log("onPress in Tutorial definieren!")}/>
 
-        <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple("rgba(255,255,255,0.25)", false)} onPress={() => {setConsented(!consented)}}>
-          <View style={styles.touchable}>
+        // TODO: Touchable in Tutorial ersetzen
+        {/* <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple("rgba(255,255,255,0.25)", false)} onPress={() => {setConsented(!consented)}}>
+          <div style={styles.touchable}>
             {consented ? 
             <MaterialIcons name={"check-box"} style={styles.check_icon}/>
             : 
             <MaterialIcons name={"check-box-outline-blank"} style={styles.check_icon}/>
             }
-            <View style={{width: responsiveWidth(5)}}></View>
-            <Text style={styles.policy_text}>{language.tutorial_consent}</Text>
-          </View>
-        </TouchableNativeFeedback>
+            <div style={{width: "5%"}}></div>
+            <p style={styles.policy_text}>{language.tutorial_consent}</p>
+          </div>
+        </TouchableNativeFeedback> */}
 
-        <View style={{height: responsiveHeight(10)}}></View>
+        <div style={{height: "5%"}}></div>
 
         {consented ?
         <Button title={language.tutorial_get_started} fontColor={"#1E2132"} color={"white"} color2={"#1E2132"} hovercolor={"rgba(0,0,0,0.25)"} onPress={() => { onDone()}}/>
         :
-        <Button title={language.tutorial_get_started} fontColor={"#1E2132"} color={"rgba(160,160,160,1)"} color2={"#1E2132"} hovercolor={"rgba(160,160,160,1)"} onPress={() => Alert.alert(language.tutorial_consent_alert)}/>
+        <Button title={language.tutorial_get_started} fontColor={"#1E2132"} color={"rgba(160,160,160,1)"} color2={"#1E2132"} hovercolor={"rgba(160,160,160,1)"} onPress={() => alert(language.tutorial_consent_alert)}/>
         }
-      </View>
+      </div>
   }
 
 
   const readyScreen = () => {
-    return <View style={{width: "100%", alignSelf: "center"}}>
+    return <div style={{width: "100%", alignSelf: "center"}}>
 
         <Button title={"Ok"} fontColor={"white"} color={"#0781E1"} color2={"#484F78"} hovercolor={"rgba(0,0,0,0.25)"} onPress={() => {onDone()}}/>
         
-      </View>
+      </div>
   }
 
     //Wenn App fertig, dann Videos für Tutorial aufnehmen -> Expo Video
@@ -281,39 +257,35 @@ const hide = () => {
 
     //Neue Version: Langes Schrollpanel mit Statusbar (04. September 2022)
     return (
-      <Animated.View style={[styles.container,{opacity: slide}]}>
+      <div style={[styles.container]}>
 
-        {type != "first" [<View style={{position: "absolute", zIndex: 10000}}>
-            <View style={{ height: responsiveHeight(1) }}></View>
+        {type != "first" [<div style={{position: "absolute", zIndex: 10000}}>
+            <div style={{ height: "1%" }}></div>
 
-            <View style={{flexDirection: "row", alignContent: "center", alignItems: "center"}}>
-              <View style={{marginLeft: 20}}>
+            <div style={{flexDirection: "row", alignContent: "center", alignItems: "center"}}>
+              <div style={{marginLeft: 20}}>
                   <BackButton onPress={() => hide()}/>
-              </View>
-              <Text style={styles.heading}>Tutorial</Text>
-            </View>
+              </div>
+              <p style={styles.heading}>Tutorial</p>
+            </div>
 
-            <View style={{ height: responsiveHeight(1) }}></View>
-          </View>]}
-
-       <ScrollView>
+            <div style={{ height: "1%"}}></div>
+          </div>]}
 
           {slides.map((slide) => {
             return RenderItem(slide);
           })}
-
-        </ScrollView>
  
-      </Animated.View> 
+      </div>
   );
 }
 
 export default Tutorial
 
-const styles = StyleSheet.create({
+const styles = {
     container: {
         backgroundColor: "#131520",
-        height: Dimensions.get("screen").height,
+        height: "100%",
         width: "100%",
         position: "absolute",
         zIndex:1000
@@ -327,69 +299,69 @@ const styles = StyleSheet.create({
     map: {
       width: "100%",
       backgroundColor: "#171717",
-      height: responsiveHeight(50),
+      height: "20%",
       position: "absolute",
       bottom: 0
     },
     heading: {
       fontFamily: "PoppinsBlack",
       color: "white",
-      fontSize: responsiveFontSize(2.3),
+      fontSize: "2.3rem",
       marginLeft: 30
     },
     icon: {
       color: "white",
-      fontSize: responsiveFontSize(4),
+      fontSize: "4rem",
       textAlignVertical: "center",
       marginRight: 5,
       marginTop: -5
     },
     testComponentContainer: {
       width: "100%", 
-      height: Dimensions.get("screen").height - responsiveHeight(20),
+      height: "80%",
     },
     swipe_up_text: {
       color: "#0781E1",
-      fontSize: responsiveFontSize(2),
+      fontSize: "2rem",
       fontFamily: "PoppinsLight",
       letterSpacing: 5,
       alignSelf: "center"
     },
     fingerprint: {
       color: "#0781E1",
-      fontSize: responsiveFontSize(7.5)
+      fontSize: "7.5rem"
     },
     title: {
       color: "#0781E1",
       textAlign: "left",
       fontFamily: "PoppinsBlack",
-      fontSize: responsiveFontSize(5),
-      marginHorizontal: responsiveWidth(10)
+      fontSize: "5rem",
+      marginHorizontal: "10%"
     },
     text: {
       color: "white",
       textAlign: "left",
       fontFamily: "PoppinsBlack",
-      fontSize: responsiveFontSize(3.5),
-      marginHorizontal: responsiveWidth(15)
+      fontSize: "3.5rem",
+      marginHorizontal: "15%"
     },
     small_logo: {
-      width: responsiveWidth(8),
-      height: responsiveWidth(8)
+      width: "8%",
+      height: "8%"
     },
     title2: {
       color: "white",
       textAlign: "left",
       fontFamily: "PoppinsBlack",
-      fontSize: responsiveFontSize(3.5),
-      marginHorizontal: responsiveWidth(10)
+      fontSize: "3.5rem",
+      marginHorizontal: "10%"
     },
     text2: {
       color: "white",
       textAlign: "left",
       fontFamily: "PoppinsMedium",
-      fontSize: responsiveFontSize(2),
-      marginHorizontal: responsiveWidth(10)
+      fontSize: "2rem",
+      marginHorizontal: "10%"
     },
     touchable: {
       width: "100%",
@@ -403,16 +375,16 @@ const styles = StyleSheet.create({
     policy_text: {
       color: "white",
       fontFamily: "PoppinsBlack",
-      fontSize: responsiveFontSize(2),
+      fontSize: "2rem",
     },
     check_icon: {
       color: "white",
-      fontSize: responsiveFontSize(3)
+      fontSize: "3rem"
     },
     screenshot: {
-      height: responsiveHeight(50),
+      height: "50%",
       resizeMode: "contain",
       alignSelf: "center"
 
     }
-});
+};

@@ -16,7 +16,7 @@ const ProfileImagePanel = ({ url, onExit }) => {
 
     return <View style={{flex: 1, backgroundColor: "#1E2132", justifyContent: "center"}}>
         <ProfileImage url={getHighResUrl()} x={Dimensions.get("window").width}/>
-        <View style={{height: responsiveHeight(5)}}></View>
+        <View style={{height: "5%"}}></View>
         <Button title={language.account_delete_account_cancel} onPress={() => onExit()} color={"#484F78"} fontColor={"white"}/>
     </View>
 }

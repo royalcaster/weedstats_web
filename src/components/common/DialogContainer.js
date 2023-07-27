@@ -59,12 +59,12 @@ const styles = StyleSheet.create({
         width: "100%",
         height: 50,
         flexDirection: "row",
-        paddingHorizontal: responsiveWidth(5)
+        paddingHorizontal: "2.5rem"
     },
     heading: {
         color: "white",
         fontFamily: "PoppinsMedium",
-        fontSize: responsiveFontSize(2.5)
+        fontSize: "2.5rem"
     },
     content_container: {
         flex: 1

@@ -7,30 +7,24 @@ import CustomLoader from "./CustomLoader";
 
 //Service
 import { LanguageContext } from "../../data/LanguageContext";
-import { LinearGradient } from "expo-linear-gradient";
-
-//Expo
-import * as NavigationBar from 'expo-navigation-bar'
 
 const CounterModal = ({ onExit, writeComplete, sayingNr, borderColor, loadingColor}) => {
 
     const language = useContext(LanguageContext);
 
-    const screen_height = Dimensions.get("screen").height;
-
     return (
       <>
-        <View
+        <p
             style={[styles.container, {
               alignItems: "center",
               justifyContent: "center",
               backgroundColor: "rgba(0,0,0,0.85)",
               flex: 1,
-              height: screen_height
+              height: "100%"
             }]}
           >
             
-            <View
+            <p
                 style={{
                   width: "100%",
                   height: "70%",
@@ -40,20 +34,20 @@ const CounterModal = ({ onExit, writeComplete, sayingNr, borderColor, loadingCol
               >
             {writeComplete ? (
               <>
-                <View style={{ flex: 5, justifyContent: "center"}}>
-                  <Text style={[styles.text, { fontSize: responsiveFontSize(3) }]}>
+                <p style={{ flex: 5, justifyContent: "center"}}>
+                  <p style={[styles.text, { fontSize: "3rem" }]}>
                     {language.sayings[sayingNr].saying}
-                  </Text>
-                  <Text
+                  </p>
+                  <p
                     style={[
                       styles.text,
                       { fontSize: 15, fontStyle: "italic", marginTop: 10 },
                     ]}
                   >
                     {language.sayings[sayingNr].from}
-                  </Text>
-                </View>
-                <View style={{ flex: 1, justifyContent: "center" }}>
+                  </p>
+                </p>
+                <p style={{ flex: 1, justifyContent: "center" }}>
                   <Button
                     title={"Ok"}
                     color={borderColor == null ? "#0080FF" : borderColor}
@@ -64,21 +58,21 @@ const CounterModal = ({ onExit, writeComplete, sayingNr, borderColor, loadingCol
                     }}
                     hovercolor={"rgba(255,255,255,0.3)"}
                   />
-                </View></>
+                </p></>
               
             ) : (
-              <View style={{height: "100%", width: "100%", justifyContent: "center"}}>
-              <CustomLoader x={80} color={"#484F78"} special={true}/></View>
+              <p style={{height: "100%", width: "100%", justifyContent: "center"}}>
+              <CustomLoader x={80} color={"#484F78"} special={true}/></p>
             )}
-            </View>
-          </View>
+            </p>
+          </p>
           </>
     );
 }
 
 export default CounterModal
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     flex: 1,
     backgroundColor: "#1E2132",
@@ -96,4 +90,4 @@ const styles = StyleSheet.create({
     maxWidth: 250,
     textAlign: "center",
   },
-});
+};

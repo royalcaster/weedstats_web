@@ -50,18 +50,7 @@ const Statusbar = ({ status }) => {
         onLayout={(event) => {
             setContainerWidth(event.nativeEvent.layout.width);
           }}>
-            <Text style={styles.status}>{chopStatus(status)}</Text>
-            
-            <Animated.View style={{transform: [{translateX: slideAnim}], width: "100%", alignSelf: "flex-start",  height: "100%", backgroundColor: "#484F78"}}>
-            </Animated.View>
-        </View>
-    )
-}
-
-export default Statusbar
-
-const styles = StyleSheet.create({
-    status: {
+            <Text style={{
         color: "white", 
         fontFamily: "PoppinsMedium",
         fontSize: 12,
@@ -71,5 +60,12 @@ const styles = StyleSheet.create({
         top: -1,
         opacity: 0.75,
         top: "30%"
-    }
-})
+    }}>{chopStatus(status)}</Text>
+            
+            <Animated.View style={{transform: [{translateX: slideAnim}], width: "100%", alignSelf: "flex-start",  height: "100%", backgroundColor: "#484F78"}}>
+            </Animated.View>
+        </View>
+    )
+}
+
+export default Statusbar

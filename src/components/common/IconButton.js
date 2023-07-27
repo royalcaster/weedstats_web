@@ -2,25 +2,13 @@ import React from "react";
 
 const IconButton = ({icon, onPress, backgroundColor }) => {
     return (
-        <Animated.View style={[styles.container, {backgroundColor: backgroundColor ? backgroundColor : "#1E2132"}]}>
-            <TouchableNativeFeedback
-        onPress={() => {
-          onPress();
-        }}
-        background={TouchableNativeFeedback.Ripple("rgba(255,255,255,0.2)", true)}
-        style={{ height: "100%", width: "100%" }}
-      >
-        <View style={styles.touchable}>
-            {icon}
-        </View>
-      </TouchableNativeFeedback>
-        </Animated.View>
+        <button style={[styles.touchable, {backgroundColor: backgroundColor}]} onPaste={() => onPress()}></button>
     );
 }
 
 export default IconButton
 
-const styles = StyleSheet.create({
+const styles = {
     container: {
         borderRadius: 100,
         height: 60,
@@ -34,4 +22,4 @@ const styles = StyleSheet.create({
         justifyContent: "center",
         alignItems: "center"
     }
-});
+};

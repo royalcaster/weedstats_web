@@ -3,19 +3,13 @@ import React from "react";
 
 const BackButton = ({onPress}) => {
     return (
-        <Animated.View style={styles.container}>
-            <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple("rgba(255,255,255,0)", true)} onPress={onPress}>
-                <View style={styles.touchable}>
-                    <MaterialIcons name="arrow-back" style={styles.icon_back}/>
-                </View>
-            </TouchableNativeFeedback>
-        </Animated.View>
+        <button onClick={() => onPress()} style={styles.touchable}>Back</button>
     );
 }
 
 export default BackButton
 
-const styles = StyleSheet.create({  
+const styles = {  
     icon_back: {
         color: "rgba(255,255,255,0.75)", 
         fontSize: 20, 
@@ -29,5 +23,4 @@ const styles = StyleSheet.create({
         backgroundColor: "rgba(0,0,0,0.0)",
         borderRadius: 25
     }
-    
-});
+};

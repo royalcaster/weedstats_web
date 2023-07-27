@@ -43,17 +43,17 @@ const LanguageDialog = ({ onSelect, onExit }) => {
         <TouchableNativeFeedback onPress={() => {onSelect("de"); hide()}} background={TouchableNativeFeedback.Ripple("rgba(255,255,255,0.15)", false)}>
             <View style={styles.touchable}>
                 <Image resizeMode="center" style={styles.flagg} source={require('../../data/img/de.png')}/>
-                <View style={{height: responsiveHeight(1)}}></View>
+                <View style={{height: "1%"}}></View>
                 <Text style={styles.label}>Deutsch (DE)</Text>
             </View>
         </TouchableNativeFeedback>
 
-        <View style={{height: responsiveHeight(5)}}></View>
+        <View style={{height: "5%"}}></View>
 
         <TouchableNativeFeedback onPress={() => {onSelect("en"); hide()}} background={TouchableNativeFeedback.Ripple("rgba(255,255,255,0.15)", false)}>
             <View style={styles.touchable}>
                 <Image resizeMode="center" style={styles.flagg} source={require('../../data/img/gb.png')}/>
-                <View style={{height: responsiveHeight(1)}}></View>
+                <View style={{height: "1%"}}></View>
                 <Text style={styles.label}>English (UK)</Text>
             </View>
         </TouchableNativeFeedback>
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
     label: {
         color: "white",
         fontFamily: "PoppinsMedium",
-        fontSize: responsiveFontSize(2),
+        fontSize: "2rem",
         alignSelf: "center"
     },
     touchable: {
@@ -81,6 +81,6 @@ const styles = StyleSheet.create({
     },
     flagg: {
         height: 100,
-        width: responsiveWidth(50)
+        width: "50%"
     }
 });

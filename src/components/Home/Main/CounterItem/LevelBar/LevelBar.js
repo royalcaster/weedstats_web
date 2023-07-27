@@ -45,7 +45,11 @@ const LevelBar = ({ index, counter }) => {
     }
 
     return (
-        <Animated.View style={[styles.container,{transform:[{translateY: slide}]}]}>
+        <Animated.View style={[{
+            flex: 1,
+            flexDirection: "column",
+            paddingVertical: 10
+        },{transform:[{translateY: slide}]}]}>
             
             {language.levels.slice(0).reverse().map(level => {
                 return <RenderItem level={level} key={uuid.v4()}/>;
@@ -56,11 +60,3 @@ const LevelBar = ({ index, counter }) => {
 }
 
 export default LevelBar
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        flexDirection: "column",
-        paddingVertical: 10
-    }
-});

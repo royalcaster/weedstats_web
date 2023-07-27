@@ -13,58 +13,31 @@ const Levels = ({ onexit, show }) => {
   //Context
   const language = useContext(LanguageContext);
 
-  //Constants
-  const screen_width = Dimensions.get("window").width;
-
   //Ref
   const fadeAnim = useRef(new Animated.Value(screen_width)).current;
 
-  const slide = () => {
-    Animated.timing(fadeAnim, {
-      toValue: 0,
-      duration: 300,
-      easing: Easing.bezier(0,.79,0,.99),
-      useNativeDriver: true,
-    }).start();
-  }
-
   const hide = () => {
-    Animated.timing(fadeAnim, {
-      toValue: screen_width,
-      duration: 300,
-      useNativeDriver: true,
-    }).start(({ finished }) => {
-      if (finished) {
-        onexit();
-      }
-    });
+ 
   };
 
-  show ? slide() : hide();
-
-  useBackHandler(() => {
-    hide();
-    return true;
-  },[]);
-
   return (
-    <Animated.View style={[{ opacity: 1 , transform: [{translateX: fadeAnim}]}, styles.container]}>
+    <div style={[{ opacity: 1 , transform: [{translateX: fadeAnim}]}, styles.container]}>
 
       
-      <View style={{height: "90%", top: 0, position: "absolute", width: "100%"}}>
-      <View style={{ height: responsiveHeight(5) }}></View>
-      <View style={{flexDirection: "row", alignContent: "center", alignItems: "center"}}>
-        <View style={{marginLeft: 20}}>
+      <div style={{height: "90%", top: 0, position: "absolute", width: "100%"}}>
+      <div style={{ height: responsiveHeight(5) }}></div>
+      <div style={{flexDirection: "row", alignContent: "center", alignItems: "center"}}>
+        <div style={{marginLeft: 20}}>
             <BackButton onPress={() => hide()}/>
-        </View>
-        <Text style={styles.heading}>{language.account_levels}</Text>
-      </View>
+        </div>
+        <p style={styles.heading}>{language.account_levels}</p>
+      </div>
 
-      <View style={{ height: responsiveHeight(2) }}></View>
+      <div style={{ height: responsiveHeight(2) }}></div>
 
       {language.levels.map((level, index) => {
         return (
-          <View
+          <div
             key={index}
             style={{
               alignSelf: "center",
@@ -81,28 +54,28 @@ const Levels = ({ onexit, show }) => {
             }}
           >
             <LevelImage index={index} style={styles.lvl_img} />
-            <View style={{ marginLeft: 15 }}>
-              <Text style={styles.lvl_name}>{level.name}</Text>
+            <div style={{ marginLeft: 15 }}>
+              <p style={styles.lvl_name}>{level.name}</p>
               {index != language.levels.length - 1 ? (
-                <Text style={styles.lvl_bounds}>
+                <p style={styles.lvl_bounds}>
                   {index * 70}-{(index + 1) * 70 - 1}
-                </Text>
+                </p>
               ) : (
-                <Text style={styles.lvl_bounds}>ab {index * 70}</Text>
+                <p style={styles.lvl_bounds}>ab {index * 70}</p>
               )}
-            </View>
-          </View>
+            </div>
+          </div>
         );
       })}
-      <View style={{ height: responsiveHeight(2) }}></View>
-      </View>
-    </Animated.View>
+      <div style={{ height: responsiveHeight(2) }}></div>
+      </div>
+    </div>
   );
 };
 
 export default Levels;
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     marginTop: 0,
     width: "100%",
@@ -124,20 +97,20 @@ const styles = StyleSheet.create({
     marginTop: 3
   },
   lvl_img: {
-    height: responsiveHeight(8),
-    width: responsiveHeight(8),
+    height: "8%",
+    width: "8%",
     marginLeft: 15,
     marginTop: -10
   },
   lvl_name: {
-    fontSize: responsiveFontSize(2.5),
+    fontSize: "2.5rem",
     fontFamily: "PoppinsBlack",
     color: "white",
   },
   lvl_bounds: {
     fontFamily: "PoppinsLight",
-    fontSize: responsiveFontSize(1.75),
+    fontSize: "1.75rem",
     marginTop: -5,
     color: "white",
   }
-});
+};

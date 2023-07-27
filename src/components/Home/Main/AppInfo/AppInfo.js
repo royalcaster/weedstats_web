@@ -14,84 +14,54 @@ const AppInfo = ({ onExit, show }) => {
   //Context
   const language = useContext(LanguageContext);
 
-  //Constants
-  const screen_width = Dimensions.get("window").width;
-
-  //State
-  const fadeAnim = useRef(new Animated.Value(screen_width)).current;
-
-  const slide = () => {
-    Animated.timing(fadeAnim, {
-      toValue: 0,
-      duration: 300,
-      easing: Easing.bezier(0,.79,0,.99),
-      useNativeDriver: true,
-    }).start();
-  }
-
   const hide = () => {
-    Animated.timing(fadeAnim, {
-      toValue: screen_width,
-      duration: 300,
-      useNativeDriver: true,
-    }).start(({ finished }) => {
-      if (finished) {
-        onExit();
-      }
-    });
+   
   };
 
-  show ? slide() : hide();
-
-  useBackHandler(() => {
-    hide();
-    return true;
-  },[]);
-
   return (
-    <Animated.View style={[{ opacity: 1 , transform: [{translateX: fadeAnim}]}, styles.container]}>
+    <div style={styles.container}>
 
-              <View style={{ height: responsiveHeight(5) }}></View>
+              <div style={{ height: "5%" }}></div>
 
-              <View style={{flexDirection: "row", alignContent: "center", alignItems: "center"}}>
-                <View style={{marginLeft: 20}}>
+              <div style={{flexDirection: "row", alignContent: "center", alignItems: "center"}}>
+                <div style={{marginLeft: 20}}>
                     <BackButton onPress={() => hide()}/>
-                </View>
-                <Text style={styles.heading}>App-Info</Text>
-              </View>
+                </div>
+                <p style={styles.heading}>App-Info</p>
+              </div>
 
-              <View style={{flex: 1, justifyContent: "center"}}>
-                <Image style={{height: responsiveHeight(12), width: responsiveHeight(12), alignSelf: "center"}} source={require('../../../../data/img/logo.png')}/>
-                <Text style={[styles.text, { fontSize: responsiveFontSize(2) }]}>
+              <div style={{flex: 1, justifyContent: "center"}}>
+                <img style={{height: "12%", width: "12%", alignSelf: "center"}} src={require('../../../../data/img/logo.png')}/>
+                <p style={[styles.text, { fontSize: "2rem" }]}>
                   Version 0.0.1 (Early Access)
-                </Text>
+                </p>
 
-                <View style={{ height: responsiveHeight(5)}}></View>
+                <div style={{ height: "5%"}}></div>
                 
-                <Text style={[styles.text, { fontSize: responsiveFontSize(2.5) }]}>
+                <p style={[styles.text, { fontSize: "2.5rem" }]}>
                   {language.config_authors}
-                </Text>
-                <Text style={[styles.text, { fontSize: responsiveFontSize(2), color: "#0080FF" }]}>
+                </p>
+                <p style={[styles.text, { fontSize: "2rem", color: "#0080FF" }]}>
                   royalcaster{"\n"}
                   Ined{"\n"}
                   {/* yung lillo */}
-                </Text>
+                </p>
 
-                <View style={{ height: responsiveHeight(5)}}></View>
+                <div style={{ height: "5%"}}></div>
 
-                <Text style={[styles.text, { fontSize: responsiveFontSize(1.8), color: "white", fontFamily: "PoppinsLight"}]}>
-                  Made in Schneeberg <Entypo style={{fontSize: responsiveFontSize(1.8)}} name="heart-outlined"/>
-                </Text>
+                <div style={[styles.text, { fontSize: "1.8rem", color: "white", fontFamily: "PoppinsLight"}]}>
+                  Made in Schneeberg {/* <Entypo style={{fontSize: "1.8rem"}} name="heart-outlined"/> */}
+                </div>
 
-                <View style={{ height: responsiveHeight(10)}}></View>
-              </View>
-    </Animated.View>
+                <div style={{ height: "10%"}}></div>
+              </div>
+    </div>
   );
 };
 
 export default AppInfo;
 
-const styles = StyleSheet.create({
+const styles = {
   container: {
     marginTop: 0,
     width: "100%",
@@ -115,9 +85,9 @@ const styles = StyleSheet.create({
   text: {
     alignSelf: "center",
     fontFamily: "PoppinsLight",
-    fontSize: responsiveFontSize(2),
+    fontSize: "2rem",
     color: "white",
     maxWidth: 250,
     textAlign: "center",
   }
-});
+};

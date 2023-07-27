@@ -10,85 +10,50 @@ import { LanguageContext } from '../../../../data/LanguageContext';
 
 const Donation = ( { onexit } ) => {
 
-    const screen_width = Dimensions.get("screen").width;
-    const fadeAnim = useRef(new Animated.Value(screen_width)).current;
-    const opacityAnim = useRef(new Animated.Value(0)).current;
-
     const language = useContext(LanguageContext)
-
-    useEffect(() => {
-        Animated.timing(fadeAnim, {
-          toValue: 0,
-          duration: 400,
-          easing: Easing.bezier(0,.79,0,.99),
-          useNativeDriver: true,
-        }).start();
-        Animated.timing(opacityAnim, {
-            toValue: 1,
-            duration: 200,
-            easing: Easing.bezier(0,.79,0,.99),
-            useNativeDriver: true,
-          }).start();
-      }, [fadeAnim, opacityAnim]);
-
-    useBackHandler(() => {
-        hide();
-        return true
-    })
     
     const hide = () => {
-        Animated.timing(fadeAnim, {
-            toValue: screen_width,
-            duration: 300,
-            useNativeDriver: true,
-        }).start(({finished}) => {
-            if (finished) {
-                onexit();
-            }
-        });
+       
     }
 
     return (
-        <Animated.View style={[{transform: [{translateX: fadeAnim}], opacity: opacityAnim, height: "100%"},styles.container]}>
+        <div style={[{height: "100%"},styles.container]}>
 
-            <View style={{ height: responsiveHeight(5) }}></View>
+            <div style={{ height: "5%" }}></div>
 
-            <View style={{flexDirection: "row", maxHeight: 60, alignItems: "center"}}>
-                <View style={{marginLeft: 20, justifyContent: "center"}}>
+            <div style={{flexDirection: "row", maxHeight: 60, alignItems: "center"}}>
+                <div style={{marginLeft: 20, justifyContent: "center"}}>
                     <BackButton onPress={() => hide()}/>
-                </View>
-                <View >
-                    <Text style={styles.heading}>{language.account_support_weedstats}</Text>
-                </View>
-            </View>
+                </div>
+                <div >
+                    <p style={styles.heading}>{language.account_support_weedstats}</p>
+                </div>
+            </div>
 
-            <View style={{width: "80%", alignSelf: "center"}}>
+            <div style={{width: "80%", alignSelf: "center"}}>
 
-                <View style={{ height: responsiveHeight(4)}}></View>
+                <div style={{ height: "4%"}}></div>
 
-                <Text style={[styles.bold]}>{language.account_support_catch}</Text>
+                <p style={[styles.bold]}>{language.account_support_catch}</p>
 
-                <Text style={[styles.text]}>{language.account_support_text}{"\n"}</Text>
+                <p style={[styles.text]}>{language.account_support_text}{"\n"}</p>
             
                 {language.account_support_features.map((feature) => {
-                    return <Text style={styles.feature} key={uuid.v4()}>{feature}</Text>
+                    return <p style={styles.feature} key={Math.random()}>{feature}</p>
                 })}
 
-                <View style={{ height: responsiveHeight(4)}}></View>
-
-    
-                {/* <Text style={[styles.bold, {fontSize: responsiveFontSize(5)}]}>{language.language_short == "de" ? "4,20 €" : "€4.20"}<Text style={[styles.text,{fontSize: responsiveFontSize(1.5)}]}>   ({language.account_support_one_time_fee})</Text></Text> */}
-            </View>
+                <div style={{ height: "4%"}}></div>
+            </div>
 
             <Button title={language.account_support_go_premium + " (COMING SOON)"} color={"#F2338C"} fontColor={"white"} hovercolor={"rgba(255,255,255,0.5)"} disabled={true}/>
 
-        </Animated.View>
+        </div>
     )
 }
 
 export default Donation
 
-const styles = StyleSheet.create({
+const styles = {
     container: {
         width: "100%",
         backgroundColor: "#131520",
@@ -101,12 +66,12 @@ const styles = StyleSheet.create({
     },
     text: {
         fontFamily: "PoppinsLight",
-        fontSize: responsiveFontSize(2),
+        fontSize: "2rem",
         color: "white",
     },
     feature: {
         fontFamily: "PoppinsLight",
-        fontSize: responsiveFontSize(2),
+        fontSize: "2rem",
         color: "white",
         backgroundColor: "#1E2132",
         borderRadius: 10,
@@ -115,7 +80,7 @@ const styles = StyleSheet.create({
     },
     bold: {
         fontFamily: "PoppinsBlack",
-        fontSize: responsiveFontSize(3),
+        fontSize: "3rem",
         color: "#F2338C",
     },
     heading: {
@@ -125,4 +90,4 @@ const styles = StyleSheet.create({
         marginLeft: 20,
         marginTop:5
       },
-});
+};

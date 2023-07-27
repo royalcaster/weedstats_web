@@ -501,12 +501,10 @@ const App = () => {
             deleteAccount={deleteAccount}
             getFriendList={getFriendList}
             loadSettings={loadSettings}
-            onSetBorderColor={color => setBorderColor(color)}
             refreshUser={refreshUser}
             handleIntroFinish={handleIntroFinish}
             handleAuthenticatorSelect={handleAuthenticatorSelect}
             onSetUser={(user) => setUser(user)}
-            sendPushNotification={sendPushNotification}
             />
           </UserContext.Provider>} />
       </Routes>

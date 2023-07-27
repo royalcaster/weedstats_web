@@ -11,10 +11,6 @@ import Button from "./Button";
 import { doc, updateDoc, getDoc, collection } from "@firebase/firestore";
 import { app, firestore } from "../../data/FirebaseConfig";
 
-//Expo
-import Constants from "expo-constants";
-import * as Linking from 'expo-linking'
-
 LogBox.ignoreLogs(['Warning: Each child in a list should have a unique "key" prop.']);
 
 const UpdatePanel = ({ language, onExit, refreshUser }) => {
@@ -34,14 +30,14 @@ const UpdatePanel = ({ language, onExit, refreshUser }) => {
         <View style={{backgroundColor: "#1E2132", height: "80%", width: "95%", borderRadius: 25}}>
 
         <View style={{flex: 1}}>
-            <View style={{height: responsiveHeight(2)}}></View>
+            <View style={{height: "2%"}}></View>
             <View style={styles.knob}></View>
-            <View style={{height: responsiveHeight(2)}}></View>
+            <View style={{height: "2%"}}></View>
             <Text style={styles.heading}>Update available</Text>
         </View>
 
         <View style={{flex: 1, width: "100%", alignSelf: "center"}}>
-            <Text style={[styles.text, {fontSize: responsiveFontSize(1.75), width: "80%", alignSelf: "center"}]}>Please update your app to the latest version to avoid errors and benefit from improvements and new features.</Text>
+            <Text style={[styles.text, {fontSize: "1.75rem", width: "80%", alignSelf: "center"}]}>Please update your app to the latest version to avoid errors and benefit from improvements and new features.</Text>
         </View>
 
         <View style={{flex: 1}}>
@@ -57,7 +53,7 @@ const UpdatePanel = ({ language, onExit, refreshUser }) => {
 
 export default UpdatePanel
 
-const styles = StyleSheet.create({
+const styles = {
     container: {
         position: "absolute",
         height: Dimensions.get("screen").height,
@@ -76,20 +72,20 @@ const styles = StyleSheet.create({
       },
     heading: {
         color: "white",
-        fontSize: responsiveFontSize(3),
+        fontSize: "3rem",
         fontFamily: "PoppinsBlack",
         marginLeft: 30
     },
     title: {
         color: "white",
-        fontSize: responsiveFontSize(2),
+        fontSize: "2rem",
         fontFamily: "PoppinsBlack",
         marginHorizontal: 20
     },
     text: {
         color: "white",
-        fontSize: responsiveFontSize(1.5),
+        fontSize: "1.5rem",
         fontFamily: "PoppinsMedium",
         marginHorizontal: 20
     }
-});
+};

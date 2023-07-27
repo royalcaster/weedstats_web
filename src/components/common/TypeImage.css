@@ -1,0 +1,6 @@
+.container {
+    justifyContent: "center";
+    alignItems: "center";
+    alignContent: "center";
+    backgroundColor: "green"
+}
