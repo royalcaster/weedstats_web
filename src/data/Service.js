@@ -1,7 +1,6 @@
 //Firebase
 import { doc, getDoc } from "@firebase/firestore";
 import { firestore } from "./FirebaseConfig";
-import AsyncStorage from "@react-native-async-storage/async-storage"
 
 //Tools
 import toGermanDate from "./DateConversion";
@@ -10,7 +9,7 @@ import { summary, streakRanges, trackRecord } from "date-streaks";
 // Lädt das Nutzer-Objekt aus dem AsyncStorage
 const getLocalUser = async () => {
   try {
-    const jsonValue = await AsyncStorage.getItem("current_user");
+    const jsonValue = await localStorage.getItem("current_user");
     return jsonValue != null ? JSON.parse(jsonValue) : null;
   } catch (e) {
     console.log("Error:", e);
@@ -42,7 +41,7 @@ export const createUsernameArray = (name) => {
 export const getRelevantKeys = async (user) => {
   let keys = [];
   try {
-    keys = await AsyncStorage.getAllKeys();
+    keys = await localStorage.getAllKeys();
   } catch (e) {
     console.log("Fehler beim Laden der Einträge-Keys aus dem lokalen Speicher:", e);
   }
@@ -55,7 +54,7 @@ export const getLocalData = async (user, callback) => {
   console.log("test");
   let buffer = [];
   try {
-    const jsonData = await AsyncStorage.multiGet(await getRelevantKeys(user));
+    const jsonData = await localStorage.multiGet(await getRelevantKeys(user));
     jsonData.forEach((entry) => buffer.push(JSON.parse(entry[1])));
     buffer.sort((a, b) => {
       return a.number - b.number;

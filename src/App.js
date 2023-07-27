@@ -8,6 +8,7 @@ import {
   BrowserRouter,
   Routes
 } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 
 //Custom components
 import Home from './components/Home/Home'
@@ -20,6 +21,12 @@ import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, si
 import { app, firestore } from './data/FirebaseConfig'
 import { doc, getDoc, updateDoc, deleteDoc, setDoc } from "@firebase/firestore";
 import { createUsernameArray, downloadUser } from "./data/Service";
+import package_object from '../package.json'
+import { ref, deleteObject } from '@firebase/storage'
+import { storage } from "./data/FirebaseConfig";
+import { LanguageContext } from './data/LanguageContext';
+import { UserContext } from './data/UserContext';
+
 
 const App = () => {
 
@@ -40,9 +47,11 @@ const App = () => {
   //Authentifizierung
   const auth = getAuth(app);
 
+  //Navigation
+  const navigate = useNavigate();
+
   useEffect(() => {
     checkForUser();
-
     //------------- Hier Notifications registrieren
 
 
@@ -130,6 +139,7 @@ const App = () => {
       }
       setWrongPassword(false);
       setLoading(false);
+      navigate("/home")
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -285,7 +295,7 @@ const App = () => {
         last_entry_type: null,
         main_counter: 0,
         username_array: createUsernameArray(username.toUpperCase()),
-        app_version: "0.0.1",
+        app_version: package_object.version,
         news_read: false,
         config: {
           first: true,
@@ -358,11 +368,150 @@ const App = () => {
     });
   }
 
+  //behandlet Beendigung des Intros, Reihenfolge der Ausführungen ist wichtig, sonst endlosschleife im Intro
+  const handleIntroFinish = async (introConfig) => {
+    handleAuthenticatorSelect(introConfig.enableAuthentication);
+    toggleLanguage(introConfig.language);
+    updateDoc(doc(firestore, "users", user.id), {
+      config: {
+        first: false,
+        language: config.language,
+        localAuthenticationRequired: config.localAuthenticationRequired,
+        saveGPS: config.saveGPS,
+        shareGPS: config.shareGPS,
+        shareLastEntry: config.shareLastEntry,
+        shareMainCounter: config.shareMainCounter,
+        shareTypeCounters: config.shareTypeCounters,
+        showBong: config.showBong,
+        showCookie: config.showCookie,
+        showJoint: config.showJoint,
+        showPipe: config.showPipe, 
+        showVape: config.showVape
+      }
+    }).then(() => {
+      loadSettings();
+    });
+  }
+
+  //behandelt Auswahl des Nutzers, ob lokale Authentifizierung benutzt werden soll
+  const handleAuthenticatorSelect = async ( bool ) => {
+    const accessToken = JSON.parse(await localStorage.getItem("accessToken"));
+    await localStorage.setItem("accessToken", JSON.stringify({
+        email: accessToken.email,
+        password: accessToken.password,
+        localAuthenticationRequired: bool
+      }));
+    updateDoc(doc(firestore, "users", user.id),{
+      config: {
+        localAuthenticationRequired: bool,
+
+        first: false,
+        language: config.language,
+        saveGPS: config.saveGPS,
+        shareGPS: config.shareGPS,
+        shareLastEntry: config.shareLastEntry,
+        shareMainCounter: config.shareMainCounter,
+        shareTypeCounters: config.shareTypeCounters,
+        showBong: config.showBong,
+        showCookie: config.showCookie,
+        showJoint: config.showJoint,
+        showPipe: config.showPipe, 
+        showVape: config.showVape
+      }
+    });
+  }
+
+  //behandelt LogOut-Event
+  const handleLogOut = async () => {
+    setLoading(true);
+    localStorage.removeItem("accessToken");
+    signOut(auth).then(() => {
+      setUser(null);
+      setLoading(false);
+    }).catch((error) => {
+      setLoading(false);
+    });
+  };
+
+  //behandelt das Löschen des Nutzeraccounts
+  const deleteAccount = async () => {
+    setLoading(true);
+
+    if (user.photoUrl != "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png") {
+      //Delete Old Profile Picture
+      const fileRef = ref(storage, "profile-pictures/" + user.id + ".png");
+      // Delete the file
+      deleteObject(fileRef).then(() => {
+      }).catch((error) => {
+        console.log("Error beim Löschen des alten Profilbilds:" + error);
+      });
+    }
+
+    const current_user = auth.currentUser;
+    deleteUser(current_user).then(() => {
+      localStorage.removeItem("user_id");
+    }).catch((error) => {
+      // An error ocurred
+      console.log("Fehler beim löschen des Kontos: " + error);
+    });
+
+    // Firestore-Doc löschen
+    const docRef = doc(firestore, "users", user.id);
+    await deleteDoc(docRef);
+    setLoading(false);
+    handleLogOut();
+  };
+
+  //stellt Sprache um, die im Context geteilt wird
+  const toggleLanguage = async ( lang ) => {
+    if (lang == "de" && config.language == "en") {
+      setLanguage(Languages.de);
+      /* await AsyncStorage.setItem("settings",JSON.stringify({...config, language: "de"})); */
+      await updateDoc(doc(firestore, "users", user.id),{
+        config: {
+          language: "de"
+        }
+      });
+      setConfig({...config, language: "de"});
+    }
+    if (lang == "en" && config.language == "de") {
+      setLanguage(Languages.en);
+      /* await AsyncStorage.setItem("settings",JSON.stringify({...config, language: "en"})); */
+      await updateDoc(doc(firestore, "users", user.id),{
+        config: {
+          language: "en"
+        }
+      });
+      setConfig({...config, language: "en"});
+      
+    } 
+  }
+
   return (
+  <div style={{backgroundColor: "#1E2132", height: "100vh", width: "100vw"}}>
+    <LanguageContext.Provider value={language}>
       <Routes>
-        <Route path="*" element={<Login />} />
-        <Route path="/home" element={<Home />} />
+        <Route path="*" element={<Login handleLogin={handleLogin} handleCreate={handleCreate} wrongPassword={wrongPassword} emailInUse={emailInUse} userNotFound={userNotFound}/>}/>
+        <Route path="/home" element={
+          <UserContext.Provider value={user}>
+            <Home 
+            friendList={friendList}
+            handleLogOut={handleLogOut}
+            toggleLanguage={toggleLanguage}
+            deleteAccount={deleteAccount}
+            getFriendList={getFriendList}
+            loadSettings={loadSettings}
+            onSetBorderColor={color => setBorderColor(color)}
+            refreshUser={refreshUser}
+            handleIntroFinish={handleIntroFinish}
+            handleAuthenticatorSelect={handleAuthenticatorSelect}
+            onSetUser={(user) => setUser(user)}
+            sendPushNotification={sendPushNotification}
+            />
+          </UserContext.Provider>} />
       </Routes>
+    </LanguageContext.Provider>
+  </div>
   );
 }
 

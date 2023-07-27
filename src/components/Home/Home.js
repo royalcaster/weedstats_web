@@ -1,3 +1,4 @@
+import { useContext, useEffect } from "react";
 import {
     createBrowserRouter,
     RouterProvider,
@@ -7,13 +8,35 @@ import {
     BrowserRouter,
     Routes
   } from "react-router-dom";
+import { UserContext } from "../../data/UserContext";
+
+//Navigation
+import { useNavigate } from "react-router-dom";
+
+//Custom Components
+import Main from "./Main/Main";
   
-  const Home = () => {
+  const Home = ({ onSetUser, onWriteComplete, friendList, handleLogOut, toggleLanguage, deleteAccount, getFriendList, loadSettings, refreshUser, handleIntroFinish }) => {
+
+    //Context
+    const user = useContext(UserContext);
+
+    //Navigation
+    const navigate = useNavigate();
+
+    useEffect(() => {
+      if (user == null) {
+        navigate("/")
+      }
+    },[]);
+
     return (
       
-      <div>
-            HOME
-      </div>
+      <>
+        <Routes>
+          <Route path="/counter" element={<Main onWriteComplete={onWriteComplete} onSetUser={onSetUser} sendPushNotification={sendPushNotification} toggleNavbar={toggleNavbar} refreshUser={refreshUser}/>} />
+        </Routes>
+      </>
   
     );
   }

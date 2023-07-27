@@ -1,0 +1,41 @@
+container {
+    position: absolute;
+    background-color: #1E2132;
+    border-radius: 10px;
+    height: 100%;
+    width: 100%;
+    z-index: 10
+}
+textinput {
+    background-color: #131520;
+    border-radius: 10px;
+    padding: 15px;
+    width: 80%;
+    align-self: center;
+    margin-vertical: 5px;
+    font-family: Poppins;
+    font-size: 2rem;
+    color: white
+}
+label {
+    color: white;
+    font-size: 1.5rem;
+    font-family: Poppins;
+    left: 10%;
+    margin-top: 20px
+}
+valid_label {
+    font-family: Poppins;
+    font-size: 1.25rem;
+    align-self: center;
+    margin-top: 10px
+}
+touchable {
+    align-items: center
+}
+icon {
+    color: white;
+    font-size: 2rem;
+    font-family: Poppins;
+    margin-vertical: 10px
+}
