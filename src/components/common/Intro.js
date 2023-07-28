@@ -15,9 +15,6 @@ const Intro = ({ onExit }) => {
 
     const language = useContext(LanguageContext);
 
-    const screen_height = Dimensions.get("screen").height;
-    const screen_width = Dimensions.get("screen").width;
-
     const slide = useRef(new Animated.Value(screen_height)).current;
 
     const [step, setStep] = useState(1);
@@ -104,7 +101,7 @@ const Intro = ({ onExit }) => {
 
 export default Intro
 
-const styles = StyleSheet.create({
+const styles = {
     container: {
         flex: 1,
         backgroundColor: "#1E2132",
@@ -127,4 +124,4 @@ const styles = StyleSheet.create({
         maxWidth: "80%",
         textAlign: "center"
     }
-});
+};

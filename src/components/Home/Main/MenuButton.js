@@ -31,7 +31,7 @@ const MenuButton = ({type, url, icon, color, borderradius, onPress, disabled}) =
 
 export default MenuButton
 
-const styles = StyleSheet.create({
+const styles = {
     container: {
         width: "100%",
         flexDirection: "column",
@@ -66,4 +66,4 @@ const styles = StyleSheet.create({
         width: 50,
         alignSelf: "center",
       },
-});
+};

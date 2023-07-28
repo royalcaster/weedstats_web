@@ -42,7 +42,7 @@ const SelectorBar = ({ options, onPress, selectedType }) => {
 
 export default SelectorBar
 
-const styles = StyleSheet.create({
+const styles = {
     container: {
         display: "flex",
         flexDirection: "row",
@@ -64,4 +64,4 @@ const styles = StyleSheet.create({
         fontSize: "1.5rem",
         textAlignVertical: "center"
     }
-});
+};

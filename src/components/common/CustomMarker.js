@@ -45,7 +45,7 @@ const CustomMarker = ({ username, photoUrl, type, timestamp,  }) => {
     );
 }
 
-const styles = StyleSheet.create({
+const styles = {
     container: {
         height: 100
     },
@@ -65,6 +65,6 @@ const styles = StyleSheet.create({
         marginTop: -5,
         alignSelf: "center"
     }
-});
+};
 
 export default CustomMarker

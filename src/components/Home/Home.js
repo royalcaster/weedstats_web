@@ -15,8 +15,9 @@ import { useNavigate } from "react-router-dom";
 
 //Custom Components
 import Main from "./Main/Main";
+import Empty from "../common/Empty";
   
-  const Home = ({ onSetUser, onWriteComplete, friendList, handleLogOut, toggleLanguage, deleteAccount, getFriendList, loadSettings, refreshUser, handleIntroFinish }) => {
+  const Home = ({ onSetUser, onWriteComplete, friendList, handleLogOut, toggleLanguage, deleteAccount, getFriendList, loadSettings, refreshUser, handleIntroFinish, loadingParent }) => {
 
     //Context
     const user = useContext(UserContext);
@@ -28,14 +29,22 @@ import Main from "./Main/Main";
       if (user == null) {
         navigate("/")
       }
+      else {
+        navigate("/home/counter")
+      }
     },[]);
 
     return (
       
       <>
-        <Routes>
-          <Route path="/counter" element={<Main onWriteComplete={onWriteComplete} onSetUser={onSetUser} refreshUser={refreshUser}/>} />
-        </Routes>
+        {!loadingParent ?
+          <Routes>
+            <Route exact path="/counter" element={<Main onWriteComplete={onWriteComplete} onSetUser={onSetUser} refreshUser={refreshUser}/>} />
+            <Route exact path="/config" element={<Empty title={"lädt config"}/>} />
+          </Routes>
+          : <Empty title={"loading app"}/>
+        }
+        
       </>
   
     );

@@ -7,11 +7,11 @@ import News from "../../data/News";
 //Custom Components
 import Button from "./Button";
 
+import package_object from '../../../package.json'
+
 //Service
 import { doc, updateDoc, getDoc, collection } from "@firebase/firestore";
 import { app, firestore } from "../../data/FirebaseConfig";
-
-LogBox.ignoreLogs(['Warning: Each child in a list should have a unique "key" prop.']);
 
 const NewsPanel = ({ language, onExit, refreshUser }) => {
 
@@ -19,7 +19,7 @@ const NewsPanel = ({ language, onExit, refreshUser }) => {
     const [news, setNews] = useState([]);
 
     //Constants
-    const app_version = Constants.manifest.version;
+    const app_version = package_object.version;
 
     useEffect(() => {
         loadNews();
@@ -49,28 +49,27 @@ const NewsPanel = ({ language, onExit, refreshUser }) => {
     }
 
     const renderNote = (note) => {
-        return <View style={styles.note_container}>
-            <Text style={styles.title}>{note.title}</Text>
-            <Text style={styles.text}>{note.text}</Text>
-        </View>
+        return <div style={styles.note_container}>
+            <p style={styles.title}>{note.title}</p>
+            <p style={styles.text}>{note.text}</p>
+        </div>
     }
 
     return (
-        <Animated.View style={styles.container}>
+        <div style={styles.container}>
             
-        <View style={{backgroundColor: "#1E2132", height: "80%", width: "95%", borderRadius: 25}}>
+        <div style={{backgroundColor: "#1E2132", height: "80%", width: "95%", borderRadius: 25}}>
 
-        <View style={{flex: 1}}>
-            <View style={{height: "2%"}}></View>
-            <View style={styles.knob}></View>
-            <View style={{height: "2%"}}></View>
-            <Text style={styles.heading}>What's new?</Text>
-            <View style={{height: "0.5%"}}></View>
-            <Text style={[styles.heading, {fontFamily: "PoppinsMedium", fontSize: "1.5rem"}]}>{app_version}</Text>
-        </View>
+        <div style={{flex: 1}}>
+            <div style={{height: "2%"}}></div>
+            <div style={styles.knob}></div>
+            <div style={{height: "2%"}}></div>
+            <p style={styles.heading}>What's new?</p>
+            <div style={{height: "0.5%"}}></div>
+            <p style={[styles.heading, {fontFamily: "PoppinsMedium", fontSize: "1.5rem"}]}>{app_version}</p>
+        </div>
 
-        <View style={{flex: 3, width: "100%", alignSelf: "center"}}>
-        <ScrollView>
+        <div style={{flex: 3, width: "100%", alignSelf: "center"}}>
 
         {
             news != null ?
@@ -80,26 +79,25 @@ const NewsPanel = ({ language, onExit, refreshUser }) => {
             : null
         }
 
-        </ScrollView>
-        </View>
+        </div>
 
-        <View style={{flex: 1}}>
+        <div style={{flex: 1}}>
             <Button title={"Ok"} color={"#0781E1"} fontColor={"white"} onPress={() => setRead()}/>
-        </View>
+        </div>
 
-        </View>
+        </div>
             
-        </Animated.View>
+        </div>
     );
 }
 
 export default NewsPanel
 
-const styles = StyleSheet.create({
+const styles = {
     container: {
         position: "absolute",
-        height: Dimensions.get("screen").height,
-        width: Dimensions.get("window").width,
+        height: "100%",
+        width: "100%",
         backgroundColor: "rgba(0,0,0,0.75)",
         zIndex: 100,
         alignItems: "center",
@@ -133,4 +131,4 @@ const styles = StyleSheet.create({
         fontFamily: "PoppinsMedium",
         marginHorizontal: 20
     }
-});
+};

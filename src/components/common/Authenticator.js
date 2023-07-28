@@ -16,9 +16,6 @@ const Authenticator = ({ first, onSubmit, onCancel, onExit }) => {
 
     //navigation
     const navigation = useNavigation()
-
-    //Constants
-    const screen_height = Dimensions.get("screen").height;
     
     //Refs
     const slide = useRef(new Animated.Value(screen_height)).current;

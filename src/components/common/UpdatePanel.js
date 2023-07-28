@@ -11,43 +11,44 @@ import Button from "./Button";
 import { doc, updateDoc, getDoc, collection } from "@firebase/firestore";
 import { app, firestore } from "../../data/FirebaseConfig";
 
-LogBox.ignoreLogs(['Warning: Each child in a list should have a unique "key" prop.']);
+import package_object from '../../../package.json'
 
 const UpdatePanel = ({ language, onExit, refreshUser }) => {
 
     //State
 
     //Constants
-    const app_version = Constants.manifest.version;
+    const app_version = package_object.version;
 
     const linkToPlayStore = () => {
-        Linking.openURL('https://play.google.com/store/apps/details?id=com.royalcaster.WeedStats_build_test');
+        /* Linking.openURL('https://play.google.com/store/apps/details?id=com.royalcaster.WeedStats_build_test'); */
+        console.log("Link in UpdatePanel.js definieren");
     }
 
     return (
-        <Animated.View style={styles.container}>
+        <div style={styles.container}>
             
-        <View style={{backgroundColor: "#1E2132", height: "80%", width: "95%", borderRadius: 25}}>
+        <div style={{backgroundColor: "#1E2132", height: "80%", width: "95%", borderRadius: 25}}>
 
-        <View style={{flex: 1}}>
-            <View style={{height: "2%"}}></View>
-            <View style={styles.knob}></View>
-            <View style={{height: "2%"}}></View>
-            <Text style={styles.heading}>Update available</Text>
-        </View>
+        <div style={{flex: 1}}>
+            <div style={{height: "2%"}}></div>
+            <div style={styles.knob}></div>
+            <div style={{height: "2%"}}></div>
+            <p style={styles.heading}>Update available</p>
+        </div>
 
-        <View style={{flex: 1, width: "100%", alignSelf: "center"}}>
-            <Text style={[styles.text, {fontSize: "1.75rem", width: "80%", alignSelf: "center"}]}>Please update your app to the latest version to avoid errors and benefit from improvements and new features.</Text>
-        </View>
+        <div style={{flex: 1, width: "100%", alignSelf: "center"}}>
+            <p style={[styles.text, {fontSize: "1.75rem", width: "80%", alignSelf: "center"}]}>Please update your app to the latest version to avoid errors and benefit from improvements and new features.</p>
+        </div>
 
-        <View style={{flex: 1}}>
+        <div style={{flex: 1}}>
             <Button title={"Go to PlayStore"} color={"#0781E1"} fontColor={"white"} onPress={() => linkToPlayStore()}/>
             <Button title={"Update later"} color={"#484F78"} fontColor={"white"} onPress={() => onExit()}/>
-        </View>
+        </div>
 
-        </View>
+        </div>
             
-        </Animated.View>
+        </div>
     );
 }
 
@@ -56,8 +57,8 @@ export default UpdatePanel
 const styles = {
     container: {
         position: "absolute",
-        height: Dimensions.get("screen").height,
-        width: Dimensions.get("window").width,
+        height: "100%",
+        width: "100%",
         backgroundColor: "rgba(0,0,0,0.75)",
         zIndex: 100,
         alignItems: "center",

@@ -3,9 +3,6 @@ import React, { useEffect, useRef } from "react";
 
 const Template = ({ onExit }) => {
 
-    const screen_height = Dimensions.get("screen").height;
-    const screen_width = Dimensions.get("screen").width;
-
     const slide = useRef(new Animated.Value(screen_height)).current;
 
     useEffect(() => {
@@ -41,9 +38,9 @@ const Template = ({ onExit }) => {
 
 export default Template
 
-const styles = StyleSheet.create({
+const styles ={
     container: {
         flex: 1,
         backgroundColor: "green"
     }
-});
+};

@@ -4,8 +4,6 @@ import Button from "./Button";
 
 const IntroStatusbar = ({ onExit, progress }) => {
 
-    const screen_height = Dimensions.get("screen").height;
-    const screen_width = Dimensions.get("screen").width;
 
     return (
         <Animated.View style={[styles.container]}>
@@ -18,7 +16,7 @@ const IntroStatusbar = ({ onExit, progress }) => {
 
 export default IntroStatusbar
 
-const styles = StyleSheet.create({
+const styles = {
     container: {
         backgroundColor: "#131520",
         borderRadius: 50,
@@ -30,4 +28,4 @@ const styles = StyleSheet.create({
         height: "100%",
         borderRadius: 50
     }
-});
+};

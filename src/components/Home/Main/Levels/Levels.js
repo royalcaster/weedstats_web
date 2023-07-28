@@ -14,18 +14,17 @@ const Levels = ({ onexit, show }) => {
   const language = useContext(LanguageContext);
 
   //Ref
-  const fadeAnim = useRef(new Animated.Value(screen_width)).current;
 
   const hide = () => {
  
   };
 
   return (
-    <div style={[{ opacity: 1 , transform: [{translateX: fadeAnim}]}, styles.container]}>
+    <div style={[{ opacity: 1}, styles.container]}>
 
       
       <div style={{height: "90%", top: 0, position: "absolute", width: "100%"}}>
-      <div style={{ height: responsiveHeight(5) }}></div>
+      <div style={{ height: "5%" }}></div>
       <div style={{flexDirection: "row", alignContent: "center", alignItems: "center"}}>
         <div style={{marginLeft: 20}}>
             <BackButton onPress={() => hide()}/>
@@ -33,7 +32,7 @@ const Levels = ({ onexit, show }) => {
         <p style={styles.heading}>{language.account_levels}</p>
       </div>
 
-      <div style={{ height: responsiveHeight(2) }}></div>
+      <div style={{ height: "2%" }}></div>
 
       {language.levels.map((level, index) => {
         return (
@@ -67,7 +66,7 @@ const Levels = ({ onexit, show }) => {
           </div>
         );
       })}
-      <div style={{ height: responsiveHeight(2) }}></div>
+      <div style={{ height: "2%" }}></div>
       </div>
     </div>
   );

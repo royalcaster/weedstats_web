@@ -6,9 +6,9 @@ const Statusbar = ({ status }) => {
     const [containerWidth, setContainerWidth] = useState(300);
     const animateTarget = (containerWidth * status / 100) - containerWidth;
 
-    const slideAnim = useRef(new Animated.Value(-400)).current;
+    /* const slideAnim = useRef(new Animated.Value(-400)).current; */
 
-      Animated.timing(
+      /* Animated.timing(
         slideAnim, {
             toValue: animateTarget,
             duration: 600,
@@ -16,7 +16,7 @@ const Statusbar = ({ status }) => {
             easing: Easing.bezier(0, 1.02, 0.21, 0.97),
             delay: 0
         }
-    ).start();
+    ).start(); */
 
     const chopStatus = () => {
         if (Number.isNaN(status)) {
@@ -37,7 +37,7 @@ const Statusbar = ({ status }) => {
     }
 
     return (
-            <View style={{
+            <div style={{
             width: "100%",
             height: "100%",
             backgroundColor: "#1E2132",
@@ -47,10 +47,10 @@ const Statusbar = ({ status }) => {
             overflow: "hidden",
             alignItems: "center"
         }}
-        onLayout={(event) => {
+        /* onLayout={(event) => {
             setContainerWidth(event.nativeEvent.layout.width);
-          }}>
-            <Text style={{
+          }} */>
+            <p style={{
         color: "white", 
         fontFamily: "PoppinsMedium",
         fontSize: 12,
@@ -60,11 +60,11 @@ const Statusbar = ({ status }) => {
         top: -1,
         opacity: 0.75,
         top: "30%"
-    }}>{chopStatus(status)}</Text>
+    }}>{chopStatus(status)}</p>
             
-            <Animated.View style={{transform: [{translateX: slideAnim}], width: "100%", alignSelf: "flex-start",  height: "100%", backgroundColor: "#484F78"}}>
-            </Animated.View>
-        </View>
+            <div style={{ width: "100%", alignSelf: "flex-start",  height: "100%", backgroundColor: "#484F78"}}>
+            </div>
+        </div>
     )
 }
 

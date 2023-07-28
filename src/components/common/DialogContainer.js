@@ -2,8 +2,6 @@ import React, { useEffect, useReducer, useRef } from "react";
 
 const DialogContainer = ({ backgroundColor, title, backButtonEnabled, contentView, onExit }) => {
 
-    const screen_width = Dimensions.get("screen").width;
-    const screen_height = Dimensions.get("screen").height;
 
     const slide = useRef(new Animated.Value(screen_height)).current;
 
@@ -51,7 +49,7 @@ const DialogContainer = ({ backgroundColor, title, backButtonEnabled, contentVie
 
 export default DialogContainer
 
-const styles = StyleSheet.create({
+const styles = {
     container: {
         flex: 1
     },
@@ -69,4 +67,4 @@ const styles = StyleSheet.create({
     content_container: {
         flex: 1
     }
-});
+};

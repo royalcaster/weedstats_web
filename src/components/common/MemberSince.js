@@ -98,7 +98,7 @@ const MemberSince = ({ backgroundColor, timestamp }) => {
 
 export default MemberSince
 
-const styles = StyleSheet.create({
+const styles = {
     container: {
         width: "100%",
         alignSelf: "center",
@@ -118,4 +118,4 @@ const styles = StyleSheet.create({
         textAlign: "center",
         fontFamily: "PoppinsMedium"
     }
-});
+};

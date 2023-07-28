@@ -8,9 +8,6 @@ import { LanguageContext } from "../../data/LanguageContext";
 
 const LanguageDialog = ({ onSelect, onExit }) => {
 
-    const screen_height = Dimensions.get("screen").height;
-    const screen_width = Dimensions.get("screen").width;
-
     const slide = useRef(new Animated.Value(screen_height)).current;
 
     useEffect(() => {
@@ -64,7 +61,7 @@ const LanguageDialog = ({ onSelect, onExit }) => {
 
 export default LanguageDialog
 
-const styles = StyleSheet.create({
+const styles = {
     container: {
         flex: 1,
         justifyContent: "center",
@@ -83,4 +80,4 @@ const styles = StyleSheet.create({
         height: 100,
         width: "50%"
     }
-});
+};

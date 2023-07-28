@@ -26,6 +26,7 @@ import { ref, deleteObject } from '@firebase/storage'
 import { storage } from "./data/FirebaseConfig";
 import { LanguageContext } from './data/LanguageContext';
 import { UserContext } from './data/UserContext';
+import { ConfigContext } from './data/ConfigContext';
 
 
 const App = () => {
@@ -491,10 +492,12 @@ const App = () => {
   <div style={{backgroundColor: "#1E2132", height: "100vh", width: "100vw"}}>
     <LanguageContext.Provider value={language}>
       <Routes>
-        <Route path="*" element={<Login handleLogin={handleLogin} handleCreate={handleCreate} wrongPassword={wrongPassword} emailInUse={emailInUse} userNotFound={userNotFound}/>}/>
-        <Route path="/home" element={
+        <Route path="/" element={<Login handleLogin={handleLogin} handleCreate={handleCreate} wrongPassword={wrongPassword} emailInUse={emailInUse} userNotFound={userNotFound}/>}/>
+        <Route path="/home/*" element={
           <UserContext.Provider value={user}>
+          <ConfigContext.Provider value={config}>
             <Home 
+            loadingParent={loading}
             friendList={friendList}
             handleLogOut={handleLogOut}
             toggleLanguage={toggleLanguage}
@@ -506,6 +509,7 @@ const App = () => {
             handleAuthenticatorSelect={handleAuthenticatorSelect}
             onSetUser={(user) => setUser(user)}
             />
+          </ConfigContext.Provider>
           </UserContext.Provider>} />
       </Routes>
     </LanguageContext.Provider>

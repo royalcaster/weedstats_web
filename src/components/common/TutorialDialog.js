@@ -15,8 +15,6 @@ const TutorialDialog = ({ onSubmit, onCancel }) => {
         show();
     },[]);
 
-    const screen_height = Dimensions.get("screen").height;
-
     const slide = useRef(new Animated.Value(screen_height)).current;
 
     const show = () => {
@@ -53,7 +51,7 @@ const TutorialDialog = ({ onSubmit, onCancel }) => {
 
 export default TutorialDialog
 
-const styles = StyleSheet.create({
+const styles = {
     container: {
         flex: 1,
         justifyContent: "center",
@@ -63,4 +61,4 @@ const styles = StyleSheet.create({
         height: 200,
         width: 200
     }
-});
+};
