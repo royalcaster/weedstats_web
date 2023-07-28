@@ -51,16 +51,15 @@ const Statusbar = ({ status }) => {
             setContainerWidth(event.nativeEvent.layout.width);
           }} */>
             <p style={{
-        color: "white", 
-        fontFamily: "PoppinsMedium",
-        fontSize: 12,
-        position: "absolute",
-        zIndex: 1,
-        textAlignVertical: "center",
-        top: -1,
-        opacity: 0.75,
-        top: "30%"
-    }}>{chopStatus(status)}</p>
+                color: "white", 
+                fontFamily: "Poppins",
+                fontSize: 12,
+                zIndex: 1,
+                textAlignVertical: "center",
+                top: -1,
+                opacity: 0.75,
+                top: "30%"
+            }}>{chopStatus(status)}</p>
             
             <div style={{ width: "100%", alignSelf: "flex-start",  height: "100%", backgroundColor: "#484F78"}}>
             </div>

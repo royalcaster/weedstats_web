@@ -24,9 +24,16 @@ const Button = ({ icon, title, color, hovercolor, borderradius, onPress, fontCol
       </TouchableNativeFeedback> 
     </div>*/}
 
-    <button title={title} className="button" name={title} onClick={() => onPress()}>{title}</button>
-    
-    <div className="container2" style={{borderRadius: 5, backgroundColor: color2}}></div>
+    <button disabled={disabled} title={title} className="button" name={title} onClick={() => onPress()}
+    style={{
+      backgroundColor: color,
+      borderRadius: borderradius ? borderradius : null,
+      color: fontColor,
+      borderWidth: 0,
+      height: 40,
+      fontFamily: "Poppins"
+    }}>{icon} {title}</button>
+    {/* <div className="container2" style={{borderRadius: 5, backgroundColor: color2}}></div> */}
     </>
   );
 };

@@ -43,20 +43,7 @@ const Template = ({ firstColor, secondColor, onToggleCounter }) => {
     }); */
 
     return (
-        <div style={[{
-            flex: 1,
-            height: 45,
-            borderRadius: 5,
-            marginBottom: 5
-        }, {backgroundColor: secondColor}]} onLayout={(event) => {
-            setContainerWidth(event.nativeEvent.layout.width);
-          }}>
-            <div style={{justifyContent: "center", backgroundColor: "red", width: "20px", height: "100%", backgroundColor: firstColor, borderRadius: 5, flexDirection: "row", alignItems: "center"}} >
-                <div className="grab" style={{backgroundColor: secondColor, opacity: 0.25}}></div>
-                <div className="grab" style={{backgroundColor: secondColor, opacity: 0.25}}></div>
-                <div className="grab" style={{backgroundColor: secondColor, opacity: 0.25}}></div>
-            </div>
-        </div>
+        <button onClick={() => onToggleCounter()}>rauchen</button>
     );
 }
 

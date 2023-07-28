@@ -33,6 +33,9 @@ import package_object from '../../../../package.json'
 
 //navigation
 import { useNavigate } from "react-router-dom";
+import { FaTrophy, FaMoneyBillWave } from "react-icons/fa";
+import { BiSolidHelpCircle } from 'react-icons/bi'
+import { AiFillInfoCircle } from 'react-icons/ai'
 
 const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
 
@@ -306,6 +309,8 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
 
   const CounterModalContent = <CounterModal borderColor={borderColor} sayingNr={sayingNr} loadingColor={borderColor} onExit={() => setShowCounterModal(false)} writeComplete={writeComplete}/> 
 
+  const button_icon_style = {fontSize: "1rem", color: "white"}
+
   return (
     <>
 
@@ -321,93 +326,97 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
 
 
         {showTutorial ? 
-        <div /* style={{zIndex: 3000, position: "absolute", height: "100%", width: "100%"}} */>
+        <div style={{zIndex: 3000, position: "absolute", height: "100%", width: "100%"}}>
           <Tutorial onDone={onDone} extraHeight={50}/>
         </div> : <> 
-          <div /* style={{height: 20, width: 20, backgroundColor: "green"}} */>
+          <div style={{height: "100%", width: "100%"}}>
           {loading ? (
             <div
-              /* style={{
+              style={{
                 flex: 1,
                 justifyContent: "center",
                 alignItems: "center",
-              }} */
+              }}
             >
               <CustomLoader x={50} color={"#484F78"}/>
             </div>
           ) : (
             <>
               {counterOrder.length == 0 ? (
-                <div /* style={{height: "90%", justifyContent: "center"}} */>
-                  <Empty title={"Keine Stats aktiviert"} tip={"Konfiguriere deine Ansicht in den Einstellungen."}/>
+                <div style={{height: "90%", justifyContent: "center"}}>
+                  <Empty title={"Keine Counter aktiviert"} tip={"Konfiguriere deine Ansicht in den Einstellungen."}/>
                 </div>
-              ) : <div /* style={styles.counters_container} */> 
-
-            <div /* style={{ height: 50 }} */></div>
-            <div /* style={{ width: "100%", flexDirection: "row", height: "50px", backgroundClip: "red"}} */>
+              ) : <div style={styles.counters_container}> 
+            <div style={{ display: "flex", width: "100%", flexDirection: "row"}}>
             <div
-              /* style={{
+              style={{
                 paddingLeft: 15,
-                flex: 1
-              }} */
+                flex: 1,
+              }}
             >
-              <button onClick={() => navigate('/home/config')}>config</button>
               <p
-                /* style={{
+                style={{
+                  margin: 0,
+                  marginTop: 10,
                   color: "#737EBF",
-                  fontFamily: "PoppinsLight",
+                  fontFamily: "Poppins",
                   marginBottom: -10,
                   fontSize: 12,
-                }} */
+                }}
               >
                 {language.main_all}
               </p>
               <p
-                /* style={{
-                  fontFamily: "PoppinsBlack",
+                style={{
+                  margin: 0,
+                  fontFamily: "Poppins",
+                  fontWeight: 700,
                   fontSize: 25,
                   color: "#737EBF",
-                }} */
+                }}
               >
                 {user.main_counter}
               </p>
             </div>
             <div>
-              {/* <p style={styles.main_heading}>{language.short == "de" ? "Hallo" : "Hello"}</p> */}
-              <p /* style={{fontSize: "2rem", fontFamily: "PoppinsBlack", textAlign: "center", color: "white"}} */>{user.username}</p>
+              <p style={styles.main_heading}>{language.short == "de" ? "Hallo" : "Hello"}</p>
+              <p style={{fontSize: "1.25rem", fontFamily: "Poppins", textAlign: "center", color: "white", fontWeight: 700, margin: 0}}>{user.username}</p>
             </div>
             <div
-              /* style={{
+              style={{
                 paddingRight: 15,
                 flex: 1
-              }} */
+              }}
             >
               <p
-                /* style={{
+                style={{
+                  margin: 0,
+                  marginTop: 10,
                   textAlign: "right",
                   color: "#737EBF",
-                  fontFamily: "PoppinsLight",
+                  fontFamily: "Poppins",
                   marginBottom: -10,
                   fontSize: 12,
-                }} */
+                }}
               >
                 {language.main_days_till_420}
               </p>
               <p
-                /* style={{
+                style={{
+                  margin: 0,
                   textAlign: "right",
-                  fontFamily: "PoppinsBlack",
+                  fontFamily: "Poppins",
+                  fontWeight: 700,
                   fontSize: 25,
                   color: "#737EBF",
-                }} */
+                }}
               >
                 {countdown}
               </p>
             </div>
           </div>
 
-                {/* {
-                counterOrder.map((item) => {
+                {counterOrder.map((item) => {
                   return (
                     <CounterItem
                       key={item.type}
@@ -417,69 +426,67 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                       toggleBorderColor={toggleBorderColor}
                     />
                   );
-                })} */}
-
-                <div /* style={{height: "2.5%"}} */></div>
+                })}
                 
-                <div /* style={{flex: 4, justifyContent: "center"}} */>
+                <div style={{height: "1rem"}}></div>
 
-                <div /* style={{flexDirection: "row", width: "90%", alignSelf: "center"}} */>
-                    <div /* style={{flex: 1}} */>
-                      {/* <Button
+                <div style={{display: "flex", flex: 4, justifyContent: "center", flexDirection: "column"}}>
+                <div style={{ display: "flex", flexDirection: "row", width: "90%", alignSelf: "center", justifyContent: "center"}}>
+                    <div style={{flex: 1, justifyContent: "center", display: "flex"}}>
+                      <Button
                         fontColor={"white"}
                         onPress={() =>{ setShowLevels(true)}}
-                        borderradius={100}
+                        borderradius={10}
                         color={"#131520"}
                         title={" " + language.account_levels}
-                        icon={<FontAwesome name="trophy" style={styles.money_icon} />}
+                        icon={<FaTrophy style={button_icon_style}/>}
                         hovercolor={"rgba(255,255,255,0.15)"}
                         small={true} 
-                      />*/}
+                      />
                     </div>
-                    <div /* style={{width: "2%"}} */></div>
-                    <div /* style={{flex: 1}} */>
-                      {/* <Button
+                    <div style={{flex: 1, justifyContent: "center", display: "flex"}}>
+                      <Button
                         onPress={() => setShowAppInfo(true)}
                         title={" App-Info"}
-                        icon={<Feather name="info" style={styles.money_icon} />}
-                        borderradius={100}
+                        icon={<AiFillInfoCircle style={button_icon_style}/>}
+                        borderradius={10}
                         color={"#131520"}
                         fontColor={"white"}
                         hovercolor={"rgba(255,255,255,0.15)"}
                         small={true} 
-                      />*/}
+                      />
                     </div>
                 </div>
-
-                <div /* style={{flexDirection: "row", width: "90%", alignSelf: "center"}} */>
-                    <div /* style={{flex: 1}} */>
-                      {/* <Button
+                <div style={{height: "0.5rem"}}></div>
+                <div style={{display: "flex", flexDirection: "row", width: "90%", alignSelf: "center"}}>
+                    <div style={{flex: 1, justifyContent: "center", display: "flex"}}>
+                      <Button
                         onPress={() => setShowTutorial(true)}
                         title={" " + language.account_tutorial}
-                        icon={<Feather name="help-circle" style={styles.money_icon} />}
-                        borderradius={100}
+                        icon={<BiSolidHelpCircle style={button_icon_style}/>}
+                        borderradius={10}
                         color={"#131520"}
                         fontColor={"white"}
                         hovercolor={"rgba(255,255,255,0.15)"}
                         small={true}
-                      /> */}
+                      />
                     </div>
-                    <div /* style={{width: "2%"}} */></div>
-                    <div /* style={{flex: 1}} */>
-                    {/* <Button
+                    <div style={{flex: 1, justifyContent: "center", display: "flex"}}>
+                    <Button
                         onPress={() => setShowDonation(true)}
                         title={" " + language.account_support}
-                        icon={<MaterialIcons name="euro" style={styles.money_icon} />}
-                        borderradius={100}
+                        icon={<FaMoneyBillWave style={button_icon_style}/>}
+                        borderradius={10}
                         color={"#131520"}
                         fontColor={"white"}
                         hovercolor={"rgba(255,255,255,0.15)"}
                         small={true}
                         color2={"#F2338C"}
-                      /> */}
+                      />
                     </div>
+                    
                 </div>
-                <div /* style={{height: "2%"}} */></div>
+                <div style={{height: "2rem"}}></div>
                 </div>
               </div>}
             </>
@@ -497,12 +504,11 @@ const styles = {
     flex: 5,
     backgroundColor: "#1E2132",
     width: "100%",
-    height: "80%"
   },
   main_heading: {
     color: "white",
-    fontSize: "1.5rem",
-    fontFamily: "PoppinsLight",
+    fontSize: "1rem",
+    fontFamily: "Poppins",
     position: "relative",
     textAlign: "center"
   },

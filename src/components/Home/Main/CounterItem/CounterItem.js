@@ -64,34 +64,40 @@ const CounterItem = ({ type, counter, toggleCounter, toggleBorderColor }) => {
   }
 
   return (
-    <div style={[styles.container]}>
+    <div style={styles.container}>
 
-      <div style={{position: "absolute", alignSelf: "center", zIndex: 10000, justifyContent: "center", width: "100%", top: -30}}>
+      {/* <div style={{position: "relative", alignSelf: "center", zIndex: 10000, justifyContent: "center", top: -30}}>
         <LevelImage index={Math.floor(counter / 70)} style={{width: "8%", height: "8%", alignSelf: "center"}}/>
-      </div>
+      </div> */}
 
-      <div style={[styles.card_opener, {backgroundColor: convertToRGB(getGradientColors(counter)[0].substring(1,7), 0.4), borderColor: getGradientColors(counter)[0], borderWidth: 0.5 }]}>
-        <div style={{backgroundColor: getGradientColors(counter)[0], height: "6.5%", width: "6.5%", justifyContent: "center", borderRadius: 10}}>
+      <div style={{backgroundColor: convertToRGB(getGradientColors(counter)[0].substring(1,7), 0.4), borderColor: getGradientColors(counter)[0], borderWidth: 0.5, flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        borderTopLeftRadius: 10,
+        borderBottomLeftRadius: 10,
+        paddingRight: 20,
+        display: "flex"}}>
+        <div style={{backgroundColor: getGradientColors(counter)[0], height: 50, width: 50, justifyContent: "center", borderRadius: 10}}>
           <TypeImage type={type} x={50}/>
         </div>
       </div>
       
-      <div style={[styles.card_content]}>
+      <div style={styles.card_content}>
         <div style={{flex: 6}}>
-        <div style={styles.grab}></div>
-          <div style={{flex: 1, flexDirection: "row", padding: 5, paddingBottom: 0}}>
+          <div style={styles.grab}></div>
+          <div style={{flex: 1, flexDirection: "row", padding: 5, paddingBottom: 0, display: "flex"}}>
             <div style={{flex: 2, alignItems: "center", flexGrow: 3}}>
               <p style={styles.counter_number}>{counter > 0 ? counter : "0"}</p>
             </div>
-            <div style={{flex: 5, padding: 5, maxHeight: "7%"}}>
+            <div style={{display: "flex", flex: 5, padding: 5}}>
               <Statusbar status={calcLevelStatus(counter)} />
             </div>
           </div> 
-          <div style={{flex: 1, padding: 10, paddingTop: 5}}>
-            <Slider firstColor={getGradientColors(counter)[0]} secondColor={getGradientColors(counter)[2]} onToggleCounter={() => {toggleCounter(type.toLowerCase(), getGradientColors(counter)[0]); toggleBorderColor(getGradientColors(counter)[0])}}/>
-          </div>
+            <div style={{display: "flex", flex: 3, padding: 10, paddingTop: 5}}>
+              <Slider firstColor={getGradientColors(counter)[0]} secondColor={getGradientColors(counter)[2]} onToggleCounter={() => {toggleCounter(type.toLowerCase(), getGradientColors(counter)[0]); toggleBorderColor(getGradientColors(counter)[0])}}/>
+            </div>
         </div>  
-        <div style={{flex: 1, flexDirection: "column"}}>
+        <div style={{flex: 1, flexDirection: "column", display: "flex"}}>
           <LevelBar index={Math.floor(counter / 70)} counter={counter}/>
         </div>
       </div> 
@@ -105,14 +111,15 @@ export default CounterItem;
 const styles = {
   container: {
     margin: 5,
-    marginVertical: 15,
-    flexDirection: "row"
+    marginTop: 20,
+    flexDirection: "row",
+    display: "flex"
   },
   counter_number: {
     color: "white",
-    fontSize: "6rem",
-    fontFamily: "PoppinsMedium",
-    marginBottom: "1%" * -1
+    fontSize: "2rem",
+    fontFamily: "Poppins",
+    fontWeight: 700
   },
   card_opener: {
     flex: 1,
@@ -124,6 +131,7 @@ const styles = {
   },
   card_content: {
     flex: 5,
+    display: "flex",
     backgroundColor: "#131520",
     borderRadius: 10,
     marginLeft: -20,
@@ -136,6 +144,9 @@ const styles = {
     borderRadius: 10,
     zIndex: 1000,
     marginVertical: 15,
-    marginBottom: 5
+    marginBottom: 5,
+    backgroundColor: "#484F78",
+    margin: "auto",
+    marginTop: 10
   }
 };

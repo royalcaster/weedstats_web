@@ -24,17 +24,18 @@ const LevelBar = ({ index, counter }) => {
     const RenderItem = ({ level }) => {  
         return <>
         <div key={level} style={{backgroundColor: getColor(level), flex: 1, margin: 1.5, marginHorizontal: 10, borderRadius: 2.5}}>
-
         </div>
         </>
     }
 
     return (
-        <div style={[{
+        <div style={{
+            display: "flex",
             flex: 1,
             flexDirection: "column",
-            paddingVertical: 10
-        }]}>
+            paddingVertical: 10,
+            margin: 10
+        }}>
             
             {language.levels.slice(0).reverse().map(level => {
                 return <RenderItem level={level} key={Math.random()}/>;
