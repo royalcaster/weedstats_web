@@ -31,6 +31,9 @@ import News from "../../../data/News";
 import UpdatePanel from "../../common/UpdatePanel";
 import package_object from '../../../../package.json'
 
+//navigation
+import { useNavigate } from "react-router-dom";
+
 const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
 
   //Context
@@ -38,6 +41,9 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
   const language = useContext(LanguageContext);
   const config = useContext(ConfigContext);
   const friendList = useContext(FriendListContext);
+
+  //Navigation
+  const navigate = useNavigate();
   
   //Refs
   /* const headingAnim = useRef(new Animated.Value(-100)).current;
@@ -345,6 +351,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                 flex: 1
               }} */
             >
+              <button onClick={() => navigate('/home/config')}>config</button>
               <p
                 /* style={{
                   color: "#737EBF",

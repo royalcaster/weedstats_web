@@ -488,11 +488,14 @@ const App = () => {
     } 
   }
 
+  const LoginComponent = <Login handleLogin={handleLogin} handleCreate={handleCreate} wrongPassword={wrongPassword} emailInUse={emailInUse} userNotFound={userNotFound}/>;
+
   return (
   <div style={{backgroundColor: "#1E2132", height: "100vh", width: "100vw"}}>
     <LanguageContext.Provider value={language}>
       <Routes>
-        <Route path="/" element={<Login handleLogin={handleLogin} handleCreate={handleCreate} wrongPassword={wrongPassword} emailInUse={emailInUse} userNotFound={userNotFound}/>}/>
+        <Route path="/" element={LoginComponent}/>
+        <Route path="/login" element={LoginComponent}/>
         <Route path="/home/*" element={
           <UserContext.Provider value={user}>
           <ConfigContext.Provider value={config}>
