@@ -27,6 +27,7 @@ import { storage } from "./data/FirebaseConfig";
 import { LanguageContext } from './data/LanguageContext';
 import { UserContext } from './data/UserContext';
 import { ConfigContext } from './data/ConfigContext';
+import { FriendListContext } from './data/FriendListContext';
 
 
 const App = () => {
@@ -499,6 +500,7 @@ const App = () => {
         <Route path="/home/*" element={
           <UserContext.Provider value={user}>
           <ConfigContext.Provider value={config}>
+          <FriendListContext.Provider value={friendList}>
             <Home 
             loadingParent={loading}
             friendList={friendList}
@@ -512,6 +514,7 @@ const App = () => {
             handleAuthenticatorSelect={handleAuthenticatorSelect}
             onSetUser={(user) => setUser(user)}
             />
+          </FriendListContext.Provider>
           </ConfigContext.Provider>
           </UserContext.Provider>} />
       </Routes>

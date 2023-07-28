@@ -8,6 +8,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="theme-color" content="#000000" />
+    
     <meta
       name="description"
       content="Web site created using create-react-app"
@@ -28,8 +29,42 @@
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
     <title>WeedStats</title>
+
+    <!--geolocator inizialisierung-->
+    <!-- <script type="text/javascript" src="geolocator.min.js"></script>
+    <script type="text/javascript">
+    
+        geolocator.config({
+            language: "en",
+            google: {
+                version: "3",
+                key: "AIzaSyCxVewlt1lfc-pgGKvlNMz_pokMYS4OzV0"
+            }
+        });
+    
+        window.onload = function () {
+            var options = {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumWait: 10000,     // max wait time for desired accuracy
+                maximumAge: 0,          // disable cache
+                desiredAccuracy: 30,    // meters
+                fallbackToIP: true,     // fallback to IP if Geolocation fails or rejected
+                addressLookup: true,    // requires Google API key if true
+                timezone: true,         // requires Google API key if true
+                map: "map-canvas",      // interactive map element id (or options object)
+                staticMap: true         // get a static map image URL (boolean or options object)
+            };
+            geolocator.locate(options, function (err, location) {
+                if (err) return console.log(err);
+                console.log(location);
+            });
+        };
+    
+    </script> -->
   </head>
-  <body>
+  <body style="background-color: #1E2132;">
+    <!-- <div id="map-canvas" style="width:600px;height:400px"></div> -->
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
     <!--

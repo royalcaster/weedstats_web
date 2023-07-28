@@ -12,16 +12,14 @@ const CounterModal = ({ onExit, writeComplete, sayingNr, borderColor, loadingCol
 
     const language = useContext(LanguageContext);
 
+    useEffect(() => {
+      console.log("modal");
+    });
+
     return (
       <>
         <p
-            style={[styles.container, {
-              alignItems: "center",
-              justifyContent: "center",
-              backgroundColor: "rgba(0,0,0,0.85)",
-              flex: 1,
-              height: "100%"
-            }]}
+            style={styles.container}
           >
             
             <p
@@ -35,15 +33,11 @@ const CounterModal = ({ onExit, writeComplete, sayingNr, borderColor, loadingCol
             {writeComplete ? (
               <>
                 <p style={{ flex: 5, justifyContent: "center"}}>
-                  <p style={[styles.text, { fontSize: "3rem" }]}>
+                  <p style={styles.text}>
                     {language.sayings[sayingNr].saying}
                   </p>
                   <p
-                    style={[
-                      styles.text,
-                      { fontSize: 15, fontStyle: "italic", marginTop: 10 },
-                    ]}
-                  >
+                    style={styles.text}>
                     {language.sayings[sayingNr].from}
                   </p>
                 </p>
@@ -76,6 +70,11 @@ const styles = {
   container: {
     flex: 1,
     backgroundColor: "#1E2132",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(0,0,0,0.85)",
+    flex: 1,
+    height: "100%"
   },
   button: {
     borderRadius: 10,
@@ -89,5 +88,9 @@ const styles = {
     color: "white",
     maxWidth: 250,
     textAlign: "center",
+    fontSize: 15, 
+    fontStyle: "italic", 
+    marginTop: 10,
+    fontSize: "3rem"
   },
 };

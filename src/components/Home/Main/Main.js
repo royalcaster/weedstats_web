@@ -30,6 +30,7 @@ import NewsPanel from "../../common/NewsPanel";
 import News from "../../../data/News";
 import UpdatePanel from "../../common/UpdatePanel";
 import package_object from '../../../../package.json'
+import { useGeolocated } from "react-geolocated";
 
 //navigation
 import { useNavigate } from "react-router-dom";
@@ -38,6 +39,17 @@ import { BiSolidHelpCircle } from 'react-icons/bi'
 import { AiFillInfoCircle } from 'react-icons/ai'
 
 const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
+
+  //Geolocation
+  const { coords, isGeolocationAvailable, isGeolocationEnabled } =
+  useGeolocated({
+      positionOptions: {
+          enableHighAccuracy: false,
+      },
+      userDecisionTimeout: 5000,
+  });
+
+  console.log(isGeolocationEnabled);
 
   //Context
   const user = useContext(UserContext);
@@ -73,6 +85,8 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
   const [showAppInfo, setShowAppInfo] = useState(false);
   const [showNews, setShowNews] = useState(false);
   const [showUpdatePanel, setShowUpdatePanel] = useState(false)
+  const [location, setLocation] = useState(null);
+  const [weather, setWeather] = useState(null);
 
  /*  useEffect(() => {
     !showCounterModal ? toggleBorderColor("rgba(0,0,0,0)", "#484F78") : null;
@@ -228,17 +242,45 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
 
     if (config.saveGPS) {
       // Die Bestimmung der Position dauert von den Schritten in der Funktion toggleCounter() mit Abstand am längsten
-      let { status } = await Location.requestForegroundPermissionsAsync();
+      /* let { status } = await Location.requestForegroundPermissionsAsync();
       if (status !== "granted") {
         console.log("Permission to access location was denied");
         return;
-      }
-      let location = await Location.getCurrentPositionAsync({
+      } */
+      /* let location = await Location.getCurrentPositionAsync({
         accuracy: Location.Accuracy.Highest,
-      });
+      }); */
 
-      new_entry.latitude = location.coords.latitude;
-      new_entry.longitude = location.coords.longitude;
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(success, error);
+      } else {
+        console.log("Geolocation not supported");
+      }
+
+      function success(position) {
+        const latitude = position.coords.latitude;
+        const longitude = position.coords.longitude;
+        setLocation({ latitude, longitude });
+        console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+    
+        // Make API call to OpenWeatherMap
+        fetch(`https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=<YOUR_API_KEY>&units=metric`)
+          .then(response => response.json())
+          .then(data => {
+            setWeather(data);
+            console.log(data);
+          })
+          .catch(error => console.log(error));
+      }
+    
+      function error() {
+        console.log("Unable to retrieve your location");
+      }
+
+      if (location != null) {
+        new_entry.latitude = location.coords.latitude;
+        new_entry.longitude = location.coords.longitude;
+      }
     }
 
     await writeLocalStorage(new_entry);
@@ -303,7 +345,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
         notification_type: "counter",
         friend_id: user.id
       }
-      sendPushNotification(friend.expo_push_token, title, body, data);
+      /* sendPushNotification(friend.expo_push_token, title, body, data); */
     });
   }
 
