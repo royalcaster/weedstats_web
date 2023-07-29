@@ -20,6 +20,8 @@
         "cancel": "Abbrechen",
 
         "login": "Anmelden",
+        "login_show_password": "Passwort zeigen",
+        "login_hide_password": "Passwort verstecken",
 
         "levels": [
           {
@@ -351,6 +353,8 @@
         "cancel": "Cancel",
 
         "login": "Sign in",
+        "login_show_password": "Show password",
+        "login_hide_password": "Hide password",
 
         "levels": [
           {

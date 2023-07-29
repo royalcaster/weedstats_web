@@ -30,8 +30,9 @@ const Button = ({ icon, title, color, hovercolor, borderradius, onPress, fontCol
       borderRadius: borderradius ? borderradius : null,
       color: fontColor,
       borderWidth: 0,
-      height: 40,
-      fontFamily: "Poppins"
+      height: 50,
+      fontFamily: "Poppins",
+      fontSize: "1rem"
     }}>{icon} {title}</button>
     {/* <div className="container2" style={{borderRadius: 5, backgroundColor: color2}}></div> */}
     </>

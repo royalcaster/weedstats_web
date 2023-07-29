@@ -6,7 +6,8 @@
     align-self: center;
     z-index: 10;
     border-radius: 10px;
-    overflow: hidden
+    overflow: hidden;
+    cursor: pointer;
 }
 .container2 {
     height: 10px;
@@ -34,4 +35,5 @@
     width: 80%;
     max-width: 500px;
     margin: auto;
+    cursor: pointer;
 }

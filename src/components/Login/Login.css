@@ -1,7 +1,13 @@
 .login_container {
-    background-color: #1E2132;
+    background-color: #131520;
     flex: 1;
-    height: 100vh
+    height: 100vh;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    display: flex;
+    flex-direction: column;
+    min-width: 400px;
 }
 .login_pressable {
     border-width: 2px;
@@ -29,22 +35,26 @@
     align-self: center
 }
 .textinput {
-    background-color: #131520;
-    border-radius: 10px;
-    padding: 15px;
-    width: 80%;
+    background-color: #1E2132;
+    border: none;
+    outline: none;
+    border-radius: 15px;
+    padding: 10px;
     align-self: center;
-    margin-vertical: 5px;
     font-family: Poppins;
-    font-size: 2rem;
-    color: white
+    font-size: 1rem;
+    color: white;
+    width: 95%;
 }
+
+.textinput:focus-visible {
+    outline: none;
+}
+
 .label {
     color: white;
-    font-size: 1.5rem;
+    font-size: 0.75rem;
     font-family: Poppins;
-    left: 10%;
-    margin-top: 20px
 }
 .touchable {
     align-items: center
@@ -54,4 +64,24 @@
     font-size: 2rem;
     font-family: Poppins;
     margin-vertical: 10px
+}
+
+.toggle_link {
+    color: #0080FF;
+    cursor: pointer;
+    text-align: right;
+}
+
+.toggle_link:hover {
+    text-decoration: underline;
+}
+
+input[type=range] {
+    -webkit-appearance: none;
+    width: 200px;
+    background: transparent;
+}
+
+input:-webkit-autofill {
+    -webkit-box-shadow: 0 0 0 1000px #1E2132 inset !important;
 }

@@ -14,10 +14,12 @@ import { useNavigation } from "react-router-dom";
 //Data
 import { LanguageContext } from "../../data/LanguageContext";
 import CreatePanel from './CreatePanel/CreatePanel'
-import logo from '../../data/img/logo.png'
 
 //Custom Components
 import Button from "../common/Button";
+
+//Third Party
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
 //CSS
 import './Login.css'
@@ -61,59 +63,62 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
 
       <div
         style={{
-          flex: 3,
           zIndex: 2,
-          justifyContent: "center"
+          justifyContent: "center",
+          display: "flex",
+          flexDirection: "column",
         }}
       >
         
         <img
           style={{ height: 100, width: 100, alignSelf: "center"}}
-          src={logo}
+          src={require('../../data/img/icon.png')}
           alt="WeedStats Logo"
         />
         <p
           style={{
             color: "white",
-            fontSize: "3rem",
-            fontFamily: "PoppinsBlack",
-            pAlign: "center",
-            marginTop: 0,
+            fontSize: "2rem",
+            fontFamily: "Poppins",
+            textAlign: "center",
+            marginTop: 10,
+            fontWeight: 700,
           }}
         >
           WeedStats
         </p>
       </div>
 
-      <div style={{ zIndex: 2, flex: 5, justifyContent: "center"}}>
+      <div style={{ zIndex: 2, justifyContent: "center", width: "80%", maxWidth: 500, display: "flex", flexDirection: "column"}}>
         <p className="label">E-Mail Adress</p>
-        <input onBlur={() => checkForSpace()} type="email" className="textinput email_input" value={email} onChange={(e) => setEmail(e.target.value)}/>
+        <input autoFocus onBlur={() => checkForSpace()} type="email" className="textinput"  value={email} onChange={(e) => setEmail(e.target.value)}/>
         {userNotFound ? <p style={{color: "#FC2044", pAlign: "center"}}>{language.login_user_not_found}</p> : null }
         <p className="label">Password</p>
-        <input onChange={(e) => setPassword(e.target.value)}  type="password" className="textinput email_input" value={password} />
-        {/* <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple("rgba(255,255,255,0.25)", false)} onPress={() => securePassword ? setSecurePassword(false) : setSecurePassword(true)}>
-          <div style={styles.touchable}>
-            {securePassword ? <><p style={styles.icon}><Entypo name="eye" style= {styles.icon}/> Show</p></> : <><p style= {styles.icon}><Entypo name="eye-with-line" style={styles.icon}/> Hide</p></>}
-          </div>
-        </TouchableNativeFeedback> */}
+        <input onChange={(e) => setPassword(e.target.value)}  type={securePassword ? "password" : "text"} className="textinput" value={password} />
+        
+        <div style={{height: "1rem"}}></div>
+        <a className="toggle_link" onClick={() => setSecurePassword(!securePassword)}>{securePassword ? <><AiFillEye style={{marginBottom: -3}}/> {language.login_show_password}</> : <><AiFillEyeInvisible style={{marginBottom: -3}}/> {language.login_hide_password}</>}</a>
+
         {wrongPassword ? <p style={{color: "#FC2044", pAlign: "center"}}>{language.login_wrong_password}</p> : null }
       </div>
 
-      <div style={{ zIndex: 2, flex: 2, justifyContent: "center"}}>
+      <div style={{height: "2rem"}}></div>
+
+      <div style={{ zIndex: 2, justifyContent: "center", width: "100%", display: "flex", flexDirection: "column"}}>
       <Button
           fontColor={"white"}
           title={language.login}
-          borderradius={100}
+          borderradius={10}
           color={"#0080FF"}
-          onPress={() => handleLogin(email, password, () => navigation.navigate("home"))}
+          onPress={() => {handleLogin(email, password, () => navigation.navigate("/home")); console.log(email, password);}}
           hovercolor={"rgba(255,255,255,0.3)"}
           color2={"#004080"}
       />
-      <p style={{fontFamily: "Poppins", color: "white", fontSize: "1.5rem", pAlign: "center", marginBottom: 10}}>OR</p>
+      <p style={{fontFamily: "Poppins", color: "white", fontSize: "1rem", textAlign: "center"}}>OR</p>
       <Button
           fontColor={"white"}
           title={"Create your account"}
-          borderradius={100}
+          borderradius={10}
           color={"#484F78"}
           onPress={() => setShowCreatePanel(true)}
           hovercolor={"rgba(255,255,255,0.3)"}

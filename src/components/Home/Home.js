@@ -44,7 +44,7 @@ import { FaSliders, FaUser } from "react-icons/fa6";
     return (
       
       <>
-        <div style={{height: "92vh", width: "100%", top: 0, position: "absolute", overflow: "scroll"}}>
+        <div style={{height: "92vh", width: "100%", top: 0, position: "absolute", overflowY: "scroll"}}>
           {!loadingParent ?
             <Routes>
               <Route index path="/counter" element={<Main onWriteComplete={onWriteComplete} onSetUser={onSetUser} refreshUser={refreshUser}/>} />
