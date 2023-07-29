@@ -49,8 +49,6 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
       userDecisionTimeout: 5000,
   });
 
-  console.log(isGeolocationEnabled);
-
   //Context
   const user = useContext(UserContext);
   const language = useContext(LanguageContext);

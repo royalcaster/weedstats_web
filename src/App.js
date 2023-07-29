@@ -29,6 +29,9 @@ import { UserContext } from './data/UserContext';
 import { ConfigContext } from './data/ConfigContext';
 import { FriendListContext } from './data/FriendListContext';
 
+//Third Party
+import { Spinner } from "react-activity";
+import "react-activity/dist/library.css";
 
 const App = () => {
 
@@ -71,6 +74,10 @@ const App = () => {
       config.language == "de" ? setLanguage(Languages.de) : setLanguage(Languages.en);
     }
   },[config]);
+
+  useEffect(() => {
+    console.log(loading); 
+  },[loading]);
 
   //Sucht im AsyncStorage nach dem letzten User der sich eingeloggt hat und loggt sich bei Erfolg automatisch ein
   const checkForUser = async () => {
@@ -493,6 +500,7 @@ const App = () => {
 
   return (
   <div style={{backgroundColor: "#1E2132", height: "100vh", width: "100vw", display: "flex", justifyContent: "center"}}>
+    {!loading ? 
     <LanguageContext.Provider value={language}>
       <Routes>
         <Route path="/" element={LoginComponent}/>
@@ -519,6 +527,10 @@ const App = () => {
           </UserContext.Provider>} />
       </Routes>
     </LanguageContext.Provider>
+    : 
+    <div style={{height: "100%", justifyContent: "center", display: "flex", alignItems: "center"}}>
+      <Spinner color='#484F78' size={40}/>
+    </div>}
   </div>
   );
 }
