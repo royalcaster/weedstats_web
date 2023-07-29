@@ -371,7 +371,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
         <div style={{zIndex: 3000, position: "absolute", height: "100%", width: "100%"}}>
           <Tutorial onDone={onDone} extraHeight={50}/>
         </div> : <> 
-          <div style={{height: "100%", width: "100%"}}>
+          <div style={{height: "100%", width: "100%", maxWidth: 700, alignSelf: "center"}}>
           {loading ? (
             <div
               style={{

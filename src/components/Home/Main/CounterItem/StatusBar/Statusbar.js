@@ -40,12 +40,14 @@ const Statusbar = ({ status }) => {
             <div style={{
             width: "100%",
             height: "100%",
-            backgroundColor: "#1E2132",
             alignSelf: "center",
             bottom: 0,
             borderRadius: 5,
             overflow: "hidden",
-            alignItems: "center"
+            alignItems: "center",
+            display: "flex",
+            backgroundColor: "#1E2132",
+            maxHeight: 60
         }}
         /* onLayout={(event) => {
             setContainerWidth(event.nativeEvent.layout.width);
@@ -53,15 +55,15 @@ const Statusbar = ({ status }) => {
             <p style={{
                 color: "white", 
                 fontFamily: "Poppins",
-                fontSize: 12,
+                fontSize: "0.75rem",
                 zIndex: 1,
                 textAlignVertical: "center",
-                top: -1,
                 opacity: 0.75,
-                top: "30%"
+                position: "absolute",
+                marginLeft: "2rem"
             }}>{chopStatus(status)}</p>
             
-            <div style={{ width: "100%", alignSelf: "flex-start",  height: "100%", backgroundColor: "#484F78"}}>
+            <div style={{ width: status + "%", alignSelf: "flex-start",  height: "100%", backgroundColor: "#484F78"}}>
             </div>
         </div>
     )

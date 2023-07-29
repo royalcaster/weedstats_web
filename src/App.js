@@ -492,7 +492,7 @@ const App = () => {
   const LoginComponent = <Login handleLogin={handleLogin} handleCreate={handleCreate} wrongPassword={wrongPassword} emailInUse={emailInUse} userNotFound={userNotFound}/>;
 
   return (
-  <div style={{backgroundColor: "#1E2132", height: "100vh", width: "100vw"}}>
+  <div style={{backgroundColor: "#1E2132", height: "100vh", width: "100vw", display: "flex", justifyContent: "center"}}>
     <LanguageContext.Provider value={language}>
       <Routes>
         <Route path="/" element={LoginComponent}/>

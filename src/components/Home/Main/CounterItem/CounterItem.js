@@ -77,15 +77,16 @@ const CounterItem = ({ type, counter, toggleCounter, toggleBorderColor }) => {
         borderBottomLeftRadius: 10,
         paddingRight: 20,
         display: "flex"}}>
-        <div style={{backgroundColor: getGradientColors(counter)[0], height: 50, width: 50, justifyContent: "center", borderRadius: 10}}>
-          <TypeImage type={type} x={50}/>
+        <div style={{height: 60, width: 60, justifyContent: "center", borderRadius: 10}}>
+          <TypeImage type={type} x={60} backgroundColor={getGradientColors(counter)[0]}/>
         </div>
       </div>
       
       <div style={styles.card_content}>
         <div style={{flex: 6}}>
           <div style={styles.grab}></div>
-          <div style={{flex: 1, flexDirection: "row", padding: 5, paddingBottom: 0, display: "flex"}}>
+          <div style={{height: "1rem"}}></div>
+          <div style={{flex: 1, flexDirection: "row", display: "flex"}}>
             <div style={{flex: 2, alignItems: "center", flexGrow: 3}}>
               <p style={styles.counter_number}>{counter > 0 ? counter : "0"}</p>
             </div>
@@ -93,15 +94,17 @@ const CounterItem = ({ type, counter, toggleCounter, toggleBorderColor }) => {
               <Statusbar status={calcLevelStatus(counter)} />
             </div>
           </div> 
-            <div style={{display: "flex", flex: 3, padding: 10, paddingTop: 5}}>
-              <Slider firstColor={getGradientColors(counter)[0]} secondColor={getGradientColors(counter)[2]} onToggleCounter={() => {toggleCounter(type.toLowerCase(), getGradientColors(counter)[0]); toggleBorderColor(getGradientColors(counter)[0])}}/>
-            </div>
+          <div style={{height: "0.5rem"}}></div>
+          <div style={{display: "flex", flex: 3, padding: 10, paddingTop: 5}}>
+            <Slider firstColor={getGradientColors(counter)[0]} secondColor={getGradientColors(counter)[2]} onToggleCounter={() => {toggleCounter(type.toLowerCase(), getGradientColors(counter)[0]); toggleBorderColor(getGradientColors(counter)[0])}}/>
+          </div>
+          <div style={{height: "0.5rem"}}></div>
         </div>  
         <div style={{flex: 1, flexDirection: "column", display: "flex"}}>
           <LevelBar index={Math.floor(counter / 70)} counter={counter}/>
         </div>
+        
       </div> 
-
     </div>
   );
 };
@@ -113,13 +116,15 @@ const styles = {
     margin: 5,
     marginTop: 20,
     flexDirection: "row",
-    display: "flex"
+    display: "flex",
   },
   counter_number: {
     color: "white",
-    fontSize: "2rem",
+    fontSize: "2.5rem",
     fontFamily: "Poppins",
-    fontWeight: 700
+    fontWeight: 700,
+    textAlign: "center",
+    margin: 0
   },
   card_opener: {
     flex: 1,
