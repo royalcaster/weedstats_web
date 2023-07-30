@@ -37,6 +37,7 @@ import { useNavigate } from "react-router-dom";
 import { FaTrophy, FaMoneyBillWave } from "react-icons/fa";
 import { BiSolidHelpCircle } from 'react-icons/bi'
 import { AiFillInfoCircle } from 'react-icons/ai'
+import { Routes, Route } from "react-router-dom";
 
 const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
 
@@ -365,6 +366,8 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
         {showAppInfo ? <AppInfo show={showAppInfo} onExit={() => setShowAppInfo(false)}/> : null}
 
 
+        <Routes>
+        <Route index path='/' element={<>
         {showTutorial ? 
         <div style={{zIndex: 3000, position: "absolute", height: "100%", width: "100%"}}>
           <Tutorial onDone={onDone} extraHeight={50}/>
@@ -475,7 +478,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                     <div style={{flex: 1, justifyContent: "center", display: "flex"}}>
                       <Button
                         fontColor={"white"}
-                        onPress={() =>{ setShowLevels(true)}}
+                        onPress={() => navigate('/home/counter/levels')}
                         borderradius={10}
                         color={"#131520"}
                         title={" " + language.account_levels}
@@ -532,7 +535,11 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
             </>
           )}
           </div>
-          </>}
+          </>}</>}/>
+
+          <Route exact path='levels' element={<Levels onexit={() => navigate('/home/counter')}/>} />
+
+          </Routes>
     </>
   );
 };

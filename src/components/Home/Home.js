@@ -38,7 +38,6 @@ import { FaSliders, FaUser } from "react-icons/fa6";
       else {
         navigate("/home/counter")
       }
-    console.log(location.pathname);
     },[]);
 
     return (
@@ -47,7 +46,7 @@ import { FaSliders, FaUser } from "react-icons/fa6";
         <div style={{height: "92vh", width: "100%", top: 0, position: "absolute", overflowY: "scroll", justifyContent: "center", display: "flex"}}>
           {!loadingParent ?
             <Routes>
-              <Route index path="/counter" element={<Main onWriteComplete={onWriteComplete} onSetUser={onSetUser} refreshUser={refreshUser}/>} />
+              <Route index path="/counter/*" element={<Main onWriteComplete={onWriteComplete} onSetUser={onSetUser} refreshUser={refreshUser}/>} />
               <Route exact path="/config" element={<Empty title={"lädt config"}/>} />
             </Routes>
             : <Empty title={"loading app"}/>

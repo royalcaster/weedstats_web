@@ -8,31 +8,28 @@ import LevelImage from "../../../common/LevelImage";
 //Service
 import { LanguageContext } from "../../../../data/LanguageContext";
 
-const Levels = ({ onexit, show }) => {
+const Levels = ({ onexit }) => {
 
   //Context
   const language = useContext(LanguageContext);
 
-  //Ref
-
-  const hide = () => {
- 
-  };
-
   return (
-    <div style={[{ opacity: 1}, styles.container]}>
+    <div style={styles.container}>
 
       
-      <div style={{height: "90%", top: 0, position: "absolute", width: "100%"}}>
-      <div style={{ height: "5%" }}></div>
-      <div style={{flexDirection: "row", alignContent: "center", alignItems: "center"}}>
-        <div style={{marginLeft: 20}}>
-            <BackButton onPress={() => hide()}/>
+      <div style={{height: "100%", top: 0, position: "absolute", width: "100%"}}>
+      <div style={{display: "flex", flexDirection: "row", alignContent: "center", alignItems: "center"}}>
+        <div style={{marginLeft: "1rem"}}>
+            <BackButton onPress={() => onexit()}/>
         </div>
-        <p style={styles.heading}>{language.account_levels}</p>
+        <div style={{width: "1rem"}}></div>
+        <div>
+          <p style={styles.heading}>{language.account_levels}</p>
+        </div>
       </div>
 
-      <div style={{ height: "2%" }}></div>
+      <div style={{height: "1rem"}}></div>
+
 
       {language.levels.map((level, index) => {
         return (
@@ -46,10 +43,15 @@ const Levels = ({ onexit, show }) => {
               flex: 1,
               flexDirection: "row",
               alignItems: "center",
-              marginBottom: 20,
               borderColor: index == language.levels.length - 1 ? "#E6C743" : null,
               borderWidth: index == language.levels.length - 1 ? 3 : null,
               maxWidth: 700,
+              display: "flex",
+              marginLeft: "auto",
+              marginRight: "auto",
+              marginBottom: 20,
+              paddingTop: 5,
+              paddingBottom: 5
             }}
           >
             <LevelImage index={index} style={styles.lvl_img} />
@@ -66,7 +68,6 @@ const Levels = ({ onexit, show }) => {
           </div>
         );
       })}
-      <div style={{ height: "2%" }}></div>
       </div>
     </div>
   );
@@ -76,24 +77,15 @@ export default Levels;
 
 const styles = {
   container: {
-    marginTop: 0,
-    width: "100%",
     height: "100%",
-    justifyContent: "center",
-    backgroundColor: "#131520",
-    paddingBottom: 30,
-    zIndex: 1,
-    position: "absolute",
-    borderTopRightRadius: 25,
-    borderTopLeftRadius: 25
+    width: "100%",
+    padding: 5,
   },
   heading: {
     color: "white",
-    fontSize: 20,
-    fontFamily: "PoppinsMedium",
-    marginLeft: 20,
+    fontSize: "1.5rem",
+    fontFamily: "Poppins",
     textAlign: "left",
-    marginTop: 3
   },
   lvl_img: {
     height: "8%",
@@ -102,14 +94,15 @@ const styles = {
     marginTop: -10
   },
   lvl_name: {
-    fontSize: "2.5rem",
-    fontFamily: "PoppinsBlack",
+    fontSize: "1.5rem",
+    fontFamily: "Poppins",
     color: "white",
+    margin: 0
   },
   lvl_bounds: {
-    fontFamily: "PoppinsLight",
-    fontSize: "1.75rem",
-    marginTop: -5,
+    fontFamily: "Poppins",
+    fontSize: "1rem",
+    margin: 0,
     color: "white",
   }
 };

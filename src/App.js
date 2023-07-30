@@ -75,10 +75,6 @@ const App = () => {
     }
   },[config]);
 
-  useEffect(() => {
-    console.log(loading); 
-  },[loading]);
-
   //Sucht im AsyncStorage nach dem letzten User der sich eingeloggt hat und loggt sich bei Erfolg automatisch ein
   const checkForUser = async () => {
     try {
