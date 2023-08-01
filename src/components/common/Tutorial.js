@@ -262,7 +262,8 @@ const styles = {
         backgroundColor: "#1E2132",
         height: "100%",
         width: "100%",
-        position: "absolute"
+        position: "absolute",
+        maxWidth: 700
     },
     logo_heading: {
       fontFamily: "Poppins",
