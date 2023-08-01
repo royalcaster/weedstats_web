@@ -6,6 +6,8 @@ import './Button.css'
 
 const Button = ({ icon, title, color, hovercolor, borderradius, onPress, fontColor, color2, small, disabled, borderColor }) => {
 
+  const [hover, setHover ] = useState(false);
+
   return (
     <>
     {/*<div className="container" >
@@ -24,9 +26,9 @@ const Button = ({ icon, title, color, hovercolor, borderradius, onPress, fontCol
       </TouchableNativeFeedback> 
     </div>*/}
 
-    <button disabled={disabled} title={title} className="button" name={title} onClick={() => onPress()}
+    <button disabled={disabled} onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} title={title} className="button" name={title} onClick={() => onPress()}
     style={{
-      backgroundColor: color,
+      backgroundColor: hover ? hovercolor : color,
       borderRadius: borderradius ? borderradius : null,
       color: fontColor,
       borderWidth: 0,

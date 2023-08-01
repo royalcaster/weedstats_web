@@ -34,6 +34,11 @@
 .button {
     width: 80%;
     max-width: 500px;
+    display: block;
     margin: auto;
+    cursor: pointer;
+}
+
+.backbutton {
     cursor: pointer;
 }

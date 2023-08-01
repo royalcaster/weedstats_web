@@ -360,12 +360,6 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
 
         <CustomModal show={showCounterModal} child={CounterModalContent}/>
 
-        {showLevels   ? <Levels onexit={() => setShowLevels(false)} show={showLevels}/> : null}
-        {showDonation ? <Donation onexit={() => setShowDonation(false)}/> : null}
-        {showTutorial ? <Tutorial onDone={() => setShowTutorial(false)} toggleNavbar={toggleNavbar} type={"first"}/> : null}
-        {showAppInfo ? <AppInfo show={showAppInfo} onExit={() => setShowAppInfo(false)}/> : null}
-
-
         <Routes>
         <Route index path='/' element={<>
         {showTutorial ? 
@@ -422,6 +416,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
               </p>
             </div>
             <div>
+              <div style={{height: "1rem"}}></div>
               <p style={styles.main_heading}>{language.short == "de" ? "Hallo" : "Hello"}</p>
               <p style={{fontSize: "1.25rem", fontFamily: "Poppins", textAlign: "center", color: "white", fontWeight: 700, margin: 0}}>{user.username}</p>
             </div>
@@ -489,7 +484,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                     </div>
                     <div style={{flex: 1, justifyContent: "center", display: "flex"}}>
                       <Button
-                        onPress={() => setShowAppInfo(true)}
+                        onPress={() => navigate('/home/counter/app-info')}
                         title={" App-Info"}
                         icon={<AiFillInfoCircle style={button_icon_style}/>}
                         borderradius={10}
@@ -504,7 +499,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                 <div style={{display: "flex", flexDirection: "row", width: "90%", alignSelf: "center"}}>
                     <div style={{flex: 1, justifyContent: "center", display: "flex"}}>
                       <Button
-                        onPress={() => setShowTutorial(true)}
+                        onPress={() => navigate('/home/counter/tutorial')}
                         title={" " + language.account_tutorial}
                         icon={<BiSolidHelpCircle style={button_icon_style}/>}
                         borderradius={10}
@@ -516,7 +511,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                     </div>
                     <div style={{flex: 1, justifyContent: "center", display: "flex"}}>
                     <Button
-                        onPress={() => setShowDonation(true)}
+                        onPress={() => navigate('/home/counter/premium')}
                         title={" " + language.account_support}
                         icon={<FaMoneyBillWave style={button_icon_style}/>}
                         borderradius={10}
@@ -537,7 +532,10 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
           </div>
           </>}</>}/>
 
-          <Route exact path='levels' element={<Levels onexit={() => navigate('/home/counter')}/>} />
+          <Route exact path='levels' element={<Levels onExit={() => navigate('/home/counter')}/>}/>
+          <Route exact path='app-info' element={<AppInfo onExit={() => navigate('/home/counter')}/>}/>
+          <Route exact path='premium' element={<Donation onExit={() => navigate('/home/counter')}/>}/>
+          <Route exact path='tutorial' element={<Tutorial onExit={() => navigate('/home/counter')}/>}/>
 
           </Routes>
     </>
@@ -557,7 +555,8 @@ const styles = {
     fontSize: "1rem",
     fontFamily: "Poppins",
     position: "relative",
-    textAlign: "center"
+    textAlign: "center",
+    margin: 0
   },
   money_icon: {
     fontSize: 25,

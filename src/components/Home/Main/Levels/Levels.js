@@ -8,7 +8,7 @@ import LevelImage from "../../../common/LevelImage";
 //Service
 import { LanguageContext } from "../../../../data/LanguageContext";
 
-const Levels = ({ onexit }) => {
+const Levels = ({ onExit }) => {
 
   //Context
   const language = useContext(LanguageContext);
@@ -17,10 +17,10 @@ const Levels = ({ onexit }) => {
     <div style={styles.container}>
 
       
-      <div style={{height: "100%", top: 0, position: "absolute", width: "100%"}}>
+      <div style={{display: "flex", flex: 1, flexDirection: "column"}}>
       <div style={{display: "flex", flexDirection: "row", alignContent: "center", alignItems: "center"}}>
         <div style={{marginLeft: "1rem"}}>
-            <BackButton onPress={() => onexit()}/>
+            <BackButton onPress={() => onExit()} hoverColor={"rgba(255,255,255,0.25)"}/>
         </div>
         <div style={{width: "1rem"}}></div>
         <div>
@@ -79,6 +79,7 @@ const styles = {
   container: {
     height: "100%",
     width: "100%",
+    maxWidth: 700,
     padding: 5,
   },
   heading: {
