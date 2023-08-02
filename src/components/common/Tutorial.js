@@ -206,7 +206,7 @@ const Tutorial = ({ onExit, type }) => {
                 </div>
                 <div style={{width: "1rem"}}></div>
                 <div>
-                <p style={styles.navigation_heading}>WeedStats Premium</p>
+                <p style={styles.navigation_heading}>Tutorial</p>
                 </div>
             </div> : null}
 
@@ -230,7 +230,8 @@ const styles = {
         height: "100%",
         width: "100%",
         position: "absolute",
-        maxWidth: 700
+        maxWidth: 700,
+        overflow: "scroll"
     },
     logo_heading: {
       fontFamily: "Poppins",

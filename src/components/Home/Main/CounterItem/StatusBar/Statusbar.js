@@ -37,6 +37,17 @@ const Statusbar = ({ status }) => {
     }
 
     return (
+        <>
+        <p style={{
+                color: "white", 
+                fontFamily: "Poppins",
+                fontSize: "0.75rem",
+                zIndex: 0,
+                textAlignVertical: "center",
+                opacity: 1,
+                marginRight: "1rem",
+            }}>{chopStatus(status)}</p>
+            
             <div style={{
             width: "100%",
             height: "100%",
@@ -48,24 +59,11 @@ const Statusbar = ({ status }) => {
             display: "flex",
             backgroundColor: "#1E2132",
             maxHeight: 60
-        }}
-        /* onLayout={(event) => {
-            setContainerWidth(event.nativeEvent.layout.width);
-          }} */>
-            <p style={{
-                color: "white", 
-                fontFamily: "Poppins",
-                fontSize: "0.75rem",
-                zIndex: 1,
-                textAlignVertical: "center",
-                opacity: 0.75,
-                position: "absolute",
-                marginLeft: "2rem"
-            }}>{chopStatus(status)}</p>
-            
+        }}>
             <div style={{ width: status + "%", alignSelf: "flex-start",  height: "100%", backgroundColor: "#484F78"}}>
             </div>
         </div>
+        </>
     )
 }
 

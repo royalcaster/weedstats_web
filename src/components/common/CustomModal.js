@@ -2,15 +2,11 @@
 import React, { useEffect, useRef } from "react";
 
 const CustomModal = ({ show, child}) => {
-
-    const hide = () => {
-        
-    }
     
     return (
         <>
             {show ? 
-                <div style={[styles.container]}>
+                <div style={styles.container}>
                     {child}
                 </div>
             : null}
@@ -22,9 +18,9 @@ export default CustomModal
 
 const styles = {
     container: {
-        height: "100%",
-        width: "100%",
+        height: "100vh",
+        width: "100vw",
         position: "absolute",
-        zIndex: 10
+        zIndex: 1000
     }
 };
