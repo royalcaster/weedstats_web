@@ -25,7 +25,7 @@ import { doc, updateDoc, getDoc } from "@firebase/firestore";
 import { app, firestore } from "../../../data/FirebaseConfig";
 import CounterModal from "../../common/CounterModal";
 import { FriendListContext } from "../../../data/FriendListContext";
-import { getCounterNotificationTitle } from "../../../data/Service";
+import { getCounterNotificationTitle, shadeColor } from "../../../data/Service";
 import NewsPanel from "../../common/NewsPanel";
 import News from "../../../data/News";
 import UpdatePanel from "../../common/UpdatePanel";
@@ -239,6 +239,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
       function success(position) {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
+        console.log("setLocation()");
         setLocation(position.coords);
         console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
     
@@ -457,7 +458,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                         color={"#131520"}
                         title={" " + language.account_levels}
                         icon={<FaTrophy style={button_icon_style}/>}
-                        hovercolor={"rgba(255,255,255,0.15)"}
+                        hovercolor={shadeColor("#131520",-25)}
                         small={true} 
                       />
                     </div>
@@ -469,7 +470,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                         borderradius={10}
                         color={"#131520"}
                         fontColor={"white"}
-                        hovercolor={"rgba(255,255,255,0.15)"}
+                        hovercolor={shadeColor("#131520",-25)}
                         small={true} 
                       />
                     </div>
@@ -484,7 +485,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                         borderradius={10}
                         color={"#131520"}
                         fontColor={"white"}
-                        hovercolor={"rgba(255,255,255,0.15)"}
+                        hovercolor={shadeColor("#131520",-25)}
                         small={true}
                       />
                     </div>
@@ -496,7 +497,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                         borderradius={10}
                         color={"#131520"}
                         fontColor={"white"}
-                        hovercolor={"rgba(255,255,255,0.15)"}
+                        hovercolor={shadeColor("#131520",-25)}
                         small={true}
                         color2={"#F2338C"}
                       />

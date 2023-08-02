@@ -45,8 +45,8 @@ const CounterModal = ({ onExit, writeComplete, sayingNr, borderColor, loadingCol
                   /></>
               
             ) : (
-              <p style={{height: "100%", width: "100%", justifyContent: "center"}}>
-              <CustomLoader x={80} color={"#484F78"} special={true}/></p>
+              <div style={{height: "100%", width: "100%", justifyContent: "center"}}>
+              <CustomLoader x={80} color={"#484F78"} special={true}/></div>
             )}
             <div style={{height: "2rem"}}></div>
             </div>
