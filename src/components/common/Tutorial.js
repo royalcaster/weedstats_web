@@ -21,7 +21,7 @@ const Tutorial = ({ onExit, type }) => {
 
   const RenderItem = ( item ) => {
     return (
-      <div style={{width: "100%", justifyContent: "center", flexDirection: "column", bottom: 0, borderRadius: 25, overflow: "hidden", backgrounColor: item.backgroundColor}}>
+      <div style={{width: "100%", justifyContent: "center", flexDirection: "column", bottom: 0, overflow: "hidden", backgrounColor: item.backgroundColor}}>
         {item.testComponent ? item.testComponent : null}
       </div>
     );
@@ -30,125 +30,113 @@ const Tutorial = ({ onExit, type }) => {
   const titleScreen = () => {
     return <>
     <div style={styles.testComponentContainer}>
+      <div style={{height: "2rem"}}></div>
       <div style={{flex: 1, justifyContent: "center"}}>
         <img style={{height: "4rem", width: "4rem", borderRadius: 15, display: "block", margin: "auto"}} src={require('../../data/img/icon.png')}/>
         <p style={styles.logo_heading}>WeedStats</p>
         <p style={styles.logo_heading2}>Tutorial</p>
       </div>
       <div style={{height: "2rem"}}></div>
-      <p style={styles.swipe_up_text}>{language.tutorial_swipe_text}</p>
+      <p style={styles.text}><img style={styles.small_logo} src={require("../../data/img/icon.png")}/> <span style={{fontWeight: 700}}>WeedStats</span> bietet verschiedenste Möglichkeiten zum <span style={{color: Levels[0].colors[0]}}>Erfassen</span>, <span style={{color: Levels[2].colors[0]}}>Auswerten</span> und <span style={{color: Levels[6].colors[0]}}>Teilen</span> deines Gras-Konsums. {"\n"}Diese kurze Tour wird dir die wesentlichen Funktionen der App beibringen.</p>
+      <div style={{height: "1rem"}}></div>
+      <p style={styles.swipe_up_text}>{language.tutorial_are_you_ready}</p>
+      <div style={{height: "2rem"}}></div>
     </div>
     </>
-  }
-
-  const welcomeScreen = () => {
-    return <div>
-    {/* <div style={{height: "10%"}}></div> */}
-    <p style={styles.text}><img style={styles.small_logo} src={require("../../data/img/icon.png")}/> WeedStats bietet verschiedenste Möglichkeiten zum <p style={{color: Levels[0].colors[0]}}>Erfassen</p>, <p style={{color: Levels[2].colors[0]}}>Auswerten</p> und <p style={{color: Levels[6].colors[0]}}>Teilen</p> deines Gras-Konsums. {"\n"}Diese kurze Tour wird dir die wesentlichen Funktionen der App beibringen.</p>
-    <div style={{height: "10%"}}></div>
-    <p style={styles.swipe_up_text}>{language.tutorial_are_you_ready}</p>
-    
-    </div>
   }
       
   const counterScreen = () => {
-    return <>
+    return <div style={styles.screen_container}>
       <p style={styles.title2}>{language.tutorial_counter_title}</p>
       <p style={styles.text2}>{language.tutorial_counter_text}</p>
-      <div style={{height: "5%"}}></div>
+      <div style={{height: "2rem"}}></div>
       <img src={require('../../data/img/tutorial/counter.png')} style={styles.screenshot} />
-    </>
+    </div>
   }
 
   const statsScreen = () => {
-    return <div>
+    return <div style={styles.screen_container}>
       <p style={styles.title2}>{language.tutorial_stats_title}</p>
       <p style={styles.text2}>{language.tutorial_stats_text}</p>
-      <div style={{height: "5%"}}></div>
-
+      <div style={{height: "2rem"}}></div>
       <img src={require('../../data/img/tutorial/stats.png')} style={styles.screenshot} />
     </div>
   }
 
   const mapScreen = () => {
-    return <div style={{height: "100%", width: "100%", borderRadius: 10, overflow: "hidden"}}>
+    return <div style={styles.screen_container}>
       <p style={styles.title2}>{language.tutorial_map_title}</p>
       <p style={styles.text2}>{language.tutorial_map_text}</p>
-      <div style={{height: "5%"}}></div>
+      <div style={{height: "2rem"}}></div>
       <img src={require('../../data/img/tutorial/map.png')} style={styles.screenshot} />
     </div>
   }
 
   const configScreen = () => {
-    return <div>
+    return <div style={styles.screen_container}>
       <p style={styles.title2}>{language.tutorial_config_title}</p>
       <p style={styles.text2}>{language.tutorial_config_text}</p>
-      <div style={{height: "5%"}}></div>
+      <div style={{height: "2rem"}}></div>
       <img src={require('../../data/img/tutorial/config.png')} style={styles.screenshot} />
     </div>
   }
 
   const friendsScreen = () => {
-    return <div>
+    return <div style={styles.screen_container}>
       <p style={styles.title2}>{language.tutorial_friends_title}</p>
       <p style={styles.text2}>{language.tutorial_friends_text}</p>
-      <div style={{height: "5%"}}></div>
+      <div style={{height: "2rem"}}></div>
       <img src={require('../../data/img/tutorial/friends.png')} style={styles.screenshot} />
     </div>
   }
 
   const tippScreen = () => {
-    return <div style={{width: "100%", alignSelf: "center"}}>
-      <p style={styles.text}><p style={{color: "#0781E1"}}>{language.tutorial_tipp_title}</p>{"\n"}{"\n"}{language.tutorial_tipp_text}</p>
+    return <div style={styles.screen_container}>
+      <p style={{color: "#0781E1", fontWeight: 700, fontSize: "1.5rem"}}>{language.tutorial_tipp_title}</p>
+      <p style={styles.text2}>{"\n"}{"\n"}{language.tutorial_tipp_text}</p>
+      <div style={{height: "2rem"}}></div>
+      {type != "first" ? <>
+      <Button title={"Ok"} fontColor={"white"} color={"#0781E1"} hovercolor={"#0782e1c9"} onPress={() => {onExit()}} borderradius={10}/>
+      <div style={{height: "1rem"}}></div></> : null}
     </div>
   }
 
   const warningScreen = () => {
-    return <div style={{width: "100%", alignSelf: "center"}}>
+    return <div style={styles.screen_container2}>
 
         <p style={styles.title2}>{language.tutorial_pls_read_title}</p>
-        <p style={styles.text2}>{language.tutorial_pls_read_text}</p>
+        <p style={styles.text2}>{language.tutorial_pls_read_text}<br/><br/></p>
+        <p style={styles.text2}>{language.tutorial_pls_read_text2}<br/><br/></p>
+        <p style={styles.text2}>{language.tutorial_pls_read_text3}<br/><br/></p>
+        <p style={styles.text2}>{language.tutorial_pls_read_text4}</p>
 
       </div>
   }
 
   const warningScreen2 = () => {
-    return <div style={{width: "100%", alignSelf: "center"}}>
+    return <div style={styles.screen_container3}>
 
-        <p style={styles.text2}>{language.tutorial_pls_read_text2}</p>
+        <p style={styles.title2}>{language.short == "de" ? "Eine Sache noch..." : "One last thing..."}</p>
+        <p style={styles.text2}>{language.short == "de" ? "Bitte lies aufmerksam unsere Datenschutzbestimmung." : "Please carefully read our data policy."}</p>
 
-        <div style={{height: "5%"}}></div>
-        <Button title={language.tutorial_show_policy} color={"#1E2132"} hovercolor={"rgba(255,255,255,0.25)"} fontColor={"white"} onPress={() => console.log("onPress in Tutorial definieren!")}/>
+        <div style={{height: "2rem"}}></div>
 
-        // TODO: Touchable in Tutorial ersetzen
-        {/* <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple("rgba(255,255,255,0.25)", false)} onPress={() => {setConsented(!consented)}}>
-          <div style={styles.touchable}>
-            {consented ? 
-            <MaterialIcons name={"check-box"} style={styles.check_icon}/>
-            : 
-            <MaterialIcons name={"check-box-outline-blank"} style={styles.check_icon}/>
-            }
-            <div style={{width: "5%"}}></div>
-            <p style={styles.policy_text}>{language.tutorial_consent}</p>
+        {/* TODO: Link zu Data Policy einfügen */}
+        <Button borderradius={10} title={language.tutorial_show_policy} color={"#131520"} hovercolor={"#1E2132"} fontColor={"white"} onPress={() => console.log("onPress in Tutorial definieren!")}/>
+
+        <div style={{height: "1rem"}}></div>
+          <div style={{display: "block", margin: "auto", display: "flex", justifyContent: "center", flexDirection: "row", alignItems: "center"}}>
+            <input style={{height: "1rem", width: "1rem"}} type="checkbox" id="policy" name="policy" value="Policy" onChange={() => setConsented(!consented)} />
+            <label for="policy" style={{fontSize: "1rem", marginTop: 0, marginLeft: 10}}>{language.tutorial_consent}</label>
           </div>
-        </TouchableNativeFeedback> */}
-
-        <div style={{height: "5%"}}></div>
+        <div style={{height: "1rem"}}></div>
 
         {consented ?
-        <Button title={language.tutorial_get_started} fontColor={"#1E2132"} color={"white"} color2={"#1E2132"} hovercolor={"rgba(0,0,0,0.25)"} onPress={() => { onExit()}}/>
+        <Button title={language.tutorial_get_started} fontColor={"#1E2132"} color={"white"} hovercolor={"rgba(255,255,255,0.8)"} onPress={() => { onExit()}} borderradius={10}/>
         :
-        <Button title={language.tutorial_get_started} fontColor={"#1E2132"} color={"rgba(160,160,160,1)"} color2={"#1E2132"} hovercolor={"rgba(160,160,160,1)"} onPress={() => alert(language.tutorial_consent_alert)}/>
+        <Button title={language.tutorial_get_started} fontColor={"#1E2132"} color={"rgba(160,160,160,1)"} hovercolor={"rgba(160,160,160,1)"} borderradius={10} onPress={() => alert(language.tutorial_consent_alert)}/>
         }
-      </div>
-  }
-
-
-  const readyScreen = () => {
-    return <div style={{width: "100%", alignSelf: "center"}}>
-
-        <Button title={"Ok"} fontColor={"white"} color={"#0781E1"} color2={"#484F78"} hovercolor={"rgba(0,0,0,0.25)"} onPress={() => {onExit()}}/>
-        
+        <div style={{height: "1rem"}}></div>
       </div>
   }
 
@@ -158,11 +146,6 @@ const Tutorial = ({ onExit, type }) => {
         key: '-one',
         testComponent: titleScreen(), 
         backgroundColor: "#1E2132"
-      },
-      {
-        key: 'zero',
-        testComponent: welcomeScreen(),
-        backgroundColor: "#131520"
       },
       {
         key: 'one',
@@ -197,14 +180,7 @@ const Tutorial = ({ onExit, type }) => {
     ];
 
     const adjustSlides = () => {
-      if (type != "first"){
-        slides.push({
-          key: 'nine',
-          testComponent: readyScreen(),
-          backgroundColor: "#FC2044"
-        })
-      } 
-      else if (type == "first") {
+      if (type == "first") {
         slides.push({
           key: 'seven',
           testComponent: warningScreen(),
@@ -214,28 +190,15 @@ const Tutorial = ({ onExit, type }) => {
           key: 'eight',
           testComponent: warningScreen2(),
           backgroundColor: "#FC2044"
-        },)
+        }
+        )
       }
     }
 
     adjustSlides()
 
-    //Neue Version: Langes Schrollpanel mit Statusbar (04. September 2022)
     return (
       <div style={styles.container}>
-
-        {/* {type != "first" [<div style={{position: "absolute", zIndex: 10000}}>
-            <div style={{ height: "1%" }}></div>
-
-            <div style={{flexDirection: "row", alignContent: "center", alignItems: "center"}}>
-              <div style={{marginLeft: 20}}>
-                  <BackButton onPress={() => hide()}/>
-              </div>
-              <p style={styles.heading}>Tutorial</p>
-            </div>
-
-            <div style={{ height: "1%"}}></div>
-          </div>]} */}
 
           {type != 'first' ? <div style={{display: "flex", flexDirection: "row", alignContent: "center", alignItems: "center"}}>
                 <div style={{marginLeft: "1rem"}}>
@@ -247,9 +210,13 @@ const Tutorial = ({ onExit, type }) => {
                 </div>
             </div> : null}
 
-          {slides.map((slide) => {
-            return RenderItem(slide);
-          })}
+          <div style={{height: "2rem"}}></div>
+
+          <div style={{width: "90%", margin: "auto"}}>
+            {slides.map((slide) => {
+              return RenderItem(slide);
+            })}
+          </div>
  
       </div>
   );
@@ -308,9 +275,11 @@ const styles = {
       marginTop: -5
     },
     testComponentContainer: {
-      width: "90%",
+      width: "100%",
       display: "block",
-      margin: "auto"
+      margin: "auto",
+      backgroundColor: "#131520",
+      borderRadius: 15
     },
     swipe_up_text: {
       color: "#0781E1",
@@ -331,7 +300,8 @@ const styles = {
       fontFamily: "Poppins",
       fontSize: "5rem",
       marginHorizontal: "10%",
-      fontWeight: 700
+      fontWeight: 700,
+      margin: 0
     },
     text: {
       color: "white",
@@ -339,26 +309,29 @@ const styles = {
       fontFamily: "Poppins",
       fontSize: "1.5rem",
       marginHorizontal: "15%",
-      fontWeight: 700
+      width: "90%",
+      margin: "auto"
     },
     small_logo: {
-      width: "8%",
-      height: "8%"
+      width: "2.5rem",
+      height: "2.5rem",
+      marginBottom: -10
     },
     title2: {
       color: "white",
       textAlign: "left",
       fontFamily: "Poppins",
-      fontSize: "3.5rem",
-      marginHorizontal: "10%",
-      fontWeight: 700
+      fontSize: "1.5rem",
+      fontWeight: 700,
+      margin: 0
     },
     text2: {
       color: "white",
       textAlign: "left",
-      fontFamily: "PoppinsMedium",
-      fontSize: "2rem",
-      marginHorizontal: "10%"
+      fontFamily: "Poppins",
+      fontSize: "1rem",
+      marginHorizontal: "10%",
+      margin: 0
     },
     touchable: {
       width: "100%",
@@ -379,10 +352,12 @@ const styles = {
       fontSize: "3rem"
     },
     screenshot: {
-      height: "50%",
+      height: "30rem",
       resizeMode: "contain",
-      alignSelf: "center"
-
+      alignSelf: "center",
+      display: "block",
+      margin: "auto",
+      borderRadius: 15
     },
     navigation_heading: {
       color: "white",
@@ -390,4 +365,29 @@ const styles = {
       fontFamily: "Poppins",
       textAlign: "left"
     },
+    screen_container: {
+      backgroundColor: "#131520",
+      borderRadius: 15,
+      padding: "2rem",
+      marginBottom: "2rem",
+      marginTop: "2rem"
+    },
+    screen_container2: {
+      backgroundColor: "#FC2044",
+      borderRadius: 15,
+      padding: "2rem",
+      marginBottom: "2rem",
+      marginTop: "2rem"
+    },
+    screen_container3: {
+      backgroundColor: "#0080FF",
+      borderRadius: 15,
+      padding: "2rem",
+      marginBottom: "2rem",
+      marginTop: "2rem"
+    },
+    checkbox: {
+      textAlign: "center",
+      backgroundColor: "green"
+    }
 };

@@ -167,7 +167,7 @@
         "tutorial_tipp_title": "Unser Tipp",
         "tutorial_tipp_text": "Je gewissenhafter du deinen Konsum in der App einträgst, desto genauer werden deine Statistiken mit der Zeit. Wenn du schummelst, brauchst du die App nicht. Wenn du mehrere vergangene Aktivitäten mit einem Mal einträgst, werden deine Zahlen verfälscht. \n\nWir wünschen dir viel Spaß mit WeedStats!",
 
-        "tutorial_consent": "Ich bin einverstanden",
+        "tutorial_consent": "Ich habe die Datenschutzbestimmungen gelesen und akzeptiere diese",
         "tutorial_consent_alert": "Bitte lies unsere Datenschutzbestimmungen.",
         "tutorial_get_started": "Loslegen",
         "tutorial_show_policy": "Datenschutzbestimmung anzeigen",
@@ -495,13 +495,15 @@
         "tutorial_friends_text": "Add friends to share your activities with them and unlock the full potential of WeedStats!",
 
         "tutorial_pls_read_title": "Please read this",
-        "tutorial_pls_read_text": "As the developers of WeedStats, we would like to draw your attention to an extremely important aspect: responsible consumption. We want to make sure that you have your experience with marijuana in a safe and healthy way.\n\nFirst of all, we would like to emphasize that marijuana is not for everyone. Everyone reacts differently to the active ingredients, and it is important to be aware of your own physical and mental condition before consuming marijuana. If you have pre-existing conditions, are taking certain medications, or are pregnant, we strongly advise against using marijuana. Always consult a medical professional in such cases to discuss your individual situation.\n\nFurthermore, we would like to especially address our underage users: We strongly oppose the use of marijuana by anyone under the legal age. Legal requirements vary by country and region, but as developers of the app, we take a clear responsibility to ensure the protection of minors. Minors should focus on their educational, personal, and social development without the potential risks and consequences of marijuana use.",
-        "tutorial_pls_read_text2": "We understand that marijuana is legalized or approved for medical purposes in some countries. However, it is essential to be aware of the legal framework in your country and strictly adhere to it. Never ignore the current laws and regulations regarding marijuana use.\n\nWe encourage you to educate yourself in order to make informed decisions and act wisely. Please consume marijuana responsibly and always consider the effects on your body, mental health, and overall well-being.",
+        "tutorial_pls_read_text": "As the developers of WeedStats, we would like to draw your attention to an extremely important aspect: responsible consumption. We want to make sure that you have your experience with marijuana in a safe and healthy way. ",
+        "tutorial_pls_read_text2": "First of all, we would like to emphasize that marijuana is not for everyone. Everyone reacts differently to the active ingredients, and it is important to be aware of your own physical and mental condition before consuming marijuana. If you have pre-existing conditions, are taking certain medications, or are pregnant, we strongly advise against using marijuana. Always consult a medical professional in such cases to discuss your individual situation.",
+        "tutorial_pls_read_text3": "Furthermore, we would like to especially address our underage users: We strongly oppose the use of marijuana by anyone under the legal age. Legal requirements vary by country and region, but as developers of the app, we take a clear responsibility to ensure the protection of minors. Minors should focus on their educational, personal, and social development without the potential risks and consequences of marijuana use.",
+        "tutorial_pls_read_text4": "We understand that marijuana is legalized or approved for medical purposes in some countries. However, it is essential to be aware of the legal framework in your country and strictly adhere to it. Never ignore the current laws and regulations regarding marijuana use.\n\nWe encourage you to educate yourself in order to make informed decisions and act wisely. Please consume marijuana responsibly and always consider the effects on your body, mental health, and overall well-being.",
 
         "tutorial_tipp_title": "Our tip",
         "tutorial_tipp_text": "The more conscientiously you enter your consumption in the app, the more accurate your statistics will become over time. If you cheat, you don't need the app. If you enter multiple past activities at once, your numbers will be skewed.\n\nWe wish you a lot of fun with WeedStats!",
 
-        "tutorial_consent": "I agree",
+        "tutorial_consent": "I have read and accept the data privacy",
         "tutorial_consent_alert": "Please read our privacy policy.",
         "tutorial_get_started": "Get started",
         "tutorial_show_policy": "Show privacy policy",
