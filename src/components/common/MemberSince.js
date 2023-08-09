@@ -87,12 +87,16 @@ const MemberSince = ({ backgroundColor, timestamp }) => {
     
 
     return (
-        <Animated.View style={[styles.container,{backgroundColor: backgroundColor}]}>
-            <View style={styles.part}>
-                <Text style={styles.text}>{language.account_member_since} {final_string}</Text>
-                <Text style={styles.date}>{date.toLocaleDateString()}</Text>
-            </View>
-        </Animated.View>
+        <div style={{width: "100%",
+                    alignSelf: "center",
+                    borderRadius: 15,
+                    padding: 15,
+                    backgroundColor: backgroundColor}}>
+            <div style={styles.part}>
+                <p style={styles.text}>{language.account_member_since} {final_string}</p>
+                <p style={styles.date}>{date.toLocaleDateString()}</p>
+            </div>
+        </div>
     );
 }
 

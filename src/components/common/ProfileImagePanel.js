@@ -14,11 +14,11 @@ const ProfileImagePanel = ({ url, onExit }) => {
        return url.substring(0, url.length - 4) + "800-c";
     }
 
-    return <View style={{flex: 1, backgroundColor: "#1E2132", justifyContent: "center"}}>
+    return <div style={{flex: 1, backgroundColor: "#1E2132", justifyContent: "center"}}>
         <ProfileImage url={getHighResUrl()} x={"600px"}/>
-        <View style={{height: "5%"}}></View>
+        <div style={{height: "5%"}}></div>
         <Button title={language.account_delete_account_cancel} onPress={() => onExit()} color={"#484F78"} fontColor={"white"}/>
-    </View>
+    </div>
 }
 
 export default ProfileImagePanel

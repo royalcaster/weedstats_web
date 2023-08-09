@@ -17,6 +17,7 @@ import { useNavigate, useLocation } from "react-router-dom";
 import Main from "./Main/Main";
 import Empty from "../common/Empty";
 import MenuButton from "./MenuButton/MenuButton";
+import Config from "./Config/Config"
 
 //Third Party
 import { FaChartArea, FaMapMarker } from 'react-icons/fa'
@@ -47,7 +48,7 @@ import { FaSliders, FaUser } from "react-icons/fa6";
           {!loadingParent ?
             <Routes>
               <Route index path="/counter/*" element={<Main onWriteComplete={onWriteComplete} onSetUser={onSetUser} refreshUser={refreshUser}/>} />
-              <Route exact path="/config" element={<Empty title={"lädt config"}/>} />
+              <Route exact path="/config" element={<Config />} />
             </Routes>
             : <Empty title={"loading app"}/>
           }
