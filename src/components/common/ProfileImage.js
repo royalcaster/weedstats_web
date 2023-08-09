@@ -3,7 +3,7 @@ import React from "react";
 
 const ProfileImage = ({ x, url, type, circle, circleColor }) => {
   return (
-    <View
+    <div
       style={{
         height: x,
         width: x,
@@ -11,11 +11,13 @@ const ProfileImage = ({ x, url, type, circle, circleColor }) => {
         overflow: "hidden",
         zIndex: 0,
         borderColor: circleColor,
-        borderWidth: circle ? 2 : 0
+        borderWidth: circle ? 2 : 0,
+        display: "block",
+        margin: "auto"
       }}
     >
-      <Image style={{ height: "100%" }} source={{ uri: url }} />
-    </View>
+      <img style={{ height: "100%" }} src={url} />
+    </div>
   );
 };
 
