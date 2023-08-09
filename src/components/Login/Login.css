@@ -9,6 +9,11 @@
     flex-direction: column;
     min-width: 400px;
 }
+
+.heading_container {
+    transform: translateX(-50%);
+}
+
 .login_pressable {
     border-width: 2px;
     border-radius: 100px;

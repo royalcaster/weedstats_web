@@ -1,11 +1,21 @@
 .container {
     position: absolute;
-    background-color: #1E2132;
-    border-radius: 10px;
+    background-color: #131520;
     height: 100%;
     width: 100%;
-    z-index: 10
+    z-index: 10;
+    display: flex;
 }
+
+.content_container {
+    background-color: #131520;
+    width: 95%;
+    max-width: 500px;
+    margin: auto;
+    border-radius: 15px;
+    padding: 1.5rem;
+}
+
 .textinput {
     background-color: #131520;
     border-radius: 10px;
@@ -26,9 +36,10 @@
 }
 .valid_label {
     font-family: Poppins;
-    font-size: 1.25rem;
+    font-size: 0.75rem;
     align-self: center;
-    margin-top: 10px
+    margin-top: 10px;
+    text-align: right;
 }
 .touchable {
     align-items: center

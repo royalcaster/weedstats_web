@@ -5,6 +5,12 @@ import { LanguageContext } from "../../../data/LanguageContext";
 
 //CSS
 import './CreatePanel.css'
+import '../Login.css'
+import AuthInput from "../../common/AuthInput";
+
+//Third Party
+import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
+import { shadeColor } from "../../../data/Service";
 
 const CreatePanel = ({ handleCreate, onExit, emailInUse }) => {
 
@@ -81,72 +87,96 @@ const CreatePanel = ({ handleCreate, onExit, emailInUse }) => {
 
     return (
         <div className="container">
-       
-        <div style={{height: 50}}></div>
 
-        <p className="label" style={{fontSize: "3rem"}}>Create your account</p>
+        <div
+            className="heading_container"
+            style={{
+            zIndex: 2,
+            position: "absolute",
+            width: "100%",
+            maxWidth: 1000,
+            top: 0,
+            left: 0,
+            display: "flex",
+            flexDirection: "row",
+            paddingLeft: "1rem",
+            left: "50%",
+            }}
+        >
+            
+            <img
+            style={{ height: "3rem", width: "3rem", alignSelf: "center"}}
+            src={require('../../../data/img/icon.png')}
+            alt="WeedStats Logo"
+            />
+            <p
+            style={{
+                color: "white",
+                fontSize: "1.5rem",
+                fontFamily: "Poppins",
+                textAlign: "center",
+                fontWeight: 700,
+                marginLeft: "1rem"
+            }}
+            >
+            WeedStats
+            </p>
+        </div>
 
-        <p className="label">Username</p>
-        {/* <TextInput onChangeText={(text) => setUserName(text)} style={[styles.textinput, styles.password_input]} value={userName}/> */}
-        <input className="textinput password_input" onChange={(text) => setUserName(text)} value={userName}/>
+        <div className="content_container">
 
-        <p className="label">
-            Email-Adress
-            <p className="valid_label" style={{color: emailIsValid ? "#00DB4D" : "#FC2044"}}>   Valid</p>
-        </p>
-        {/* <TextInput onBlur={() => checkForSpace()} onChangeText={(text) => {setEmail(text); validateEmail(text)}} style={[styles.textinput, styles.password_input]} value={email}/> */}
-        <input onBlur={() => checkForSpace()} className="textinput password_input" onChange={(text) => {setEmail(text); validateEmail(text)}} value={email}/>
-        {emailInUse ? <p style={{color: "#FC2044", textAlign: "center"}}>Email-Adress already in use</p> : null}
+        <p className="label" style={{fontSize: "2rem", fontWeight: 700}}>Create your account</p>
 
-        {/* <Text style={styles.label}>Telefonnummer</Text>
-        <TextInput onChangeText={(text) => setPhoneNumber(text)} style={[styles.textinput, styles.password_input]} value={phoneNumber}/> */}
+        <AuthInput onChange={(text) => setUserName(text)} value={userName} type={"text"} label={"Username"}/>
 
-        <p className="label">
-            Password
-            <p className="valid_label" style={{color: passwordLengthValid ? "#00DB4D" : "#FC2044"}}>   At least 8 digits</p> 
-            <p className="valid_label" style={{color: passwordNumberValid ? "#00DB4D" : "#FC2044"}}>   At least 1 number</p>
-        </p>
-             
         
-{/*         <TextInput onChangeText={(text) => {setPassword(text); validatePassword(text)}} secureTextEntry={securePassword} style={[styles.textinput, styles.password_input]} value={password}/>
-*/}        <input className="textinput password_input" onChange={(text) => {setPassword(text); validatePassword(text)}} value={password}/>
+        <AuthInput  onBlur={() => checkForSpace()} onChange={(text) => {setEmail(text); validateEmail(text)}} value={email} type={"email"} label={"Email-Adress"}/>
+        <p className="valid_label" style={{color: emailIsValid ? "#00DB4D" : "#FC2044"}}>Valid</p>
+
+        {emailInUse ? <p style={{color: "#FC2044", textAlign: "center", fontFamily: "Poppins"}}>Email-Adress already in use</p> : null}
 
 
-        <p className="label">
-            Confirm password
-            <p className="valid_label" style={{color: passwordMatch ? "#00DB4D" : "#FC2044"}}>   identical</p>
-        </p>
-{/*         <TextInput onChangeText={(text) => {setPasswordSubmit(text); checkMatch()}} secureTextEntry={securePassword} style={[styles.textinput, styles.password_input]} value={passwordSubmit}/>
- */}        <input className="textinput password_input" onChange={(text) => {setPasswordSubmit(text); checkMatch()}} />
+        <AuthInput onChange={(text) => {setPassword(text); validatePassword(text)}} value={password} label={"Password"} type={securePassword ? "password" : "text"}/>
 
+        <p className="valid_label" style={{color: passwordLengthValid ? "#00DB4D" : "#FC2044"}}>At least 8 digits</p> 
+        <p className="valid_label" style={{color: passwordNumberValid ? "#00DB4D" : "#FC2044"}}>At least 1 number</p>
 
-        {/* <TouchableNativeFeedback background={TouchableNativeFeedback.Ripple("rgba(255,255,255,0.25)", false)} onPress={() => securePassword ? setSecurePassword(false) : setSecurePassword(true)}>
-          <View style={styles.touchable}>
-            {securePassword ? <><Text style={styles.icon}><Entypo name="eye" style= {styles.icon}/> Show</Text></> : <><Text style= {styles.icon}><Entypo name="eye-with-line" style={styles.icon}/> Hide</Text></>}
-          </View>
-        </TouchableNativeFeedback> */}
+        <AuthInput onChange={(text) => {setPasswordSubmit(text); checkMatch()}} value={passwordSubmit} label={"Confirm Password"} type={securePassword ? "password" : "text"}/>
 
-        <div style={{height: 40}}></div>
+        <p className="valid_label" style={{color: passwordMatch ? "#00DB4D" : "#FC2044"}}>Identical</p> 
+
+        <div style={{height: "1rem"}}></div>
+        <div style={{textAlign: "right"}}>
+        <a className="toggle_link" onClick={() => setSecurePassword(!securePassword)}>{securePassword ? <><AiFillEye style={{marginBottom: -3}}/> {language.login_show_password}</> : <><AiFillEyeInvisible style={{marginBottom: -3}}/> {language.login_hide_password}</>}</a>
+        </div>
+
+        <div style={{height: "3rem"}}></div>
         
+        <div style={{width: "100%"}}>
         <Button
-          fontColor={!emailIsValid || !passwordLengthValid || !passwordNumberValid || !passwordMatch || userName.length == 0 ? "#484F78" : "white"}
+          fontColor={!emailIsValid || !passwordLengthValid || !passwordNumberValid || !passwordMatch || userName.length == 0 ? shadeColor("#ffffff",-25) : "white"}
           title={"Create my account"}
-          borderradius={100}
-          color={"#0080FF"}
+          borderradius={10}
+          color={!emailIsValid || !passwordLengthValid || !passwordNumberValid || !passwordMatch || userName.length == 0 ? shadeColor("#0080FF",-25) : "#0080FF"}
           onPress={() => handleCreate(userName, email, password)}
-          hovercolor={"rgba(255,255,255,0.3)"}
+          hovercolor={shadeColor("#0080FF",-25)}
           color2={"#004080"}
           disabled={!emailIsValid || !passwordLengthValid || !passwordNumberValid || !passwordMatch || userName.length == 0}
+          huge={true}
         />
+        <div style={{height: "1rem"}}></div>
         <Button
             fontColor={"white"}
             title={"Cancel"}
-            borderradius={100}
+            borderradius={10}
             color={"#484F78"}
             onPress={() => onExit()}
-            hovercolor={"rgba(255,255,255,0.3)"}
-            />
+            hovercolor={shadeColor("#484F78",-25)}
+            huge={true}
+        />
+        </div>
 
+            </div>
         </div>
     )
 }

@@ -4,7 +4,7 @@ import React, { useState } from "react";
 //CSS
 import './Button.css'
 
-const Button = ({ icon, title, color, hovercolor, borderradius, onPress, fontColor, color2, small, disabled, borderColor }) => {
+const Button = ({ icon, title, color, hovercolor, borderradius, onPress, fontColor, color2, disabled, borderColor, huge }) => {
 
   const [hover, setHover ] = useState(false);
 
@@ -34,7 +34,8 @@ const Button = ({ icon, title, color, hovercolor, borderradius, onPress, fontCol
       borderWidth: 0,
       height: 50,
       fontFamily: "Poppins",
-      fontSize: "1rem"
+      fontSize: "1rem",
+      width: huge ? "100%" : "80%"
     }}>{icon} {title}</button>
     {/* <div className="container2" style={{borderRadius: 5, backgroundColor: color2}}></div> */}
     </>

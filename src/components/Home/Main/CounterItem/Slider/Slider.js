@@ -7,6 +7,7 @@ import Button from "../../../../common/Button";
 
 //THird PArty
 import { GiLighter } from 'react-icons/gi'
+import { shadeColor } from "../../../../../data/Service";
 
 const Template = ({ firstColor, secondColor, onToggleCounter }) => {
 
@@ -25,7 +26,7 @@ const Template = ({ firstColor, secondColor, onToggleCounter }) => {
     }
 
     return (
-        <Button title={"rauchen"} borderradius={10} color={firstColor} hovercolor={secondColor} fontColor={"white"} onPress={() => onToggleCounter()} icon={<GiLighter style={{marginBottom: -5, fontSize: "1.5rem"}}/>}/>
+        <Button title={"rauchen"} borderradius={10} color={firstColor} hovercolor={shadeColor(firstColor, -25)} fontColor={"white"} onPress={() => onToggleCounter()} icon={<GiLighter style={{marginBottom: -5, fontSize: "1.5rem"}}/>}/>
     );
 }
 

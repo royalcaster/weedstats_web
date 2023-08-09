@@ -81,30 +81,39 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
     <>
     {showCreatePanel ? <CreatePanel emailInUse={emailInUse} handleCreate={handleCreate} onExit={() => setShowCreatePanel(false)}/> : null}
 
+
+
     <div className="login_container">
 
       <div
+        className="heading_container"
         style={{
           zIndex: 2,
-          justifyContent: "center",
+          position: "absolute",
+          width: "100%",
+          maxWidth: 1000,
+          top: 0,
+          left: 0,
           display: "flex",
-          flexDirection: "column",
+          flexDirection: "row",
+          paddingLeft: "1rem",
+          left: "50%",
         }}
       >
         
         <img
-          style={{ height: 100, width: 100, alignSelf: "center"}}
+          style={{ height: "3rem", width: "3rem", alignSelf: "center"}}
           src={require('../../data/img/icon.png')}
           alt="WeedStats Logo"
         />
         <p
           style={{
             color: "white",
-            fontSize: "2rem",
+            fontSize: "1.5rem",
             fontFamily: "Poppins",
             textAlign: "center",
-            marginTop: 10,
             fontWeight: 700,
+            marginLeft: "1rem"
           }}
         >
           WeedStats
@@ -112,6 +121,8 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
       </div>
 
       <div style={{ zIndex: 2, justifyContent: "center", width: "80%", maxWidth: 500, display: "flex", flexDirection: "column"}}>
+
+        <p className="label" style={{fontSize: "2rem", fontWeight: 700}}>Login</p>
 
         <AuthInput label={"E-Mail Adress"} onBlur={() => checkForSpace()} onChange={(text) => setEmail(text)} value={email} type={"email"}/>
 
