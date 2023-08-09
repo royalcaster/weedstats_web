@@ -23,11 +23,13 @@ import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 
 //CSS
 import './Login.css'
+import { shadeColor } from "../../data/Service";
+import AuthInput from "../common/AuthInput";
 
 const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFound }) => {
 
   //navigation
-  const navigation = useNavigation(LanguageContext);
+  const navigate = useNavigation()
 
   //Conp
   const language = useContext(LanguageContext);
@@ -37,6 +39,8 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
   const [password, setPassword] = useState("");
   const [showCreatePanel, setShowCreatePanel] = useState(false);
   const [securePassword, setSecurePassword] = useState(true);
+  const [showEmailLabel, setShowEmailLabel] = useState(false)
+  const [showPasswordLabel, setShowPasswordLabel] = useState(false)
 
   //Ref
   const passwordInput = useRef().current;
@@ -47,6 +51,24 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
     }
   }, []);
 
+  useEffect(() => {
+    if (email == "") {
+      setShowEmailLabel(false)
+    }
+    else {
+      setShowEmailLabel(true);
+    }
+  },[email])
+
+  useEffect(() => {
+    if (password == "") {
+      setShowPasswordLabel(false)
+    }
+    else {
+      setShowPasswordLabel(true);
+    }
+  },[password])
+
     const checkForSpace = () => {
       let email_without_space;
       if (email.slice(-1) === " ") {
@@ -56,10 +78,10 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
     }
 
   return (
-    
-    <div className="login_container">
+    <>
+    {showCreatePanel ? <CreatePanel emailInUse={emailInUse} handleCreate={handleCreate} onExit={() => setShowCreatePanel(false)}/> : null}
 
-      {showCreatePanel ? <CreatePanel onExit={() => setShowCreatePanel(false)} handleCreate={handleCreate} emailInUse={emailInUse}/> : null}
+    <div className="login_container">
 
       <div
         style={{
@@ -90,12 +112,13 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
       </div>
 
       <div style={{ zIndex: 2, justifyContent: "center", width: "80%", maxWidth: 500, display: "flex", flexDirection: "column"}}>
-        <p className="label">E-Mail Adress</p>
-        <input autoFocus onBlur={() => checkForSpace()} type="email" className="textinput"  value={email} onChange={(e) => setEmail(e.target.value)}/>
+
+        <AuthInput label={"E-Mail Adress"} onBlur={() => checkForSpace()} onChange={(text) => setEmail(text)} value={email} type={"email"}/>
+
         {userNotFound ? <p style={{color: "#FC2044", pAlign: "center"}}>{language.login_user_not_found}</p> : null }
-        <p className="label">Password</p>
-        <input onChange={(e) => setPassword(e.target.value)}  type={securePassword ? "password" : "text"} className="textinput" value={password} />
-        
+
+        <AuthInput label={"Password"} onBlur={() => checkForSpace()} onChange={(text) => setPassword(text)} value={password} type={securePassword ? "password" : "text"}/>
+
         <div style={{height: "1rem"}}></div>
         <a className="toggle_link" onClick={() => setSecurePassword(!securePassword)}>{securePassword ? <><AiFillEye style={{marginBottom: -3}}/> {language.login_show_password}</> : <><AiFillEyeInvisible style={{marginBottom: -3}}/> {language.login_hide_password}</>}</a>
 
@@ -110,8 +133,8 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
           title={language.login}
           borderradius={10}
           color={"#0080FF"}
-          onPress={() => {handleLogin(email, password, () => navigation.navigate("/home")); console.log(email, password);}}
-          hovercolor={"rgba(255,255,255,0.3)"}
+          onPress={() => {handleLogin(email, password, () => navigate("/home")); console.log(email, password);}}
+          hovercolor={shadeColor("#0080FF", -25)}
           color2={"#004080"}
       />
       <p style={{fontFamily: "Poppins", color: "white", fontSize: "1rem", textAlign: "center"}}>OR</p>
@@ -121,12 +144,12 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
           borderradius={10}
           color={"#484F78"}
           onPress={() => setShowCreatePanel(true)}
-          hovercolor={"rgba(255,255,255,0.3)"}
+          hovercolor={shadeColor("#484F78", -25)}
         />
       </div>
 
     </div>
-
+</>
   );
 }
 

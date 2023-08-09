@@ -143,7 +143,7 @@ const CreatePanel = ({ handleCreate, onExit, emailInUse }) => {
             title={"Cancel"}
             borderradius={100}
             color={"#484F78"}
-            onPress={() => hide()}
+            onPress={() => onExit()}
             hovercolor={"rgba(255,255,255,0.3)"}
             />
 

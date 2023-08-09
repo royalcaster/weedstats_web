@@ -66,8 +66,8 @@ const styles = {
     height: "100%",
     width: "100%",
     maxWidth: 700,
-    padding: 5
-    
+    padding: 5,
+    overflow: "scroll"
   },
   heading: {
     color: "white",

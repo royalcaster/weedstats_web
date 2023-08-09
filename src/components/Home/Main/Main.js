@@ -25,7 +25,7 @@ import { doc, updateDoc, getDoc } from "@firebase/firestore";
 import { app, firestore } from "../../../data/FirebaseConfig";
 import CounterModal from "../../common/CounterModal";
 import { FriendListContext } from "../../../data/FriendListContext";
-import { getCounterNotificationTitle } from "../../../data/Service";
+import { getCounterNotificationTitle, shadeColor } from "../../../data/Service";
 import NewsPanel from "../../common/NewsPanel";
 import News from "../../../data/News";
 import UpdatePanel from "../../common/UpdatePanel";
@@ -92,27 +92,6 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
   },[showCounterModal]); */
 
   useEffect(() => {
-    /* Animated.timing(headingAnim, {
-      toValue: 0,
-      duration: 300,
-      useNativeDriver: true,
-      easing: Easing.bezier(0.07, 1, 0.33, 0.89),
-    }).start();
-
-    Animated.timing(leftAnim, {
-      toValue: 0,
-      duration: 400,
-      useNativeDriver: true,
-      easing: Easing.bezier(0.07, 1, 0.33, 0.89),
-    }).start();
-
-    Animated.timing(rightAnim, {
-      toValue: 0,
-      duration: 400,
-      useNativeDriver: true,
-      easing: Easing.bezier(0.07, 1, 0.33, 0.89),
-    }).start(); */
-
     checkForUpdate();
     checkForNews();
     calcDaysTill420();
@@ -140,6 +119,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
     console.log("checkForUpdate Alert wieder anschalten");
     if (docSnap.exists()) {
       if (compareVersions(docSnap.data().latest_version, package_object.version) == 1) {
+        // TODO: Updates / Versionen implementieren
         /* alert('Update available', 'This version of the app is no longer supported, please update the app from the Google PlayStore to ensure a seamless experience.', [
           {
             text: 'Later',
@@ -259,7 +239,8 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
       function success(position) {
         const latitude = position.coords.latitude;
         const longitude = position.coords.longitude;
-        setLocation({ latitude, longitude });
+        console.log("setLocation()");
+        setLocation(position.coords);
         console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
     
         // Make API call to OpenWeatherMap
@@ -354,7 +335,6 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
 
   return (
     <>
-
         {showNews ? <NewsPanel language={language} onExit={() => setShowNews(false)} refreshUser={refreshUser} /> : null}
         {showUpdatePanel ? <UpdatePanel language={language} onExit={() => setShowUpdatePanel(false)}/> : null}
 
@@ -366,7 +346,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
         <div style={{zIndex: 3000, position: "absolute", height: "100%", width: "100%"}}>
           <Tutorial onDone={onDone} extraHeight={50}/>
         </div> : <> 
-          <div style={{height: "100%", width: "100%", maxWidth: 700, alignSelf: "center"}}>
+          <div style={{height: "100%", width: "100%", maxWidth: 700, alignSelf: "center", overflow: "scroll"}}>
           {loading ? (
             <div
               style={{
@@ -478,7 +458,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                         color={"#131520"}
                         title={" " + language.account_levels}
                         icon={<FaTrophy style={button_icon_style}/>}
-                        hovercolor={"rgba(255,255,255,0.15)"}
+                        hovercolor={shadeColor("#131520",-25)}
                         small={true} 
                       />
                     </div>
@@ -490,7 +470,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                         borderradius={10}
                         color={"#131520"}
                         fontColor={"white"}
-                        hovercolor={"rgba(255,255,255,0.15)"}
+                        hovercolor={shadeColor("#131520",-25)}
                         small={true} 
                       />
                     </div>
@@ -505,7 +485,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                         borderradius={10}
                         color={"#131520"}
                         fontColor={"white"}
-                        hovercolor={"rgba(255,255,255,0.15)"}
+                        hovercolor={shadeColor("#131520",-25)}
                         small={true}
                       />
                     </div>
@@ -517,7 +497,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                         borderradius={10}
                         color={"#131520"}
                         fontColor={"white"}
-                        hovercolor={"rgba(255,255,255,0.15)"}
+                        hovercolor={shadeColor("#131520",-25)}
                         small={true}
                         color2={"#F2338C"}
                       />
@@ -556,7 +536,8 @@ const styles = {
     fontFamily: "Poppins",
     position: "relative",
     textAlign: "center",
-    margin: 0
+    margin: 0,
+    zIndex: 0
   },
   money_icon: {
     fontSize: 25,

@@ -83,6 +83,7 @@ const App = () => {
         handleLogin(accessToken.email, accessToken.password);
       }
       else {
+        navigate('/login');
         setLoading(false);
       }
     }

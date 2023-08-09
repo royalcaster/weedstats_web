@@ -7,6 +7,7 @@ import CustomLoader from "./CustomLoader";
 
 //Service
 import { LanguageContext } from "../../data/LanguageContext";
+import { shadeColor } from "../../data/Service";
 
 const CounterModal = ({ onExit, writeComplete, sayingNr, borderColor, loadingColor}) => {
 
@@ -18,30 +19,20 @@ const CounterModal = ({ onExit, writeComplete, sayingNr, borderColor, loadingCol
 
     return (
       <>
-        <p
-            style={styles.container}
-          >
-            
-            <p
-                style={{
-                  width: "100%",
-                  height: "70%",
-                  alignSelf: "center",
-                  borderRadius: 25,
-                }}
-              >
+        <div style={styles.container}>
+          <div style={{width: "90%", maxWidth: 700, backgroundColor: "#131520", borderRadius: 15}}>
+          <div style={{height: "2rem"}}></div>
             {writeComplete ? (
               <>
-                <p style={{ flex: 5, justifyContent: "center"}}>
                   <p style={styles.text}>
-                    {language.sayings[sayingNr].saying}
+                    "{language.sayings[sayingNr].saying}"
                   </p>
+                  <div style={{height: "1rem"}}></div>
                   <p
-                    style={styles.text}>
+                    style={styles.text2}>
                     {language.sayings[sayingNr].from}
                   </p>
-                </p>
-                <p style={{ flex: 1, justifyContent: "center" }}>
+                <div style={{height: "4rem"}}></div>
                   <Button
                     title={"Ok"}
                     color={borderColor == null ? "#0080FF" : borderColor}
@@ -50,16 +41,16 @@ const CounterModal = ({ onExit, writeComplete, sayingNr, borderColor, loadingCol
                     onPress={() => {
                       onExit();
                     }}
-                    hovercolor={"rgba(255,255,255,0.3)"}
-                  />
-                </p></>
+                    hovercolor={shadeColor(borderColor, -50)}
+                  /></>
               
             ) : (
-              <p style={{height: "100%", width: "100%", justifyContent: "center"}}>
-              <CustomLoader x={80} color={"#484F78"} special={true}/></p>
+              <div style={{height: "100%", width: "100%", justifyContent: "center"}}>
+              <CustomLoader x={80} color={"#484F78"} special={true}/></div>
             )}
-            </p>
-          </p>
+            <div style={{height: "2rem"}}></div>
+            </div>
+          </div>
           </>
     );
 }
@@ -68,13 +59,13 @@ export default CounterModal
 
 const styles = {
   container: {
-    flex: 1,
-    backgroundColor: "#1E2132",
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "rgba(0,0,0,0.85)",
-    flex: 1,
-    height: "100%"
+    backgroundColor: "rgba(0,0,0,0.75)",
+    height: "100%",
+    width: "100%",
+    display: "flex",
+    justifyContent: "center",
   },
   button: {
     borderRadius: 10,
@@ -83,14 +74,23 @@ const styles = {
   },
   text: {
     alignSelf: "center",
-    fontFamily: "PoppinsMedium",
+    fontFamily: "Poppins",
     fontSize: 18,
     color: "white",
-    maxWidth: 250,
     textAlign: "center",
-    fontSize: 15, 
-    fontStyle: "italic", 
-    marginTop: 10,
-    fontSize: "3rem"
+    fontSize: "1.5rem",
+    margin: "auto",
+    width: "90%"
+  },
+  text2: {
+    alignSelf: "center",
+    fontFamily: "Poppins",
+    fontSize: 18,
+    color: "white",
+    textAlign: "center",
+    fontStyle: "italic",
+    fontSize: "1rem",
+    margin: "auto",
+    width: "90%"
   },
 };
