@@ -26,22 +26,22 @@ const CustomMarker = ({ username, photoUrl, type, timestamp,  }) => {
     },[region]); */
 
     return (
-        <View>
-            <Animated.View style={[styles.container]}>
+        <div>
+            <div style={styles.container}>
                     
                      
-                    <View style={{display: "flex",flexDirection: "row", alignSelf: "center", backgroundColor: username == user.username ? "#484F78" : "#131520", padding: 5, marginBottom: -10, paddingBottom: 10, borderRadius: 10, paddingRight: 10, paddingLeft: 10}}>
+                    <div style={{display: "flex",flexDirection: "row", alignSelf: "center", backgroundColor: username == user.username ? "#484F78" : "#131520", padding: 5, marginBottom: -10, paddingBottom: 10, borderRadius: 10, paddingRight: 10, paddingLeft: 10}}>
                         <TypeImage type={type} x={20} backgroundColor={"rgba(0,0,0,0)"}/>
-                        <View style={{width: 5}}></View>
-                        <Text style={{color: "white", fontSize: "1.25rem"}}> {new Date(timestamp).toUTCString().substring(5,16)}{"\n"}{new Date(timestamp).toUTCString().substring(16,22)}</Text>
-                    </View>
+                        <div style={{width: 5}}></div>
+                        <p style={{color: "white", fontSize: "1.25rem"}}> {new Date(timestamp).toUTCString().substring(5,16)}{"\n"}{new Date(timestamp).toUTCString().substring(16,22)}</p>
+                    </div>
 
-                    <Animated.View style={[styles.image,{alignSelf: "center"}]}>
+                    <div style={styles.image}>
                         <ProfileImage x={50} url={photoUrl} type={1} circleColor={username == user.username ? "#484F78" : "#131520"} circle={false}/>
-                    </Animated.View>
-                    <View style={styles.dot}></View>
-            </Animated.View>
-        </View>
+                    </div>
+                    <div style={styles.dot}></div>
+            </div>
+        </div>
     );
 }
 
@@ -56,6 +56,7 @@ const styles = {
         alignItems: "center",
         borderRadius: 100,
         paddingTop: 3.5,
+        alignSelf: "center"
     },
     dot: {
         width: 10,

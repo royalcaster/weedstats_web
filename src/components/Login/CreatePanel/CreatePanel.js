@@ -86,47 +86,47 @@ const CreatePanel = ({ handleCreate, onExit, emailInUse }) => {
     }
 
     return (
-        <div className="container">
+        <div className="container" style={{overflow: "scroll"}}>
 
-        <div
-            className="heading_container"
-            style={{
-            zIndex: 2,
-            position: "absolute",
-            width: "100%",
-            maxWidth: 1000,
-            top: 0,
-            left: 0,
-            display: "flex",
-            flexDirection: "row",
-            paddingLeft: "1rem",
-            left: "50%",
-            }}
+<div
+        className="heading_container"
+        style={{
+          position: "absolute",
+          top: 0,
+          left: 0,
+          zIndex: 2,
+          display: "flex",
+          flexDirection: "row",
+          width: "100%"
+        }}
+      >
+       <div style={{maxWidth: 500, display: "flex", flexDirection: "row", width: "100%", margin: "auto"}}> 
+        <div style={{width: "1rem"}}></div>
+        <img
+          style={{ height: "3rem", width: "3rem", alignSelf: "center"}}
+          src={require('../../../data/img/icon.png')}
+          alt="WeedStats Logo"
+        />
+        <p
+          style={{
+            color: "white",
+            fontSize: "1.5rem",
+            fontFamily: "Poppins",
+            textAlign: "center",
+            fontWeight: 700, 
+            marginLeft: "1rem"
+          }}
         >
-            
-            <img
-            style={{ height: "3rem", width: "3rem", alignSelf: "center"}}
-            src={require('../../../data/img/icon.png')}
-            alt="WeedStats Logo"
-            />
-            <p
-            style={{
-                color: "white",
-                fontSize: "1.5rem",
-                fontFamily: "Poppins",
-                textAlign: "center",
-                fontWeight: 700,
-                marginLeft: "1rem"
-            }}
-            >
-            WeedStats
-            </p>
+          WeedStats
+        </p>
         </div>
+      </div>
 
         <div className="content_container">
 
-        <p className="label" style={{fontSize: "2rem", fontWeight: 700}}>Create your account</p>
+        <div style={{height: "3rem"}}></div>
 
+        <p className="label" style={{fontSize: "2rem", fontWeight: 700}}>Create your account</p>
         <AuthInput onChange={(text) => setUserName(text)} value={userName} type={"text"} label={"Username"}/>
 
         

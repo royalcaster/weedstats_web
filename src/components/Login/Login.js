@@ -81,26 +81,22 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
     <>
     {showCreatePanel ? <CreatePanel emailInUse={emailInUse} handleCreate={handleCreate} onExit={() => setShowCreatePanel(false)}/> : null}
 
-
-
     <div className="login_container">
 
-      <div
+       <div
         className="heading_container"
         style={{
-          zIndex: 2,
           position: "absolute",
-          width: "100%",
-          maxWidth: 1000,
           top: 0,
           left: 0,
+          zIndex: 2,
           display: "flex",
           flexDirection: "row",
-          paddingLeft: "1rem",
-          left: "50%",
+          width: "100%"
         }}
       >
-        
+       <div style={{maxWidth: 500, display: "flex", flexDirection: "row", width: "100%", margin: "auto"}}> 
+        <div style={{width: "1rem"}}></div>
         <img
           style={{ height: "3rem", width: "3rem", alignSelf: "center"}}
           src={require('../../data/img/icon.png')}
@@ -112,12 +108,13 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
             fontSize: "1.5rem",
             fontFamily: "Poppins",
             textAlign: "center",
-            fontWeight: 700,
+            fontWeight: 700, 
             marginLeft: "1rem"
           }}
         >
           WeedStats
         </p>
+        </div>
       </div>
 
       <div style={{ zIndex: 2, justifyContent: "center", width: "80%", maxWidth: 500, display: "flex", flexDirection: "column"}}>
@@ -157,7 +154,7 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
           onPress={() => setShowCreatePanel(true)}
           hovercolor={shadeColor("#484F78", -25)}
         />
-      </div>
+      </div> 
 
     </div>
 </>
@@ -165,10 +162,3 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
 }
 
 export default Login;
-
-{/* <BrowserRouter>
-      <Routes>
-        <Route path="login" element={<Users/>} />
-      </Routes>
-    </BrowserRouter> */}
-

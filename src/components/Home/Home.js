@@ -18,6 +18,7 @@ import Main from "./Main/Main";
 import Empty from "../common/Empty";
 import MenuButton from "./MenuButton/MenuButton";
 import Config from "./Config/Config"
+import Map from './Map/Map'
 
 //Third Party
 import { FaChartArea, FaMapMarker } from 'react-icons/fa'
@@ -49,6 +50,7 @@ import { FaSliders, FaUser } from "react-icons/fa6";
             <Routes>
               <Route index path="/counter/*" element={<Main onWriteComplete={onWriteComplete} onSetUser={onSetUser} refreshUser={refreshUser}/>} />
               <Route exact path="/config" element={<Config />} />
+              <Route exact path="/map" element={<Map />} />
             </Routes>
             : <Empty title={"loading app"}/>
           }
