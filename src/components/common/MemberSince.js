@@ -87,14 +87,15 @@ const MemberSince = ({ backgroundColor, timestamp }) => {
     
 
     return (
-        <div style={{width: "100%",
-                    alignSelf: "center",
+        <div style={{width: "95%",
+                    margin: "auto", 
                     borderRadius: 15,
-                    padding: 15,
                     backgroundColor: backgroundColor}}>
             <div style={styles.part}>
+                <div style={{height: "0.5rem"}}></div>
                 <p style={styles.text}>{language.account_member_since} {final_string}</p>
                 <p style={styles.date}>{date.toLocaleDateString()}</p>
+                <div style={{height: "0.5rem"}}></div>
             </div>
         </div>
     );
@@ -104,10 +105,10 @@ export default MemberSince
 
 const styles = {
     container: {
-        width: "100%",
+        width: 300,
         alignSelf: "center",
         borderRadius: 15,
-        padding: 15
+        padding: 10
     },
     part: {
         justifyContent: "center"
@@ -115,11 +116,11 @@ const styles = {
     text: {
         color: "white",
         textAlign: "center",
-        fontFamily: "PoppinsMedium"
+        fontFamily: "Poppins"
     },
     date: {
         color: "#0080FF",
         textAlign: "center",
-        fontFamily: "PoppinsMedium"
+        fontFamily: "Poppins"
     }
 };

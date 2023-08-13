@@ -12,29 +12,22 @@ import Toggle from "react-toggle";
 
 const ConfigItem = ({ type, config, onToggle }) => {
 
-  const [active, setActive] = useState(config);
-
   return (
-    <div style={{backgroundColor: config ? "#484F78" : "#131520", margin: 2.5,
-    borderRadius: 10,
-    justifyContent: "center",
-    textAlign: "center",
-    backgroundColor: "#131520",
-    flex: 1,}}>
-      {/* <TouchableNativeFeedback 
-      onPress={() => {
-        onToggle(type);
-        setActive(!active);
-      }}
-      background={TouchableNativeFeedback.Ripple(
-        "rgba(255,255,255,0.1)",
-        true
-      )}>
-        <div style={styles.touchable}>
-          <TypeImage x={50} type={type}/>
-        </div>
-      </TouchableNativeFeedback> */}
-      <p>config item</p>
+    <div style={{
+      backgroundColor: config ? "#484F78" : "#131520",
+      margin: "0.5rem",
+      borderRadius: 10, 
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: "center",
+      alignContent: "center",
+      alignItems: "center",
+      cursor: "pointer"
+    }}
+    onClick={() => onToggle()}>
+      <div style={{height: "0.5rem"}}></div>
+      <TypeImage x={60} type={type}/>
+      <div style={{height: "0.5rem"}}></div>
     </div>
   );
 };

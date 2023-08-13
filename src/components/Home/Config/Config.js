@@ -21,6 +21,7 @@ import CustomModal from "../../common/CustomModal";
 import { UserContext } from "../../../data/UserContext";
 
 import "./Config.css"
+import { shadeColor } from "../../../data/Service";
 
 const Config = ({ toggleLanguage, loadSettings, deleteAccount, refreshUser, handleLogOut }) => {
 
@@ -247,6 +248,7 @@ const logOutModalContent = <div
                 margin: "auto",
                 cursor: "pointer"
               }}
+
               onClick={() => {setShowProfileEditor(true)}}
             >
               <div style={{ flex: 1, justifyContent: "center", alignItems: "center"}}>            
@@ -257,39 +259,37 @@ const logOutModalContent = <div
                 <p style={styles.username}>{user.username}</p>
                 <p style={styles.email}>{user.email}</p>
               </div>
-        </div>
+            </div>
         
         <div style={{height: "1rem"}}></div>
 
-        <div style={{flex: 1, justifyContent: "center", width: "90%", alignSelf: "center"}}>
           <MemberSince backgroundColor={"#131520"} timestamp={user.member_since}/>
-        </div>
 
         <div style={{height: "1rem"}}></div>
-        <div style={{flexDirection: "row", width: "90%", alignSelf: "center", justifyContent: "space-around"}}>
+        <div style={{flexDirection: "row", width: "95%", alignSelf: "center", justifyContent: "space-around", display: "flex", margin: "auto"}}>
           <div style={{flex: 1}}>
             <Button
                 onPress={() => setShowLogOut(true)}
                 title={" " + language.account_sign_out}
-                icon={<BiLogOut />}
-                borderradius={100}
+                icon={<BiLogOut style={{fontSize: "1.5rem", marginBottom: -6}}/>}
+                borderradius={10}
                 color={"#eb4034"}
                 fontColor={"white"}
-                hovercolor={"rgba(255,255,255,0.5)"}
-                small={true}
+                hovercolor={shadeColor("#eb4034",-25)}
+                huge={true}
               />
           </div>
-          <div style={{width: "2rem"}}></div>
+          <div style={{width: "1rem"}}></div>
           <div style={{flex: 1}}>
             <Button
                 onPress={() => setShowDelete(true)}
                 title={" " + language.account_delete_account}
-                icon={<BiTrash />}
-                borderradius={100}
+                icon={<BiTrash style={{fontSize: "1.5rem", marginBottom: -6}}/>}
+                borderradius={10}
                 color={"#eb4034"}
                 fontColor={"white"}
-                hovercolor={"rgba(255,255,255,0.5)"}
-                small={true}
+                hovercolor={shadeColor("#eb4034",-25)}
+                huge={true}
               />
           </div>
         </div>
@@ -297,9 +297,10 @@ const logOutModalContent = <div
             <div style={{height: "1rem"}}></div>
 
             <p style={styles.heading}>{language.config_counter}</p>
-            <div style={{height: "1rem"}}></div>
 
-            <div style={{flexDirection: "row", width: "90%", alignSelf: "center"}}>
+            <div style={{width: "95%", margin: "auto"}}>
+
+            <div style={{flexDirection: "row", width: "100%", alignSelf: "center", display: "flex"}}>
 
               <div style={{alignSelf: "center", flex: 1}}>
                 <ConfigItem
@@ -323,9 +324,7 @@ const logOutModalContent = <div
                   }}
                 />
               </div>
-            </div> 
-
-            <div style={{flexDirection: "row", width: "90%", alignSelf: "center"}}>
+            
 
               <div style={{alignSelf: "center", flex: 1}}>
                 <ConfigItem
@@ -338,6 +337,9 @@ const logOutModalContent = <div
                   }}
                 />
               </div>
+              </div> 
+
+              <div style={{flexDirection: "row", width: "100%", alignSelf: "center", display: "flex"}}>
 
               <div style={{alignSelf: "center", flex: 1}}>
                 <ConfigItem
@@ -350,9 +352,6 @@ const logOutModalContent = <div
                   }}
                 />
               </div>
-            </div> 
-
-            <div style={{flexDirection: "row", width: "90%", alignSelf: "center"}}>
 
               <div style={{alignSelf: "center", flex: 1}}>
                 <ConfigItem
@@ -365,15 +364,12 @@ const logOutModalContent = <div
                   }}
                 />
               </div>
-
-              <div style={{alignSelf: "center", flex: 1}}>
-                
-              </div>
             </div> 
+            </div>
 
+            <div style={{height: "1rem"}}></div>      
             <p style={styles.heading}>{language.config_personal_data}</p>
             
-
             <ConfigToggle
               value={localConfig.shareMainCounter}
               onPress={() => {

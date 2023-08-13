@@ -1,3 +1,23 @@
 .left {
     transform: translateX(-50%);
 }
+
+.profile_button {
+    background-color: blue;
+}
+
+.custom-classname.react-toggle .react-toggle-track {
+    background-color: #1E2132;
+}
+
+.custom-classname.react-toggle .react-toggle-track:hover {
+    background-color: #1E2132;
+}
+
+.custom-classname.react-toggle--checked .react-toggle-track {
+    background-color: #484F78;
+}
+
+.custom-classname.react-toggle--checked .react-toggle-track:hover {
+    background-color: #484F78;
+}

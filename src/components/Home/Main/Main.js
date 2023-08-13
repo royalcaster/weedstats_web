@@ -457,7 +457,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                         borderradius={10}
                         color={"#131520"}
                         title={" " + language.account_levels}
-                        icon={<FaTrophy style={button_icon_style}/>}
+                        icon={<FaTrophy style={{fontSize: "1.25rem", marginBottom: -4}}/>}
                         hovercolor={shadeColor("#131520",-25)}
                         small={true} 
                       />
@@ -466,7 +466,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                       <Button
                         onPress={() => navigate('/home/counter/app-info')}
                         title={" App-Info"}
-                        icon={<AiFillInfoCircle style={button_icon_style}/>}
+                        icon={<AiFillInfoCircle style={{fontSize: "1.25rem", marginBottom: -4}}/>}
                         borderradius={10}
                         color={"#131520"}
                         fontColor={"white"}
@@ -481,7 +481,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                       <Button
                         onPress={() => navigate('/home/counter/tutorial')}
                         title={" " + language.account_tutorial}
-                        icon={<BiSolidHelpCircle style={button_icon_style}/>}
+                        icon={<BiSolidHelpCircle style={{fontSize: "1.25rem", marginBottom: -4}}/>}
                         borderradius={10}
                         color={"#131520"}
                         fontColor={"white"}
@@ -493,7 +493,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                     <Button
                         onPress={() => navigate('/home/counter/premium')}
                         title={" " + language.account_support}
-                        icon={<FaMoneyBillWave style={button_icon_style}/>}
+                        icon={<FaMoneyBillWave style={{fontSize: "1.25rem", marginBottom: -4}}/>}
                         borderradius={10}
                         color={"#131520"}
                         fontColor={"white"}
@@ -543,5 +543,5 @@ const styles = {
     fontSize: 25,
     color: "white",
     textAlignVertical: "center",
-  },
+  }
 };
