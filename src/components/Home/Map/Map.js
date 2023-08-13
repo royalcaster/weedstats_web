@@ -439,10 +439,10 @@ const Map = ({ getFriendList }) => {
         {view == "friends" ? (
           <div style={styles.iconbutton_container_left}>
             <div style={styles.touchable2}>
-                <FaUserFriends />
+                <FaUserFriends style={{color: "white", fontSize: "1.5rem", textAlign: "center"}}/>
                 <div>
                   {markers.length != 0 ? markers.map((marker) => {
-                    return <div key={Math.random()} style={{marginVertical: 5}}><ProfileImage x={50} url={marker.photoUrl} type={1} circle={user.username == marker.username} circleColor={user.username == marker.username ? "#484F78" : "#131520"}/></div>      
+                    return <div key={Math.random()} style={{marginTop: "0.5rem"}}><ProfileImage x={50} url={marker.photoUrl} type={1} circle={user.username == marker.username} circleColor={user.username == marker.username ? "#484F78" : "#131520"}/></div>      
                   }) : null}
                 </div>
                 </div>
@@ -499,7 +499,10 @@ const styles = {
     width: "35%",
   },
   iconbutton_container_left: {
+    display: "flex",
     flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
     alignSelf: "center",
     bottom: "15%",
     left: 0,
