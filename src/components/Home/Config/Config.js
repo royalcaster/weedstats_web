@@ -169,24 +169,28 @@ const logOutModalContent = <div
  style={{
    alignItems: "center",
    justifyContent: "center",
-   backgroundColor: "rgba(0,0,0,0.5)",
-   flex: 1
+   backgroundColor: "rgba(0,0,0,0.75)",
+   height: "100%",
+   width: "100vw",
+   display: "flex",
+   justifyContent: "center"
  }}
 >
  <div
    style={{
      width: "90%",
-     height: 300,
      backgroundColor: "#1E2132",
-     alignSelf: "center",
-     borderRadius: 25,
+     margin: "auto",
+     borderRadius: 15,
    }}
  >
+    <div style={{height: "2rem"}}></div>
    <div style={{ flex: 1 }}>
-     <p style={styles.heading}>
+     <p style={styles.heading_modal}>
        {language.signout_title}
      </p>
    </div>
+   <div style={{height: "5rem"}}></div>
    <div style={{ flex: 1, flexDirection: "row" }}>
      <div
        style={{
@@ -195,8 +199,9 @@ const logOutModalContent = <div
          alignItems: "center",
        }}
      >
-       <Button title={language.account_delete_account_cancel} onPress={() => setShowLogOut(false)} color={"#484F78"} fontColor={"white"}/>
-     </div>
+      <Button title={language.account_sign_out} onPress={() => handleLogOut()} color={"#eb4034"} fontColor={"white"} borderradius={10} hovercolor={shadeColor("#eb4034",-25)}/>
+      </div>
+     <div style={{height: "1rem"}}></div>
      <div
        style={{
          flex: 1,
@@ -204,9 +209,10 @@ const logOutModalContent = <div
          alignItems: "center",
        }}
      >
-       <Button title={language.account_sign_out} onPress={() => handleLogOut()} color={"#eb4034"} fontColor={"white"}/>
+     <Button title={language.account_delete_account_cancel} onPress={() => setShowLogOut(false)} color={"#484F78"} fontColor={"white"} borderradius={10} hovercolor={shadeColor("#484F78",-25)}/>
      </div>
    </div>
+   <div style={{height: "1rem"}}></div>
  </div>
 </div>;
 
@@ -494,6 +500,17 @@ const styles = {
     textAlign: "left",
     textAlignVertical: "center",
     fontSize: "2.5",
+    margin: 0
+  },
+  heading_modal: {
+    color: "white",
+    fontSize: "1.3rem",
+    fontFamily: "Poppins",
+    marginLeft: "1rem",
+    textAlign: "center",
+    textAlignVertical: "center",
+    fontSize: "2.5",
+    margin: 0,
   },
   text: {
     alignSelf: "center",

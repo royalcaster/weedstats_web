@@ -6,9 +6,10 @@ import BackButton from "../../../common/BackButton";
 import Button from "../../../common/Button";
 import CustomLoader from "../../../common/CustomLoader";
 import ProfileImage from "../../../common/ProfileImage";
+import AuthInput from '../../../common/AuthInput'
 
 //Service
-import { createUsernameArray } from "../../../../data/Service";
+import { createUsernameArray, shadeColor } from "../../../../data/Service";
 import { ref, uploadBytes, getDownloadURL, deleteObject } from '@firebase/storage'
 import { storage } from "../../../../data/FirebaseConfig";
 
@@ -86,34 +87,43 @@ const ProfileEditor = ({ onExit, refreshUser}) => {
     return (
         <div style={styles.container}>
 
-        <div style={{height: "5%"}}></div>
+          
 
-          <div style={{flexDirection: "row", alignContent: "center", alignItems: "center"}}>
-          <div style={{marginLeft: 20}}>
-              <BackButton onPress={() => onExit()}/>
+        <div style={{display: "flex", flexDirection: "row", alignContent: "center", alignItems: "center"}}>
+          <div style={{marginLeft: "1rem"}}>
+              <BackButton onPress={() => onExit()} hoverColor={"rgba(255,255,255,0.25)"}/>
           </div>
-          <p style={styles.heading}>{language.edit_your_profile}</p>
+          <div style={{width: "1rem"}}></div>
+          <div>
+            <p style={styles.heading}>{language.edit_your_profile}</p>
+          </div>
         </div>
+
+        <div style={{width: "90%", maxWidth: 500, margin: "auto"}}>
 
         <p style={styles.label}>{language.profile_image}</p>
         {loading ? <CustomLoader x={50}/> :
-            <div style={{width: "20%", height: "20%", position: "relative", alignSelf: "center"}}>
-                <ProfileImage url={image} type={1}/>
+            <div style={{position: "relative", alignSelf: "center", margin: "auto"}}>
+                <ProfileImage url={image} type={1} x={150}/>
             </div>
         }
-        <div style={{height: "2%"}}></div>
+        <div style={{height: "2rem"}}></div>
 
         <Button
           fontColor={"white"}
           title={language.search_gallery}
-          borderradius={100}
+          borderradius={10}
           color={"#484F78"}
           onPress={async () => console.log("html upload form implementieren")}
-          hovercolor={"rgba(255,255,255,0.3)"}
+          hovercolor={shadeColor("#484F78",-25)}
+          huge={true}
         />
 
+        <div style={{height: "2rem"}}></div>
+
         <p style={styles.label}>{language.username}</p>
-        <pInput onChangeText={(text) => setUserName(text)} style={styles.text_input} value={userName}/>
+        <input style={styles.text_input} label={language.username} onBlur={() => null} onChange={(e) => setUserName(e.target.value)} type={"text"} value={userName}/>
+        
 
         <div style={{height: 10}}></div>
 
@@ -124,20 +134,24 @@ const ProfileEditor = ({ onExit, refreshUser}) => {
         <Button
           fontColor={"white"}
           title={language.config_save}
-          borderradius={100}
+          borderradius={10}
           color={"#0080FF"}
           onPress={() => saveChanges()}
-          hovercolor={"rgba(255,255,255,0.3)"}
+          hovercolor={shadeColor("#0080FF",-25)}
           color2={"#004080"}
+          huge={true}
         />
+        <div style={{height: "1rem"}}></div>
         <Button
             fontColor={"white"}
             title={language.account_delete_account_cancel}
-            borderradius={100}
+            borderradius={10}
             color={"#484F78"}
             onPress={() => onExit()}
-            hovercolor={"rgba(255,255,255,0.3)"}
+            hovercolor={shadeColor("#484F78",-25)}
+            huge={true}
             />
+        </div>
         </div>
     )
 }
@@ -153,35 +167,34 @@ const styles = {
         width: "100%",
         zIndex: 10
     },
-    textinput: {
+    text_input: {
         backgroundColor: "#131520",
         borderRadius: 10,
         padding: 15,
         width: "80%",
         alignSelf: "center",
         marginVertical: 5,
-        fontFamily: "PoppinsMedium",
-        fontSize: "2rem",
-        color: "white"
+        fontFamily: "Poppins",
+        fontSize: "1rem",
+        color: "white",
+        border: "none"
       },
       label: {
         color: "white",
-        fontSize: "1.5rem",
-        fontFamily: "PoppinsMedium",
+        fontSize: "1rem",
+        fontFamily: "Poppins",
         left: "10%",
         marginTop: 20
       },
       warning: {
         color: "#eb4034",
-        fontFamily: "PoppinsMedium",
+        fontFamily: "Poppins",
         textAlign: "center"
       },
       heading: {
         color: "white",
-        fontSize: 20,
-        fontFamily: "PoppinsMedium",
-        marginLeft: 20,
+        fontSize: "1.5rem",
+        fontFamily: "Poppins",
         textAlign: "left",
-        marginTop: 3
-  },
+      },
 };
