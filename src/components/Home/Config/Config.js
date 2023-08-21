@@ -238,6 +238,7 @@ const logOutModalContent = <div
             <p style={styles.bold_heading}>{language.config_settings}</p>
 
             <p style={styles.heading}>Account</p>
+            <div style={{height: "1rem"}}></div>
 
             <div
               style={{
@@ -300,9 +301,10 @@ const logOutModalContent = <div
           </div>
         </div>
 
-            <div style={{height: "1rem"}}></div>
+            <div style={{height: "2rem"}}></div>
 
             <p style={styles.heading}>{language.config_counter}</p>
+            <div style={{height: "1rem"}}></div>
 
             <div style={{width: "95%", margin: "auto"}}>
 
@@ -375,6 +377,7 @@ const logOutModalContent = <div
 
             <div style={{height: "1rem"}}></div>      
             <p style={styles.heading}>{language.config_personal_data}</p>
+            <div style={{height: "1rem"}}></div>
             
             <ConfigToggle
               value={localConfig.shareMainCounter}
@@ -439,7 +442,7 @@ const logOutModalContent = <div
             <div style={{ height: 30 }}></div>
 
             <p style={styles.heading}>{language.config_security}</p>
-            <div style={{ height: 5 }}></div>
+            <div style={{height: "1rem"}}></div>
 
             <ConfigToggle
             label={language.config_unlock_on_launch}
@@ -456,14 +459,14 @@ const logOutModalContent = <div
             <div style={{ height: 30 }}></div>
 
             <p style={styles.heading}>{language.config_language}</p>
-            <div style={{ height: 5 }}></div>
+            <div style={{height: "1rem"}}></div>
 
             <LanguageSelector toggleLanguage={(lang) => {handleLanguageSwitch(lang); setSaved(false)}} value={localConfig.language} />
 
             <div style={{ height: 30 }}></div>
 
             <p style={styles.heading}>{language.config_other}</p>
-            <div style={{ height: 5 }}></div>
+            <div style={{height: "1rem"}}></div>
 
             <ConfigToggle
               label={language.config_lightmode}
@@ -500,7 +503,10 @@ const styles = {
     textAlign: "left",
     textAlignVertical: "center",
     fontSize: "2.5",
-    margin: 0
+    marginLeft: "1rem",
+    marginBottom: 0,
+    marginTop: 0
+    
   },
   heading_modal: {
     color: "white",
