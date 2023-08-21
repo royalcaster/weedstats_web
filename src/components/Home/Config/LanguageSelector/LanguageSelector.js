@@ -7,20 +7,16 @@ const LanguageSelector = ({ toggleLanguage, value }) => {
 
     return <div style={styles.container}>
 
-        <div 
-            onPress={() => {toggleLanguage("de")}}
-            >
-            <div style={{backgroundColor: value == "de" ? "#484F78" : "#131520",flexDirection: "row",}}>
-                <img style={styles.language_image} source={require("../../../../data/img/de.png")}/>
+        <div onClick={() => {toggleLanguage("de")}} style={styles.button}>
+            <div style={{backgroundColor: value == "de" ? "#484F78" : "#131520",flexDirection: "row", display: "flex", justifyContent: "center"}}>
+                <div><img style={styles.language_image} src={require("../../../../data/img/de.png")}/></div>
             </div>
         </div>
 
-        <div 
-            onPress={() => {toggleLanguage("en")}}
-            >
-            <div style={{backgroundColor: value == "en" ? "#484F78" : "#131520",flexDirection: "row",}}>
-                <div><img style={styles.language_image} source={require("../../../../data/img/gb.png")}/></div>
-                <div><img style={styles.language_image} source={require("../../../../data/img/us.png")}/></div>
+        <div onClick={() => {toggleLanguage("en")}} style={styles.button}>
+            <div style={{backgroundColor: value == "en" ? "#484F78" : "#131520",flexDirection: "row", display: "flex", justifyContent: "center"}}>
+                <div><img style={styles.language_image} src={require("../../../../data/img/gb.png")}/></div>
+                <div><img style={styles.language_image} src={require("../../../../data/img/us.png")}/></div>
             </div>
         </div>
 
@@ -31,24 +27,28 @@ export default LanguageSelector
 
 const styles = {
     container: {
-        width: "90%",
+        width: "95%",
         borderRadius: 10,
         backgroundColor: "#131520",
         flexDirection: "row",
         alignSelf: "center",
-        overflow: "hidden"
+        overflow: "hidden",
+        margin: "auto",
+        display: "flex",
+        cursor: "pointer"
     },
     touchable: {
         flexDirection: "row",
     },
     language_image: {
-        height: "3.5%",
-        width: "12%",
+        height: "3rem",
+        width: "5rem",
         margin: 20,
         borderRadius: 3,
         alignSelf: "center"
     },
-    touchable: {
-        flex: 1
+    button: {
+        height: "100%",
+        width: "100%"
     }
 };

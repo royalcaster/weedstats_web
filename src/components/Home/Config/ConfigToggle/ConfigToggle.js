@@ -9,19 +9,22 @@ import '../Config.css'
 
 const ConfigToggle = ({ label, value, onPress, disabled, scrolling }) => {
 
+    const toggleRef = useRef(null);
+
     return <>
     <div style={{height: "0.25rem"}}></div>
-    <div style={styles.container}>
+    <div style={styles.container} onClick={() => {if (!disabled) {onPress()}}}>
                 <div style={styles.touchable}>
                     <div style={{flex: 5}}>
                         <p style={{fontFamily: "Poppins", fontSize: "1rem", color: "white", color: disabled ? "#484F78" : "white", marginLeft: "0.5rem"}}>{label}</p>
                     </div>
                     <div style={{flex: 1}}>
-                        {/* <div style={{backgroundColor: "rgba(0,0,0,0)", height: 30, width: 50, position: "absolute", zIndex: 1000}}></div> */}
                         <Toggle
-                            defaultChecked={value}
                             icons={false}
-                            onChange={() => onPress()}
+                            checked={disabled ? false : value}
+                            readOnly={true}
+                            ref={toggleRef}
+                            disabled={disabled}
                             className='custom-classname'
                         />
                     </div>
@@ -40,7 +43,8 @@ const styles = {
         overflow: "hidden",
         borderRadius: 10,
         alignSelf: "center",
-        margin: "auto"
+        margin: "auto",
+        cursor: "pointer"
     },
     touchable: {
         flexDirection: "row",

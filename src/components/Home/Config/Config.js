@@ -72,23 +72,23 @@ const Config = ({ toggleLanguage, loadSettings, deleteAccount, refreshUser, hand
 
   const lightmodeModalContent = <div
   style={{
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: "rgba(0,0,0,0.5)",
-    flex: 1,
-    height: "100%",
-    top: 0,
-    zIndex: 1000
-  }}
->
-  <div style={{flex:1, justifyContent: "flex-start"}}></div>
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "rgba(0,0,0,0.5)",
+      flex: 1,
+      height: "100%",
+      top: 0,
+      zIndex: 1000
+    }}
+  >
   <div
     style={{
       width: "90%",
       backgroundColor: "#1E2132",
       alignSelf: "center",
       borderRadius: 25,
-      height: "50%"
+      height: "50%",
+      maxWidth: 500
     }}
   >
     <div style={{ flex: 1 }}>
@@ -112,15 +112,17 @@ const Config = ({ toggleLanguage, loadSettings, deleteAccount, refreshUser, hand
       />
     </div>
   </div>
-  <div style={{flex:1, justifyContent: "flex-end"}}></div>
 </div>;
 
 const deleteAccountModalContent = <div
 style={{
   alignItems: "center",
   justifyContent: "center",
-  backgroundColor: "rgba(0,0,0,0.5)",
-  flex: 1
+  backgroundColor: "rgba(0,0,0,0.75)",
+  height: "100%",
+  width: "100vw",
+  display: "flex",
+  justifyContent: "center"
 }}
 >
 <div
@@ -130,38 +132,44 @@ style={{
     backgroundColor: "#1E2132",
     alignSelf: "center",
     borderRadius: 25,
+    maxWidth: 500
   }}
 >
-  <div style={{ flex: 1 }}>
-    <p style={styles.heading}>
+<div style={{height: "1rem"}}></div>
+   <div style={{ flex: 1 }}>
+     <p style={styles.heading_modal2}>
       {language.delete_account_title}
-    </p>
-  </div>
-  <div style={{ flex: 1}}>
-    <p style={{ fontSize: "2rem", maxWidth: "80%", fontFamily: "PoppinsMedium"}}>
+     </p>
+   </div>
+   <div style={{height: "1rem"}}></div>
+   <div style={{ flex: 1}}>
+    <p style={{ fontSize: "1rem", maxWidth: "80%", fontFamily: "Poppins", margin: "auto", color: "white"}}>
       {language.delete_account_text}
     </p>
   </div>
-  <div style={{ flex: 1, flexDirection: "row" }}>
-    <div
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Button title={language.account_delete_account_cancel} onPress={() => setShowDelete(false)} color={"#484F78"} fontColor={"white"}/>
-    </div>
-    <div
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-      }}
-    >
-      <Button title={language.account_delete_account_submit} onPress={() => deleteAccount()} color={"#eb4034"} fontColor={"white"}/>
-    </div>
-  </div>
+  <div style={{height: "2rem"}}></div>
+   <div style={{ flex: 1, flexDirection: "row" }}>
+     <div
+       style={{
+         flex: 1,
+         justifyContent: "center",
+         alignItems: "center",
+       }}
+     >
+      <Button title={language.account_delete_account_submit} onPress={() => deleteAccount()} color={"#eb4034"} fontColor={"white"} borderradius={10} icon={<BiTrash style={{fontSize: "1.5rem", marginBottom: -6}}/>} hovercolor={shadeColor("#eb4034",-25)}/>
+      </div>
+     <div style={{height: "1rem"}}></div>
+     <div
+       style={{
+         flex: 1,
+         justifyContent: "center",
+         alignItems: "center",
+       }}
+     >
+     <Button title={language.account_delete_account_cancel} onPress={() => setShowDelete(false)} color={"#484F78"} fontColor={"white"} hovercolor={shadeColor("#484F78",-25)} borderradius={10}/>
+     </div>
+   </div>
+   <div style={{height: "2rem"}}></div>
 </div>
 </div>;
 
@@ -178,15 +186,17 @@ const logOutModalContent = <div
 >
  <div
    style={{
-     width: "90%",
-     backgroundColor: "#1E2132",
-     margin: "auto",
-     borderRadius: 15,
+    width: "90%",
+    height: 300,
+    backgroundColor: "#1E2132",
+    alignSelf: "center",
+    borderRadius: 25,
+    maxWidth: 500
    }}
  >
     <div style={{height: "2rem"}}></div>
    <div style={{ flex: 1 }}>
-     <p style={styles.heading_modal}>
+     <p style={styles.heading_modal2}>
        {language.signout_title}
      </p>
    </div>
@@ -199,7 +209,7 @@ const logOutModalContent = <div
          alignItems: "center",
        }}
      >
-      <Button title={language.account_sign_out} onPress={() => handleLogOut()} color={"#eb4034"} fontColor={"white"} borderradius={10} hovercolor={shadeColor("#eb4034",-25)}/>
+      <Button title={language.account_sign_out} onPress={() => handleLogOut()} color={"#eb4034"} fontColor={"white"} borderradius={10} hovercolor={shadeColor("#eb4034",-25)} icon={<BiLogOut style={{fontSize: "1.5rem", marginBottom: -6}}/>}/>
       </div>
      <div style={{height: "1rem"}}></div>
      <div
@@ -516,6 +526,15 @@ const styles = {
     textAlign: "center",
     textAlignVertical: "center",
     fontSize: "2.5",
+    margin: 0,
+  },
+  heading_modal2: {
+    color: "white",
+    fontFamily: "Poppins",
+    marginLeft: "1rem",
+    textAlign: "center",
+    textAlignVertical: "center",
+    fontSize: "1.5rem",
     margin: 0,
   },
   text: {

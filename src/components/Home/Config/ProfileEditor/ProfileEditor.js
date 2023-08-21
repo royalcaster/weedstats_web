@@ -17,6 +17,8 @@ import { storage } from "../../../../data/FirebaseConfig";
 import { LanguageContext } from "../../../../data/LanguageContext";
 import { UserContext } from "../../../../data/UserContext";
 
+import './ProfileEditor.css'
+
 const ProfileEditor = ({ onExit, refreshUser}) => {
 
     //Context
@@ -122,7 +124,10 @@ const ProfileEditor = ({ onExit, refreshUser}) => {
         <div style={{height: "2rem"}}></div>
 
         <p style={styles.label}>{language.username}</p>
-        <input style={styles.text_input} label={language.username} onBlur={() => null} onChange={(e) => setUserName(e.target.value)} type={"text"} value={userName}/>
+
+        <div style={{width: "100%"}}>
+          <input style={styles.text_input} className="text_input" placeholder={language.username} label={language.username} onBlur={() => null} onChange={(e) => setUserName(e.target.value)} type={"text"} value={userName}/>
+        </div>
         
 
         <div style={{height: 10}}></div>
@@ -162,22 +167,20 @@ const styles = {
     container: {
         position: "absolute",
         backgroundColor: "#1E2132",
-        borderRadius: 10,
         height: "100%",
         width: "100%",
-        zIndex: 10
+        zIndex: 1
     },
     text_input: {
         backgroundColor: "#131520",
         borderRadius: 10,
-        padding: 15,
-        width: "80%",
         alignSelf: "center",
         marginVertical: 5,
         fontFamily: "Poppins",
         fontSize: "1rem",
         color: "white",
-        border: "none"
+        border: "none",
+        
       },
       label: {
         color: "white",
