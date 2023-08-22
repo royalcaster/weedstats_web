@@ -113,7 +113,7 @@ const Config = ({ toggleLanguage, loadSettings, deleteAccount, refreshUser, hand
         borderradius={25}
         fontColor={"white"}
         onPress={() => setLightMode(false)}
-        hovercolor={"rgba(255,255,255,0.3)"}
+        hovercolor={shadeColor("#484F78", -25)}
       />
     </div>
     <div style={{height: "1rem"}}></div>
