@@ -135,7 +135,7 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
 
       <div style={{height: "2rem"}}></div>
 
-      <div style={{ zIndex: 2, justifyContent: "center", width: "100%", display: "flex", flexDirection: "column"}}>
+      <div style={{ zIndex: 2, justifyContent: "center", width: "100%", display: "flex", flexDirection: "column", maxWidth: 500}}>
       <Button
           fontColor={"white"}
           title={language.login}
@@ -144,6 +144,7 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
           onPress={() => {handleLogin(email, password, () => navigate("/home")); console.log(email, password);}}
           hovercolor={shadeColor("#0080FF", -25)}
           color2={"#004080"}
+          huge={true}
       />
       <p style={{fontFamily: "Poppins", color: "white", fontSize: "1rem", textAlign: "center"}}>OR</p>
       <Button
@@ -153,6 +154,7 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
           color={"#484F78"}
           onPress={() => setShowCreatePanel(true)}
           hovercolor={shadeColor("#484F78", -25)}
+          huge={true}
         />
       </div> 
 

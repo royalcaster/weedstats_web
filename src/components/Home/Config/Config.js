@@ -45,8 +45,11 @@ const Config = ({ toggleLanguage, loadSettings, deleteAccount, refreshUser, hand
     }
   }, []);
 
+  useEffect(() => {
+    console.debug(localConfig)
+  },[localConfig]);
+
   const storeSettings = async () => {
-    console.log(localConfig);
     try {/* 
       const accessToken = JSON.parse(await AsyncStorage.getItem("accessToken"));
       await AsyncStorage.setItem("accessToken", JSON.stringify({
@@ -72,13 +75,13 @@ const Config = ({ toggleLanguage, loadSettings, deleteAccount, refreshUser, hand
 
   const lightmodeModalContent = <div
   style={{
-      alignItems: "center",
-      justifyContent: "center",
-      backgroundColor: "rgba(0,0,0,0.5)",
-      flex: 1,
-      height: "100%",
-      top: 0,
-      zIndex: 1000
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "rgba(0,0,0,0.75)",
+    height: "100%",
+    width: "100vw",
+    display: "flex",
+    justifyContent: "center"
     }}
   >
   <div
@@ -87,20 +90,22 @@ const Config = ({ toggleLanguage, loadSettings, deleteAccount, refreshUser, hand
       backgroundColor: "#1E2132",
       alignSelf: "center",
       borderRadius: 25,
-      height: "50%",
       maxWidth: 500
     }}
   >
+    <div style={{height: "1rem"}}></div>
     <div style={{ flex: 1 }}>
-      <p style={styles.heading}>
+      <p style={styles.heading_modal2}>
         {language.config_modal_title}
       </p>
     </div>
+    <div style={{height: "1rem"}}></div>
     <div style={{ flex: 2 }}>
-      <p style={styles.text}>
+      <p style={{ fontSize: "1rem", maxWidth: "80%", fontFamily: "Poppins", margin: "auto", color: "white"}}>
         {language.config_modal_text}
       </p>
     </div>
+    <div style={{height: "2rem"}}></div>
     <div style={{ flex: 1 }}>
       <Button
         title={language.config_modal_thanks}
@@ -111,6 +116,7 @@ const Config = ({ toggleLanguage, loadSettings, deleteAccount, refreshUser, hand
         hovercolor={"rgba(255,255,255,0.3)"}
       />
     </div>
+    <div style={{height: "1rem"}}></div>
   </div>
 </div>;
 
@@ -245,7 +251,16 @@ const logOutModalContent = <div
         ) : (
           <div className="left" style={{height: "100%", position: "absolute", width: "100%", backgroundColor: "#1E2132", overflow: "scroll", maxWidth: 700, left: "50%"}}>
 
-            <p style={styles.bold_heading}>{language.config_settings}</p>
+            <div style={{display: "flex"}}> 
+              <div style={{flex: 1}}> 
+                <p style={styles.bold_heading}>{language.config_settings}</p>
+              </div>
+              <div style={{flex: 1}}> 
+              </div>
+              <div style={{flex: 3, justifyContent: "center", display: "flex"}}>
+                {saved ? <Button color={"#131520"} borderradius={10} title={language.config_saved} fontColor={shadeColor("white",-25)} hovercolor={"#131520"} onPress={() => null} disabled={true}/> : <Button color={"#0080FF"} borderradius={10} title={language.config_save} fontColor={"white"} hovercolor={shadeColor("#0080FF",-25)} onPress={() => storeSettings()}/>}
+              </div>
+            </div>
 
             <p style={styles.heading}>Account</p>
             <div style={{height: "1rem"}}></div>
@@ -290,22 +305,10 @@ const logOutModalContent = <div
                 title={" " + language.account_sign_out}
                 icon={<BiLogOut style={{fontSize: "1.5rem", marginBottom: -6}}/>}
                 borderradius={10}
-                color={"#eb4034"}
-                fontColor={"white"}
-                hovercolor={shadeColor("#eb4034",-25)}
-                huge={true}
-              />
-          </div>
-          <div style={{width: "1rem"}}></div>
-          <div style={{flex: 1}}>
-            <Button
-                onPress={() => setShowDelete(true)}
-                title={" " + language.account_delete_account}
-                icon={<BiTrash style={{fontSize: "1.5rem", marginBottom: -6}}/>}
-                borderradius={10}
-                color={"#eb4034"}
-                fontColor={"white"}
-                hovercolor={shadeColor("#eb4034",-25)}
+                color={"#131520"}
+                fontColor={"#eb4034"}
+                borderColor={"#eb4034"}
+                hovercolor={shadeColor("#131520",-25)}
                 huge={true}
               />
           </div>
@@ -451,23 +454,6 @@ const logOutModalContent = <div
 
             <div style={{ height: 30 }}></div>
 
-            <p style={styles.heading}>{language.config_security}</p>
-            <div style={{height: "1rem"}}></div>
-
-            <ConfigToggle
-            label={language.config_unlock_on_launch}
-              value={localConfig.localAuthenticationRequired}
-              onPress={() => {
-                setLocalConfig({
-                  ...localConfig,
-                  localAuthenticationRequired: !localConfig.localAuthenticationRequired,
-                });
-                setSaved(false);
-              }}
-            />
-
-            <div style={{ height: 30 }}></div>
-
             <p style={styles.heading}>{language.config_language}</p>
             <div style={{height: "1rem"}}></div>
 
@@ -484,13 +470,27 @@ const logOutModalContent = <div
               onPress={(val) => {setLightMode(true);}}
             />
 
+            <div style={{ height: 30 }}></div>
+
+            <p style={styles.heading}>{language.config_dangerous}</p>
+            <div style={{height: "1rem"}}></div>
+
+            <div style={{flexDirection: "row", width: "95%", alignSelf: "center", justifyContent: "space-around", display: "flex", margin: "auto"}}>
+            <Button
+                onPress={() => setShowDelete(true)}
+                title={" " + language.account_delete_account}
+                icon={<BiTrash style={{fontSize: "1.5rem", marginBottom: -6}}/>}
+                borderradius={10}
+                color={"#eb4034"}
+                fontColor={"white"}
+                hovercolor={shadeColor("#eb4034",-25)}
+                huge={true}
+              />
+              </div>
+
           <div style={{height: "12%"}}></div>
           </div>   
           )}
-
-          <div style={styles.save_button_container}>
-            
-          </div>
       </div>
     </>
   );

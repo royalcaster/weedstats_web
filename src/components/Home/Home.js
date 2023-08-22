@@ -49,7 +49,7 @@ import { FaSliders, FaUser } from "react-icons/fa6";
           {!loadingParent ?
             <Routes>
               <Route index path="/counter/*" element={<Main onWriteComplete={onWriteComplete} onSetUser={onSetUser} refreshUser={refreshUser}/>} />
-              <Route exact path="/config" element={<Config handleLogOut={handleLogOut} toggleLanguage={toggleLanguage}/>} />
+              <Route exact path="/config" element={<Config handleLogOut={handleLogOut} toggleLanguage={toggleLanguage} loadSettings={loadSettings} refreshUser={refreshUser}/>}/>
               <Route exact path="/map" element={<Map />} />
             </Routes>
             : <Empty title={"loading app"}/>

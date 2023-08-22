@@ -89,7 +89,7 @@ const ProfileEditor = ({ onExit, refreshUser}) => {
     return (
         <div style={styles.container}>
 
-          
+        <div style={{width: "100%", maxWidth: 700, margin: "auto"}}>
 
         <div style={{display: "flex", flexDirection: "row", alignContent: "center", alignItems: "center"}}>
           <div style={{marginLeft: "1rem"}}>
@@ -156,6 +156,7 @@ const ProfileEditor = ({ onExit, refreshUser}) => {
             hovercolor={shadeColor("#484F78",-25)}
             huge={true}
             />
+          </div>
         </div>
         </div>
     )
