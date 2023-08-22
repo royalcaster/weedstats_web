@@ -11,7 +11,7 @@ import Donation from "../Main/Donation/Donation";
 //Third Party
 import { FaUserFriends, FaMapMarked } from 'react-icons/fa'
 import { BiMap } from 'react-icons/bi'
-import { GoogleMap, useJsApiLoader } from '@react-google-maps/api';
+import { GoogleMap, Marker, useJsApiLoader,  } from '@react-google-maps/api';
 
 //Konstanten
 import { mapStyle } from "../../../data/CustomMapStyle";
@@ -43,18 +43,10 @@ const Map = ({ getFriendList }) => {
   const [markers, setMarkers] = useState([]);
   const [showMakerList, setShowMarkerList] = useState(false);
   const [showDonation, setShowDonation] = useState(false);
-
-
-  //React-google-maps stuff
-  const containerStyle = {
-    width: window.innerWidth,
-    height: '400px'
-  };
-  
-  const center = {
+  const [center, setCenter] = useState({
     lat: -3.745,
-    lng: -38.523
-  };
+    lng: -38.745
+  })
 
   const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -135,6 +127,8 @@ const Map = ({ getFriendList }) => {
 
   const fillMarkers = () => {
     setLoading(true);
+    setCenter({lat: friendList[1].last_entry_latitude, lng: friendList[1].last_entry_longitude})
+    console.debug({lat: friendList[1].last_entry_latitude, lng: friendList[1].last_entry_longitude});
     if (user.last_entry_type != null) {
       setMarkers([{
         latitude: user.last_entry_latitude,
@@ -163,8 +157,8 @@ const Map = ({ getFriendList }) => {
           username: friend.username
         }])
       }
-      console.log(friend.last_entry_timestamp);
     });
+    setLoading(false)
   }
 
   const toggleMapType = () => {
@@ -334,9 +328,16 @@ const Map = ({ getFriendList }) => {
                 options={{fullscreenControl: false, zoomControl: false, disableDefaultUI: true, styles: mapStyle}}
               >
                 { /* Child components, such as markers, info windows, etc. */ }
-                <></>
+
+                {loading ? null : 
+                <Marker position={{lat: markers[0].latitude, lng: markers[0].longitude}}>
+                  <div style={{height: 50, width: 50, backgroundColor: "green"}}>
+                  </div>
+                </Marker>}
+                
+
               </GoogleMap>
-          ) : <><p>Test</p></>}
+          ) : <></>}
 
         {!loading && localDataLoaded ? (
           <>

@@ -45,10 +45,6 @@ const Config = ({ toggleLanguage, loadSettings, deleteAccount, refreshUser, hand
     }
   }, []);
 
-  useEffect(() => {
-    console.debug(localConfig)
-  },[localConfig]);
-
   const storeSettings = async () => {
     try {/* 
       const accessToken = JSON.parse(await AsyncStorage.getItem("accessToken"));

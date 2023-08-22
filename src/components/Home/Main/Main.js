@@ -93,12 +93,12 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
 
   useEffect(() => {
     checkForUpdate();
-    checkForNews();
     calcDaysTill420();
     sortCounterOrder();
   }, []);
 
-  const checkForNews = async () => {
+  //In Web-app kinda useless
+  /* const checkForNews = async () => {
     const app_version = package_object.version;
     const newsSnap = await getDoc(doc(firestore, "news", app_version));
 
@@ -111,12 +111,11 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
       });
       setShowNews(true)
     }
-  }
+  } */
 
   
   const checkForUpdate = async () => {
     const docSnap = await getDoc(doc(firestore, "info", "info"))
-    console.log("checkForUpdate Alert wieder anschalten");
     if (docSnap.exists()) {
       if (compareVersions(docSnap.data().latest_version, package_object.version) == 1) {
         // TODO: Updates / Versionen implementieren
