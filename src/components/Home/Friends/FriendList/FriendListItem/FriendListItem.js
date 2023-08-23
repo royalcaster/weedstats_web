@@ -11,26 +11,35 @@ import levels from "../../../../../data/Levels.json";
 //Firebase
 import { doc, getDoc } from "@firebase/firestore";
 import { firestore } from "../../../../../data/FirebaseConfig";
+import CustomLoader from "../../../../common/CustomLoader";
+import { shadeColor } from "../../../../../data/Service";
 
 const FriendListItem = ({ friend, toggleNavbar, onPress, friendList }) => {
-
-  //State
-  const [user, setUser] = useState();
-  const [counters, setCounters] = useState();
-  const [isLoading, setIsLoading] = useState(true);
+ 
+  const [hover, setHover] = useState(false)
 
   return (
     <>
-
-      {!isLoading ? (
-        <div style={styles.container}>
-            <div style={styles.touchable}>
-              <div style={{ flexDirection: "row", alignItems: "center" }}>
+    <div style={{height: "0.25rem"}}></div>
+        <div 
+        onMouseEnter={() => setHover(true)}
+        onMouseLeave={() => setHover(false)}
+        style={{
+          flexDirection: "row",
+          width: "95%",
+          display: "flex",
+          height: 70,
+          cursor: "pointer",
+          backgroundColor: hover ? shadeColor("#1E2132",-25) : "#1E2132",
+          borderRadius: 10,
+          margin: "auto"
+        }} onClick={() => onPress()}>
+              <div style={{display: "flex", flexDirection: "row", alignItems: "center" }}>
                 <div style={{ width: 20 }}></div>
                 <div
                   style={{zIndex: 2}}
                 >
-                  {!isLoading ? <ProfileImage x={45} type={1} url={friend.photoUrl} /> : null}
+                  <ProfileImage x={50} type={1} url={friend.photoUrl} />
                 </div>
                 <div style={{ width: "2rem"}}></div>
                 <div
@@ -39,32 +48,28 @@ const FriendListItem = ({ friend, toggleNavbar, onPress, friendList }) => {
                     transform: [{ translateY: 0}],
                     zIndex: 1,
                   }}
-                >
-                  {!isLoading ? 
-                  <p style={styles.username}>{friend.username}</p> : null}
+                > 
+                  <p style={styles.username}>{friend.username}</p>
                 </div>
               </div>
-            </div>
         </div>
-      ) : null}
-    </>
+      <div style={{height: "0.25rem"}}></div>
+      </>
   );
 };
 
 export default FriendListItem;
 
 const styles = {
-  container: {
-    flexDirection: "row"
-  },
   username: {
     color: "rgba(255,255,255,1)",
-    fontFamily: "PoppinsMedium",
+    fontFamily: "Poppins",
     fontSize: "1rem",
   },
   touchable: {
     width: "100%",
     justifyContent: "center",
-    paddingVertical: 15
+    paddingVertical: 15,
+    display: "flex"
   }
 };

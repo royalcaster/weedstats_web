@@ -13,6 +13,8 @@ import CustomModal from "../../../../../common/CustomModal";
 //Konstanten
 import levels from "../../../../../../data/Levels.json";
 
+import './FriendPage.css'
+
 //Firebase
 import { doc, getDoc, updateDoc } from "@firebase/firestore";
 import { firestore } from "../../../../../../data/FirebaseConfig";
@@ -211,10 +213,8 @@ const FriendPage = ({ show, user, onExit, refreshUser, onRemoveFriend }) => {
   return (
     <>
       {user ? (
+        <>
         
-        <div
-          style={styles.container}
-        >
 
       <CustomModal>
         {/* <ProfileImagePanel url={user.photoUrl} onExit={() => setShowProfilePicture(false)}/> */}
@@ -230,15 +230,28 @@ const FriendPage = ({ show, user, onExit, refreshUser, onRemoveFriend }) => {
         { //here begins visible component
         }
 
-        <div style={{flex: 1}}>
+        <div
+          style={styles.container}
+        >
 
-          <div style={{height: 500, position: "absolute", width: 500}}>
-            <img src={{uri: chopUrl(user.photoUrl)}} style={styles.profile_image}/>
+        <div style={{maxWidth: 700, margin: "auto"}}>
+
+          <div  style={{maxHeight: 250, position: "absolute", width: "100%", maxWidth: 700, top: 0, overflow: "hidden", height: "100%"}}>
+            <div style={{position: "absolute", left: "1rem", bottom: "1rem", zIndex: 10, display: "flex", alignItems: "center"}}>
+              <img src={chopUrl(user.photoUrl)} style={styles.profile_image}/>
+              <div style={{width: "1rem"}}></div>
+              <div style={{justifyContent: "center", alignItems: "center"}}>
+                <p style={styles.username}>{!loading ? user.username : " "}</p>
+              </div>
+            </div>
+            <img className="profile_image_huge" src={chopUrl(user.photoUrl)} style={styles.profile_image_huge}/>
           </div>
 
           <div>
 
           <div style={{flex: 1, backgroundColor: "#1E2132"}}>
+
+            <div style={{height: 250}}></div>
             
           <div
             style={{
@@ -250,14 +263,10 @@ const FriendPage = ({ show, user, onExit, refreshUser, onRemoveFriend }) => {
             }}
           >
             <div style={{position: "absolute", zIndex: 20, left: 15}}>
-              <BackButton onPress={() => onExit()} />
+              <BackButton onPress={() => onExit()} hoverColor={"rgba(255,255,255,0.25)"}/>
             </div>
 
             <div style={{alignSelf: "center"}}>
-
-              <div style={{justifyContent: "center", alignItems: "center"}}>
-                <p style={styles.username}>{!loading ? user.username : " "}</p>
-              </div>
             </div>
           </div> 
 
@@ -441,7 +450,7 @@ const FriendPage = ({ show, user, onExit, refreshUser, onRemoveFriend }) => {
         </div>
         </div>
         
-      ) : null}
+        </>) : null}
     </>
   );
 };
@@ -453,27 +462,26 @@ const styles = {
     width: "100%",
     height: "100%",
     position: "absolute",
-    zIndex: 10000,
     backgroundColor: "#1E2132",
-    borderRadius: 25,
     overflow: "hidden"
   },
   username: {
     color: "white",
     fontSize: "2rem",
-    fontFamily: "PoppinsBlack"
+    fontFamily: "Poppins",
+    fontWeight: 700
   },
   label: {
     color: "white",
     fontSize: "1rem",
-    fontFamily: "PoppinsMedium",
+    fontFamily: "Poppins",
     textAlignVertical: "center",
     textAlign: "left"
   },
   date: {
     color: "white",
     fontSize: "1rem",
-    fontFamily: "PoppinsLight",
+    fontFamily: "Poppins",
     textAlignVertical: "center",
     textAlign: "left",
   },
@@ -539,10 +547,6 @@ const styles = {
     fontFamily: "PoppinsLight",
     fontSize: "2rem"
   },
-  profile_image: {
-    height: 500,
-    width: "100%"
-  },
   lock_icon: {
     color: "white",
     fontSize: "2rem",
@@ -555,4 +559,19 @@ const styles = {
     position: "absolute",
     backgroundColor: "#171717",
   },
+  profile_image: {
+    display: "block",
+    width: "100%",
+    height: "100%",
+    maxWidth: 100,
+    borderRadius: 15,
+    zIndex: 10,
+  },
+  profile_image_huge: {
+    display: "block",
+    width: "100%",
+    height: "auto",
+    borderRadius: 15,
+    zIndex: 3
+  }
 };

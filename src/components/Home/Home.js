@@ -52,7 +52,7 @@ import { FaSliders, FaUser } from "react-icons/fa6";
               <Route index path="/counter/*" element={<Main onWriteComplete={onWriteComplete} onSetUser={onSetUser} refreshUser={refreshUser}/>} />
               <Route exact path="/config" element={<Config handleLogOut={handleLogOut} toggleLanguage={toggleLanguage} loadSettings={loadSettings} refreshUser={refreshUser} deleteAccount={deleteAccount}/>}/>
               <Route exact path="/map" element={<Map />} />
-              <Route exact path="/friends" element={<Friends friendList={friendList}/>} />
+              <Route exact path="/friends/*" element={<Friends friendList={friendList} refreshUser={refreshUser}/>} />
             </Routes>
             : <Empty title={"loading app"}/>
           }

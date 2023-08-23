@@ -1,0 +1,6 @@
+.profile_image_huge {
+    position: absolute;
+    top: 50%;
+    transform: translate(0,-50%);
+    filter: blur(1rem) brightness(0.5)
+}

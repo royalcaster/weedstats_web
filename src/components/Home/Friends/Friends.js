@@ -13,27 +13,44 @@ import FriendRequestButton from "./FriendRequestButton/FriendRequestButton";
 import IconButton from "../../common/IconButton";
 import { shadeColor } from "../../../data/Service";
 
+import { BiUserCheck, BiUserPlus } from 'react-icons/bi'
+import { useState } from "react";
+import SearchPanel from "./SearchPanelButton/SearchPanel/SearchPanel";
+import { Routes, Route, useNavigate } from "react-router-dom";
+import FriendRequests from "./FriendRequestButton/FriendRequests/FriendRequests";
+import FriendPage from "./FriendList/FriendListItem/FriendPage/FriendPage";
+
 const Friends = ({ toggleNavbar, getFriendList, refreshUser, friendList }) => {
 
     //Context
     const language = useContext(LanguageContext);
 
+    //navigation
+    const navigate = useNavigate()
+
+    //State
+    const [showSearchPanel, setShowSearchPanel] = useState(false);
+    const [showRequests, setShowRequests] = useState(false);
+
     return (<>
     
-    <div style={styles.container}>
+    <Routes>
+      <Route index path="/" element={<div style={styles.container}>
+        <div style={{maxWidth: 700, margin: "auto"}}>
         <div style={{ alignItems: "center", flexDirection: "row", marginBottom: 0, zIndex: 10000}}>
           
         <div style={{ display: "flex" }}>
           <div style={{flex: 1}}> 
             <p style={styles.bold_heading}>{language.friends_friends}</p>
           </div>
-          <div style={{flex: 1, alignItems: "center", justifyContent: "center", display: "flex"}}>
-            <div style={{height: "3rem", width: "3rem"}}>
-              <IconButton backgroundColor={"#484F78"} hoverColor={shadeColor("#484F78",-25)}/>
+          <div style={{flex: 2}}></div>
+          <div style={{flex: 1, alignItems: "center", justifyContent: "center", display: "flex", paddingRight: "1rem"}}>
+            <div>
+              <IconButton onPress={() => navigate('/home/friends/search')} x={20} icon={<BiUserPlus style={styles.icon} />} backgroundColor={"#1E2132"} hoverColor={shadeColor("#1E2132",-25)}/>
             </div>
             <div style={{width: "1rem"}}></div>
-            <div style={{height: "3rem", width: "3rem"}}>
-              <IconButton backgroundColor={"#484F78"} hoverColor={shadeColor("#484F78",-25)}/>
+            <div>
+              <IconButton onPress={() => navigate('/home/friends/requests')} x={20} icon={<BiUserCheck style={styles.icon}/>} backgroundColor={"#1E2132"} hoverColor={shadeColor("#1E2132",-25)}/>
             </div>
           </div>
         </div>
@@ -42,16 +59,24 @@ const Friends = ({ toggleNavbar, getFriendList, refreshUser, friendList }) => {
 
             <SearchPanelButton />
 
-
-
             <FriendRequestButton refreshUser={refreshUser} getFriendList={getFriendList}/>
 
             <div style={{ width: 20 }}></div>
         </div>
 
-        {/* <FriendList friendList={friendList} getFriendList={getFriendList} refreshUser={refreshUser} /> */}
+        <FriendList friendList={friendList} getFriendList={getFriendList} refreshUser={refreshUser} />
+        </div>
+      </div>}/>
 
-      </div>
+      <Route exact path="/search" element={<SearchPanel onExit={() => navigate("/home/friends")} />}/>
+      <Route exact path="/requests" element={<FriendRequests onExit={() => navigate("/home/friends")} />}/>
+      
+      {
+        friendList.map((friend) => {
+          return <Route path={"/" + friend.id} element={<FriendPage onExit={() => navigate("/home/friends")} refreshUser={refreshUser} user={friend}/>} />
+        })
+      }
+    </Routes>
 
     </>)
 }
@@ -63,8 +88,7 @@ container: {
     height: "100%",
     width: "100%",
     zIndex: 10,
-    maxWidth: 700,
-    margin: "auto"
+    margin: "auto",
     },
     bold_heading: {
         color: "white",
@@ -79,4 +103,8 @@ container: {
       fontWeight: 700,
       marginLeft: "1rem"
     },
+    icon: {
+      color: "white",
+      fontSize: "1.5rem"
+    }
 };

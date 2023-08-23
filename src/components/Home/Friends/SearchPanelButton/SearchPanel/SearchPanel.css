@@ -1,0 +1,7 @@
+.text_input {
+    width: calc(100% - 3rem);
+    padding: 0.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    border: none;
+}

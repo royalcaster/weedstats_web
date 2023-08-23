@@ -1,23 +1,24 @@
 import React, {useState} from "react";
 
-const IconButton = ({icon, onPress, backgroundColor, hoverColor }) => {
+const IconButton = ({x, icon, onPress, backgroundColor, hoverColor }) => {
 
     const [hover, setHover ] = useState(false);
 
     return (
-        <button
+        <div
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
         style={{
-            height: "100%",
-            width: "100%",
+            height: x,
+            width: x,
             padding: 20,
             borderRadius: 100,
             justifyContent: "center",
             alignItems: "center", 
             backgroundColor: hover ? hoverColor : backgroundColor,
             borderWidth: 0,
-        }} onPaste={() => onPress()}></button>
+            cursor: "pointer"
+        }} onClick={() => onPress()}>{icon}</div>
     );
 }
 

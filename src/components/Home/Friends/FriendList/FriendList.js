@@ -10,6 +10,7 @@ import FriendPage from "./FriendListItem/FriendPage/FriendPage";
 //Service
 import { UserContext } from "../../../../data/UserContext";
 import { LanguageContext } from "../../../../data/LanguageContext";
+import { useNavigate } from "react-router-dom";
 
 
 const FriendList = ({ friendList, toggleNavbar, getFriendList, refreshUser }) => {
@@ -17,6 +18,9 @@ const FriendList = ({ friendList, toggleNavbar, getFriendList, refreshUser }) =>
     //Context
     const user = useContext(UserContext);
     const language = useContext(LanguageContext);
+
+    //navigation
+    const navigate = useNavigate()
 
     //State
     const [loading, setLoading] = useState(false);
@@ -26,7 +30,7 @@ const FriendList = ({ friendList, toggleNavbar, getFriendList, refreshUser }) =>
 
     return (
         <>
-        {friendList.length != 0 ?
+       {/*  {friendList.length != 0 ?
             <FriendPage
                 show={showFriend}
                 user={activeFriend}
@@ -35,7 +39,7 @@ const FriendList = ({ friendList, toggleNavbar, getFriendList, refreshUser }) =>
                 refreshUser={refreshUser}
                 toggleNavbar={toggleNavbar}
             /> 
-        : null}
+        : null} */}
 
         <div style={styles.container}>
             {!loading ?  
@@ -43,13 +47,13 @@ const FriendList = ({ friendList, toggleNavbar, getFriendList, refreshUser }) =>
                     <div>
                         {friendList.length != 0 ?
                         <>
-                        {/* {friendList.map((friend) => {
-                            return <FriendListItem  key={Math.random()} friend={friend} onPress={() => {setActiveFriend(friend); setShowFriend(true)}}/>
-                        })} */}
+                        {friendList.map((friend) => {
+                            return <FriendListItem key={Math.random()} friend={friend} onPress={() => {navigate("/home/friends/" + friend.id) /* setActiveFriend(friend); setShowFriend(true) */}}/>
+                        })}
 
                         </> : <div style={{justifyContent: "center", flex: 1}}>
                                 <div style={{height: "2rem"}}></div>
-                                {/* <Empty title={language.empty_no_friends_yet} tip={language.empty_tap_the_plus}/> */}
+                                <Empty title={language.empty_no_friends_yet} tip={language.empty_tap_the_plus}/>
                             </div>}
 
                         <div style={{height: "2rem"}}></div>
@@ -57,7 +61,7 @@ const FriendList = ({ friendList, toggleNavbar, getFriendList, refreshUser }) =>
                 </> 
                 : 
                 <div style={{height: "90%", justifyContent: "center"}}>
-                    {/* <CustomLoader x={50} color={"#0080FF"}/> */}
+                    <CustomLoader x={50} color={"#0080FF"}/>
                 </div>}
         </div></>
     );

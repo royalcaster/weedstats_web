@@ -251,23 +251,23 @@ const FriendRequests = ({ onExit, refreshUser, getFriendList }) => {
     <div
       style={styles.container}
     >
-      <div style={{ height: 10 }}></div>
+
+      <div style={{maxWidth: 700, margin: "auto"}}>
 
       <CustomModal show={modalVisible} child={modalContent}/>
 
-      <div
-        style={{ width: "100%", flexDirection: "row"}}
-      >
-        <div style={{ flex: 1, alignItems: "center" }}>
-          <BackButton onPress={() => onExit()} />
+      <div style={{display: "flex", flexDirection: "row", alignContent: "center", alignItems: "center"}}>
+            <div style={{marginLeft: "1rem"}}>
+                <BackButton onPress={() => onExit()} hoverColor={"rgba(255,255,255,0.25)"}/>
+            </div>
+            <div style={{width: "1rem"}}></div>
+            <div>
+            <p style={styles.heading}>{language.friendrequests_title}</p>
+            </div>
         </div>
-        <div style={{ flex: 5, justifyContent: "center"}}>
-          <p style={styles.heading}>{language.friendrequests_title}</p>
-        </div>
-      </div>
 
         {loading ? (
-          <div style={{height: "100%", justifyContent: "center"}}>
+          <div style={{height: "50%", justifyContent: "center", display: "flex", alignItems: "center"}}>
             <CustomLoader x={50} color={"#484F78"}/>
           </div>
         ) : (
@@ -286,7 +286,8 @@ const FriendRequests = ({ onExit, refreshUser, getFriendList }) => {
                     );
                   })
                 ) : 
-                <div>
+                <div style={{height: "100%"}}>
+                  <div style={{height: "5rem"}}></div>
                   <Empty title={language.requests_no_requests}/>
                 </div>}
               </div>
@@ -294,7 +295,7 @@ const FriendRequests = ({ onExit, refreshUser, getFriendList }) => {
             null}
           </>
         )}
-
+      </div>
     </div>
   );
 };
@@ -305,12 +306,9 @@ const styles = {
   container: {
     width: "100vw",
     position: "absolute",
-    backgroundColor: "#131520",
+    backgroundColor: "#1E2132",
     height: "100vh",
-    top: 0,
-    borderTopLeftRadius: 25,
-    borderTopRightRadius: 25,
-    zIndex: 1
+    top: 0
   },
   modal_container: {
     backgroundColor: "#1E2132",
@@ -322,12 +320,9 @@ const styles = {
   },
   heading: {
     color: "white",
-    textAlign: "center",
-    fontFamily: "PoppinsMedium",
-    fontSize: 20,
+    fontSize: "1.5rem",
+    fontFamily: "Poppins",
     textAlign: "left",
-    marginLeft: 10,
-    marginTop: 5
   },
   touchable: {
     height: "100%",

@@ -3,10 +3,15 @@ import React, { useEffect, useRef, useState } from "react";
 
 //Custom Components
 import ProfileImage from "../../../../../common/ProfileImage";
+import Button from "../../../../../common/Button";
 
 //Firebase
 import { doc, getDoc } from "@firebase/firestore";
 import { firestore } from "../../../../../../data/FirebaseConfig";
+
+import { BsCheckLg } from 'react-icons/bs'
+import { IoMdClose } from 'react-icons/io'
+import { shadeColor } from "../../../../../../data/Service";
 
 
 const RequestItem = ({ userid, onAccept, onDecline }) => {
@@ -34,7 +39,6 @@ const RequestItem = ({ userid, onAccept, onDecline }) => {
       console.log("Error:", e);
     }
     setIsLoading(false);
-    animate();
   };
 
   return (
@@ -47,56 +51,50 @@ const RequestItem = ({ userid, onAccept, onDecline }) => {
               width: "100%",
               height: "100%",
               alignItems: "center",
-              justifyContent: "center"
+              justifyContent: "center",
+              display: "flex",
             }}
           >
-            <div style={{ flex: 3, flexDirection: "row", width: "100%", height: "100%", padding: 10}}>
+            <div style={{ flex: 3, display: "flex", flexDirection: "row", width: "100%", height: "100%", padding: 10}}>
               <div
-                style={{zIndex: 2, justifyContent: "center"}}
+                style={{zIndex: 2, justifyContent: "center", display: "flex", padding: "1rem"}}
               >
                 <ProfileImage x={80} type={1} url={user.photoUrl} />
               </div>
-              <div style={{ width: 20 }}></div>
+              <div style={{ width: "1rem" }}></div>
               <div
                 style={{
                   flexDirection: "column",
-                  transform: [{ translateX: 0 }],
                   zIndex: 1,
                   justifyContent: "center",
                   flex: 1,
+                  display: "flex"
                 }}
               >
-                <div style={{flex: 3, justifyContent: "center"}}>
+                <div style={{height: "1rem"}}></div>
+
+                <div style={{flex: 3, display: "flex", flexDirection: "column"}}>
                   <p style={styles.username}>{user.username}</p>
-                  <p style={styles.username}>
+                  <p style={styles.email}>
                     {user.email}
                   </p>
                 </div>
 
-            <div style={{flex: 2, flexDirection: "row", maxHeight: 50}}>
-            <div style={{ flex: 1, backgroundColor: "#eb4034", borderRadius: 10, overflow: "hidden"}}>
-              <div onClick={() => onDecline()}>
-                <div style={styles.touchable}>
-                  {/* <Feather
-                    name="x"
-                    style={[styles.icon, { color: "white" }]}
-                  /> */}
-                </div>
-              </div>
+                <div style={{height: "1rem"}}></div>
+
+            <div style={{flex: 2, flexDirection: "row", maxHeight: 50, display: "flex"}}>
+            <div style={{ flex: 1}}>
+              
+              <Button onPress={() => onAccept()} color={"#00DB4D"} huge={true} borderradius={10} icon={<BsCheckLg style={{color: "white", fontSize: "1.5rem", marginTop: 3}}/>} hovercolor={shadeColor("#00DB4D",-25)}/>
             </div>
-            <div style={{width: 10}}></div>
-            <div style={{ flex: 1, borderRadius: 10, backgroundColor: "#00DB4D"}}>
-              <div onClick={() => onAccept()}>
-                <div style={styles.touchable}>
-                  {/* <Feather
-                    name="check"
-                    style={[styles.icon, { color: "white" }]}
-                  /> */}
-                </div>
-              </div>
+            <div style={{width: "1rem"}}></div>
+            <div style={{ flex: 1}}>
+              <Button onPress={() => onDecline()} color={"#eb4034"} huge={true} borderradius={10} icon={<IoMdClose style={{color: "white", fontSize: "1.5rem", marginTop: 3}}/>} hovercolor={shadeColor("#eb4034",-25)}/>
             </div>
+            <div style={{width: "1rem"}}></div>
             </div>
-              </div>
+              <div style={{height: "1rem"}}></div>
+            </div>
             </div>
           </div>
         </div>
@@ -112,19 +110,23 @@ const styles = {
     flexDirection: "row",
     height: 120,
     width: "90%",
-    backgroundColor: "#1E2132",
+    backgroundColor: "#131520",
     alignSelf: "center",
-    marginBottom: 10,
+    margin: "auto",
     borderRadius: 15,
     overflow: "hidden"
   },
   username: {
-    color: "rgba(255,255,255,0.8)",
-    fontFamily: "PoppinsBlack",
-    fontSize: 15,
-    fontFamily: "PoppinsLight",
-    fontSize: 12,
-    marginTop: -3 
+    color: "white",
+    fontFamily: "Poppins",
+    fontSize: "1rem",
+    margin: 0
+  },
+  email: {
+    color: "white",
+    fontFamily: "Poppins",
+    fontSize: "0.8rem",
+    margin: 0
   },
   touchable: {
     width: "100%",
