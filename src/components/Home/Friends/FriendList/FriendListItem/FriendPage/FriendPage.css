@@ -4,3 +4,7 @@
     transform: translate(0,-50%);
     filter: blur(1rem) brightness(0.5)
 }
+
+.banner_container {
+    transform: translate(-50%,0);
+}
