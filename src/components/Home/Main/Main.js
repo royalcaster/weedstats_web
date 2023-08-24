@@ -22,7 +22,8 @@ import sayings from '../../../data/Sayings.json'
 import { LanguageContext } from "../../../data/LanguageContext";
 import { ConfigContext } from '../../../data/ConfigContext'
 import { doc, updateDoc, getDoc } from "@firebase/firestore";
-import { app, firestore } from "../../../data/FirebaseConfig";
+import { set, ref } from "@firebase/database";
+import { app, firestore, db } from "../../../data/FirebaseConfig";
 import CounterModal from "../../common/CounterModal";
 import { FriendListContext } from "../../../data/FriendListContext";
 import { getCounterNotificationTitle, shadeColor } from "../../../data/Service";
@@ -305,7 +306,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
   //erstellt Einträge im lokalen Gerätespeicher
   const writeLocalStorage = async (new_entry) => {
     // Erstellt neuen Eintrag im AsyncStorage
-    try {
+    /* try {
       const jsonValue = JSON.stringify(new_entry);
       await localStorage.setItem(
         user.id + "_entry_" + (user.main_counter + 1),
@@ -313,7 +314,9 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
       );
     } catch (e) {
       console.log("Error:", e);
-    }
+    } */
+    await set(ref(db, 'users/' + user.id), new_entry);
+    console.debug(new_entry)
   };
 
   const sendCounterPushNotification = ( type ) => {
