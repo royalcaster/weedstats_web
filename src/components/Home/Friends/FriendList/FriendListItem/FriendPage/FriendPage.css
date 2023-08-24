@@ -65,7 +65,7 @@
     font-size: 2rem;
     font-family: "Poppins", sans-serif;
     font-weight: 700;
-    transition: 0.5s;
+    transition: 0.25s;
     margin-bottom: -1rem;
 }
 
@@ -74,7 +74,7 @@
     font-size: 1.25rem;
     font-family: "Poppins", sans-serif;
     font-weight: 700;
-    transition: 0.5s;
+    transition: 0.25s;
     margin-bottom: -1rem;
     
 }
