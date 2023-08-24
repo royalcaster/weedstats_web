@@ -50,6 +50,7 @@ const FriendPage = ({ show, user, onExit, refreshUser, onRemoveFriend }) => {
   const [friendConfig, setFriendConfig] = useState();
   const [showMap, setShowMap] = useState(false);
   const [mapType, setMapType] = useState("standard");
+  const [headerClass, setHeaderClass] = useState("")
 
   useEffect(() => {
     if (user) {
@@ -176,12 +177,11 @@ const FriendPage = ({ show, user, onExit, refreshUser, onRemoveFriend }) => {
    flex: 1,
    alignItems: "center",
    justifyContent: "center",
-   backgroundColor: "rgba(0,0,0,0.5)",
- }}
->
+   backgroundColor: "rgba(0,0,0,0.5)"
+ }}>
  <div style={styles.modal_container}>
    <>
-     <div style={{ flex: 1, justifyContent: "center" }}>
+     <div style={{ flex: 1, justifyContent: "center"}}>
        {config.language == "de" ? <p style={styles.heading}>
          <p style={{color: "#0080FF"}}>{user.username}</p> {language.remove_friend}
        </p> : <p style={styles.heading}>
@@ -212,6 +212,17 @@ const FriendPage = ({ show, user, onExit, refreshUser, onRemoveFriend }) => {
  </div>
 </div> : null;
 
+const toggleHeader = () => {
+  const div = document.getElementById("friendpage_container");
+  if (div.scrollTop > 50) {
+    setHeaderClass("_small")
+  
+  }
+  else {
+    setHeaderClass("")
+  }
+}
+
   return (
     <>
       {user ? (
@@ -236,17 +247,17 @@ const FriendPage = ({ show, user, onExit, refreshUser, onRemoveFriend }) => {
           style={styles.container}
         >
 
-        <div style={{maxWidth: 700, margin: "auto"}}>
+        <div id="friendpage_container" onScroll={() => toggleHeader()} style={{maxWidth: 700, margin: "auto", overflow: "scroll", height: "100%"}}>
 
-          <div style={{maxHeight: 250, position: "absolute", width: "90%", maxWidth: 700, top: 20, overflow: "hidden", height: "100%", borderRadius: 15, left: "50%", transform: [{translate: "-50%"}]}} className="banner_container">
+          <div style={{maxHeight: 250, position: "absolute", width: "90%", maxWidth: 700, top: 20, overflow: "hidden", borderRadius: 15, left: "50%", transform: [{translate: "-50%"}]}} className={"banner_container" + headerClass}>
             <div style={{position: "absolute", zIndex: 20, left: 15, top: 15}}>
               <BackButton onPress={() => onExit()} hoverColor={"rgba(255,255,255,0.25)"}/>
             </div>
-            <div style={{position: "absolute", left: "1rem", bottom: "1rem", zIndex: 10, display: "flex", alignItems: "center"}}>
-              <img src={chopUrl(user.photoUrl)} style={styles.profile_image}/>
+            <div className={"profile_image_container" + headerClass}>
+              <img src={chopUrl(user.photoUrl)} /* style={styles.profile_image} */ className={"profile_image" + headerClass}/>
               <div style={{width: "1rem"}}></div>
               <div style={{justifyContent: "center", alignItems: "center"}}>
-                <p style={styles.username}>{!loading ? user.username : " "}</p>
+                <p className={"username" + headerClass}>{!loading ? user.username : " "}</p>
               </div>
             </div>
             <img className="profile_image_huge" src={chopUrl(user.photoUrl)} style={styles.profile_image_huge}/>
@@ -260,27 +271,27 @@ const FriendPage = ({ show, user, onExit, refreshUser, onRemoveFriend }) => {
           <div style={{height: "2rem"}}></div>
 
           {/* COUNTER */}
-          <div style={{width: "80%", alignSelf: "center"}}>
+          <div style={{width: "90%", alignSelf: "center", margin: "auto"}}>
             <p style={styles.label}>Counter</p>
-            <div style={{ height: "1rem" }}></div>
               <div style={styles.activity_container}>
+
+                <div style={{height: "1rem"}}></div>
 
               {/* GESAMT */}
               {!loading ?<>
-
                 <div>
                   <div>
-                    {friendConfig.shareMainCounter ? <p style={styles.small_counter}>{user.main_counter}</p> : <p>icon{/* <MaterialIcons name="lock" style={styles.lock_icon}/> */}</p> }
+                    {friendConfig.shareMainCounter ? <p style={styles.big_counter}>{user.main_counter}</p> : <p>icon{/* <MaterialIcons name="lock" style={styles.lock_icon}/> */}</p> }
                   </div>
                   <div>
                     <p style={styles.small_label}>{language.stats_all.toUpperCase()}</p>
                   </div>
                 </div>
 
-                <div style={{height: "2.5rem"}}></div>
+                <div style={{height: "1rem"}}></div>
 
                 {/* DETAIL */}
-                <div style={{flexDirection: "row"}}>
+                <div style={{flexDirection: "row", display: "flex"}}>
                   
                     <div style={{flex: 1, justifyContent: "center"}}>
                         <div style={{opacity: 1, transform: [{translateX: 0}]}}>
@@ -323,6 +334,7 @@ const FriendPage = ({ show, user, onExit, refreshUser, onRemoveFriend }) => {
                     </div>
 
                 </div>
+                <div style={{height: "1rem"}}></div>
                 </> : <CustomLoader x={50} color={"#0080FF"}/>}
               </div>
           </div>
@@ -333,7 +345,7 @@ const FriendPage = ({ show, user, onExit, refreshUser, onRemoveFriend }) => {
                
 
               <div style={{position: "relative", width: "100%", alignSelf: "center", flex: 4}}>
-                <div style={{width: "80%", alignSelf: "center"}}>
+                <div style={{width: "90%", alignSelf: "center", backgroundColor: "green", margin: "auto"}}>
                 
                 <p style={styles.label}>{language.friendpage_last_activity}</p>
                 {user.last_entry_latitude != null ?<>
@@ -410,18 +422,15 @@ const FriendPage = ({ show, user, onExit, refreshUser, onRemoveFriend }) => {
 
               {/**MEMBER SINCE */}
 
-              <div style={{width: "80%", alignSelf: "center"}}>
-
+              <div style={{width: "90%", alignSelf: "center", margin: "auto"}}>
                 <p style={styles.label}>{language.account_member_since}</p>
-                <div style={{ height: 10 }}></div>
-
                 <MemberSince timestamp={user.member_since} backgroundColor={"#131520"}/>
                 
               </div>
 
               {/**FREUND ENTFERNEN */}
 
-              <div style={{height: "2rem"}}></div>
+              {/* <div style={{height: "2rem"}}></div>
 
               <div style={{position: "relative", width: "100%", flex: 1, marginBottom: 20}}>
                 <div onClick={() => setModalVisible(true)}>
@@ -429,7 +438,7 @@ const FriendPage = ({ show, user, onExit, refreshUser, onRemoveFriend }) => {
                     <p style={styles.delete_text}>{language.friendpage_remove_friend}</p>
                   </div>
                 </div>
-              </div>
+              </div> */}
 
               <div style={{height: 100}}></div>
           </div>
@@ -451,12 +460,6 @@ const styles = {
     position: "absolute",
     backgroundColor: "#1E2132",
     overflow: "hidden"
-  },
-  username: {
-    color: "white",
-    fontSize: "2rem",
-    fontFamily: "Poppins",
-    fontWeight: 700
   },
   label: {
     color: "white",
@@ -509,15 +512,27 @@ const styles = {
     alignSelf: "center",
     justifyContent: "center",
     flexDirection: "column",
-    padding: "2rem"
+    display: "flex"
   },
   small_counter: {
     zIndex: 2,
     color: "white",
-    fontSize: "3rem",
-    fontFamily: "PoppinsMedium",
+    fontSize: "1rem",
+    fontFamily: "Poppins",
+    fontWeight: 700,
     textAlign: "center",
-    opacity: 1
+    opacity: 1,
+    margin: 0
+  },
+  big_counter: {
+    zIndex: 2,
+    color: "white",
+    fontSize: "2rem",
+    fontFamily: "Poppins",
+    textAlign: "center",
+    opacity: 1,
+    margin: 0,
+    fontWeight: 700
   },
   small_image: {
       height: "8rem",
@@ -531,8 +546,9 @@ const styles = {
     textAlign: "center",
     zIndex: 1,
     color: "rgba(255,255,255,1)",
-    fontFamily: "PoppinsLight",
-    fontSize: "2rem"
+    fontFamily: "Poppins",
+    fontSize: "0.75rem",
+    margin: 0
   },
   lock_icon: {
     color: "white",
@@ -545,14 +561,6 @@ const styles = {
     height: "100%",
     position: "absolute",
     backgroundColor: "#171717",
-  },
-  profile_image: {
-    display: "block",
-    width: "100%",
-    height: "100%",
-    maxWidth: 100,
-    borderRadius: 15,
-    zIndex: 10,
   },
   profile_image_huge: {
     display: "block",
