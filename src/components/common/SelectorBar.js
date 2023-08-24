@@ -26,17 +26,23 @@ const SelectorBar = ({ options, onPress, selectedType }) => {
     }
 
     return (
-            <Animated.View style={styles.container}>
+            <div style={styles.container}>
                 {options.map((option) => {
                     return (
-                        <TouchableHighlight key={uuidv4()} onPress={() => onPress(option.value)} activeOpacity={0.75} underlayColor={"rgba(0,0,0,0)"}>
-                            <Animated.View style={[styles.item_container,{backgroundColor: selectedType == getTypeString(option.value) ? "#0080FF" : "rgba(0,0,0,0)"}]}>
-                                {option.value > 0 && option.value < 6 ? <TypeImage type={getTypeString(option.value)} x={20}/> : <Text style={styles.item_label}>{option.label}</Text>}
-                            </Animated.View>
-                        </TouchableHighlight>
+                        <div onClick={() => onPress(option.value)}>
+                            <div style={{
+                                    backgroundColor: selectedType == getTypeString(option.value) ? "#0080FF" : "rgba(0,0,0,0)",
+                                    padding: 5,
+                                    paddingHorizontal: 25,
+                                    paddingVertical: 10,
+                                    borderRadius: 100,
+                                    justifyContent: "center"}}>
+                                {option.value > 0 && option.value < 6 ? <TypeImage type={getTypeString(option.value)} x={20}/> : <p style={styles.item_label}>{option.label}</p>}
+                            </div>
+                        </div>
                     )
                 })}
-            </Animated.View>
+            </div>
     );
 }
 

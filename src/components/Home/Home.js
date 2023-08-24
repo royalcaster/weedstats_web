@@ -24,6 +24,7 @@ import Friends from './Friends/Friends'
 //Third Party
 import { FaChartArea, FaMapMarker } from 'react-icons/fa'
 import { FaSliders, FaUser } from "react-icons/fa6";
+import Stats from "./Stats/Stats";
   
   const Home = ({ onSetUser, onWriteComplete, friendList, handleLogOut, toggleLanguage, deleteAccount, getFriendList, loadSettings, refreshUser, handleIntroFinish, loadingParent }) => {
 
@@ -53,6 +54,7 @@ import { FaSliders, FaUser } from "react-icons/fa6";
               <Route exact path="/config" element={<Config handleLogOut={handleLogOut} toggleLanguage={toggleLanguage} loadSettings={loadSettings} refreshUser={refreshUser} deleteAccount={deleteAccount}/>}/>
               <Route exact path="/map" element={<Map />} />
               <Route exact path="/friends/*" element={<Friends friendList={friendList} refreshUser={refreshUser}/>} />
+              <Route exact path="/stats/*" element={<Stats />} />
             </Routes>
             : <Empty title={"loading app"}/>
           }
