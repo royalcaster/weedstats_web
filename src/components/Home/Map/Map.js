@@ -11,7 +11,7 @@ import Donation from "../Main/Donation/Donation";
 //Third Party
 import { FaUserFriends, FaMapMarked } from 'react-icons/fa'
 import { BiMap } from 'react-icons/bi'
-import { GoogleMap, Marker, useJsApiLoader,  } from '@react-google-maps/api';
+import { GoogleMap, Marker, useJsApiLoader, LoadScript, OverlayView } from '@react-google-maps/api';
 
 //Konstanten
 import { mapStyle } from "../../../data/CustomMapStyle";
@@ -25,6 +25,7 @@ import TypeImage from "../../common/TypeImage";
 import IconButton from "../../common/IconButton";
 
 import './Map.css'
+import { useRef } from "react";
 
 const Map = ({ getFriendList }) => {
 
@@ -43,17 +44,17 @@ const Map = ({ getFriendList }) => {
   const [markers, setMarkers] = useState([]);
   const [showMakerList, setShowMarkerList] = useState(false);
   const [showDonation, setShowDonation] = useState(false);
-  const [center, setCenter] = useState({
-    lat: -3.745,
-    lng: -38.745
-  })
+  const [center, setCenter] = useState({lat: -20, lng: -7});
 
-  const { isLoaded } = useJsApiLoader({
+  //ref
+  const mapRef = useRef(null);
+
+  /* const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
     googleMapsApiKey: "AIzaSyB5qQ0ApePizK0VrhpKrNlTLmn4aLgEU6o"
-  })
+  }) */
 
-  const [map, setMap] = React.useState(null)
+  const [map, setMap] = useState(null);
 
   const onLoad = React.useCallback(function callback(map) {
     // This is just an example of getting and using the map instance!!! don't just blindly copy!
@@ -77,23 +78,24 @@ const Map = ({ getFriendList }) => {
 
   useEffect(() => {
     init();
+    console.debug(friendList[1]);
   }, []);
 
   useEffect(() => {
+    console.debug(center);
+  }, [center]);
+
+  useEffect(() => {
     if (markers.length != 0) {
-      setRegion({
-        latitude: markers[0].latitude,
-        longitude: markers[0].longitude,
-        latitudeDelta: 0.25,
-        longitudeDelta: 0.25
+      setCenter({
+        lat: friendList[0].last_entry_latitude,
+        lng: friendList[0].last_entry_longitude
       });
     }
     else {
-      setRegion({
-        latitude: 50,
-        longitude: 39,
-        latitudeDelta: 0.25,
-        longitudeDelta: 0.25
+      setCenter({
+        lat: 50,
+        lng: 39,
       });
       setLoading(false);
     }
@@ -128,7 +130,6 @@ const Map = ({ getFriendList }) => {
   const fillMarkers = () => {
     setLoading(true);
     setCenter({lat: friendList[1].last_entry_latitude, lng: friendList[1].last_entry_longitude})
-    console.debug({lat: friendList[1].last_entry_latitude, lng: friendList[1].last_entry_longitude});
     if (user.last_entry_type != null) {
       setMarkers([{
         latitude: user.last_entry_latitude,
@@ -158,7 +159,7 @@ const Map = ({ getFriendList }) => {
         }])
       }
     });
-    setLoading(false)
+    setLoading(false);
   }
 
   const toggleMapType = () => {
@@ -318,26 +319,43 @@ const Map = ({ getFriendList }) => {
         {showMakerList ? <MarkerList onRefresh={() => refreshMarkers()} markers={markers} onExit={() => setShowMarkerList(false)} setRegion={(region) => mapViewRef.current.animateCamera(region)}/> : null}
         {showDonation ? <Donation onexit={() => setShowDonation(false)}/> : null}
 
-        {isLoaded ? (
-              <GoogleMap
-                center={center}
-                zoom={10}
-                onLoad={onLoad}
-                onUnmount={onUnmount}
-                mapContainerClassName="map_container"
-                options={{fullscreenControl: false, zoomControl: false, disableDefaultUI: true, styles: mapStyle}}
-              >
-                { /* Child components, such as markers, info windows, etc. */ }
+        <LoadScript
+          googleMapsApiKey="AIzaSyB5qQ0ApePizK0VrhpKrNlTLmn4aLgEU6o"
+        >
+          <GoogleMap
+            mapContainerClassName="map_container"
+            center={{
+              lat: center.lat,
+              lng: center.lng
+            }}
+            ref={mapRef}
+            zoom={12}
+            options={{
+              disableDefaultUI: true
+            }}
+          >
+            {loading ? null :
+                <>
 
-                {loading ? null : 
-                <Marker position={{lat: markers[0].latitude, lng: markers[0].longitude}}>
-                  <div style={{height: 50, width: 50, backgroundColor: "green"}}>
-                  </div>
-                </Marker>}
-                
-
-              </GoogleMap>
-          ) : <></>}
+                {friendList.map((friend) => {
+                    return  <OverlayView
+                  position={{lat: friend.last_entry_latitude, lng: friend.last_entry_longitude}}
+                  mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+                >
+                  <CustomMarker 
+                    key={Math.random()} 
+                    username={friend.username} 
+                    photoUrl={friend.photoUrl}
+                    timestamp={friend.last_entry_timestamp}
+                    type={friend.last_entry_type}
+                  />
+                </OverlayView>
+                  })}
+                </>
+                }
+          </GoogleMap>
+        </LoadScript>
+          
 
         {!loading && localDataLoaded ? (
           <>

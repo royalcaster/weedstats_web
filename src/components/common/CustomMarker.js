@@ -30,10 +30,10 @@ const CustomMarker = ({ username, photoUrl, type, timestamp,  }) => {
             <div style={styles.container}>
                     
                      
-                    <div style={{display: "flex",flexDirection: "row", alignSelf: "center", backgroundColor: username == user.username ? "#484F78" : "#131520", padding: 5, marginBottom: -10, paddingBottom: 10, borderRadius: 10, paddingRight: 10, paddingLeft: 10}}>
-                        <TypeImage type={type} x={20} backgroundColor={"rgba(0,0,0,0)"}/>
+                    <div style={{display: "flex",flexDirection: "row", alignSelf: "center", backgroundColor: username == user.username ? "#484F78" : "#131520", padding: 5, marginBottom: -10, paddingBottom: 10, borderRadius: 10, paddingRight: 5, paddingLeft: 5}}>
+                        <TypeImage type={type} x={30} backgroundColor={"rgba(0,0,0,0)"}/>
                         <div style={{width: 5}}></div>
-                        <p style={{color: "white", fontSize: "1.25rem"}}> {new Date(timestamp).toUTCString().substring(5,16)}{"\n"}{new Date(timestamp).toUTCString().substring(16,22)}</p>
+                        <p style={{color: "white", fontSize: "0.6rem", fontFamily: "Poppins"}}> {new Date(timestamp).toUTCString().substring(5,16)}{"\n"}{new Date(timestamp).toUTCString().substring(16,22)}</p>
                     </div>
 
                     <div style={styles.image}>
@@ -47,7 +47,9 @@ const CustomMarker = ({ username, photoUrl, type, timestamp,  }) => {
 
 const styles = {
     container: {
-        height: 100
+        height: 100,
+        display: "flex",
+        flexDirection: "column"
     },
     image: {
         width: 57,

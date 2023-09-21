@@ -22,7 +22,7 @@ import { firestore } from "../../../../../../data/FirebaseConfig";
 //Service
 import {UserContext} from '../../../../../../data/UserContext'
 import { LanguageContext } from "../../../../../../data/LanguageContext";
-import { downloadUser } from '../../../../../../data/Service'
+import { downloadUser, shadeColor } from '../../../../../../data/Service'
 import { ConfigContext } from '../../../../../../data/ConfigContext'
 import toGermanDate from "../../../../../../data/DateConversion";
 import { mapStyle } from "../../../../../../data/CustomMapStyle";
@@ -247,14 +247,13 @@ const toggleHeader = () => {
           style={styles.container}
         >
 
-        <div id="friendpage_container" onScroll={() => toggleHeader()} style={{maxWidth: 700, margin: "auto", overflow: "scroll", height: "100%"}}>
-
+          <div style={{position: "absolute", top: 0, height: 40, width: "100%", backgroundColor: "#1E2132"}}></div>
           <div style={{maxHeight: 250, position: "absolute", width: "90%", maxWidth: 700, top: 20, overflow: "hidden", borderRadius: 15, left: "50%", transform: [{translate: "-50%"}]}} className={"banner_container" + headerClass}>
             <div style={{position: "absolute", zIndex: 20, left: 15, top: 15}}>
               <BackButton onPress={() => onExit()} hoverColor={"rgba(255,255,255,0.25)"}/>
             </div>
             <div className={"profile_image_container" + headerClass}>
-              <img src={chopUrl(user.photoUrl)} /* style={styles.profile_image} */ className={"profile_image" + headerClass}/>
+              <img src={chopUrl(user.photoUrl)} className={"profile_image" + headerClass}/>
               <div style={{width: "1rem"}}></div>
               <div style={{justifyContent: "center", alignItems: "center"}}>
                 <p className={"username" + headerClass}>{!loading ? user.username : " "}</p>
@@ -262,13 +261,16 @@ const toggleHeader = () => {
             </div>
             <img className="profile_image_huge" src={chopUrl(user.photoUrl)} style={styles.profile_image_huge}/>
           </div>
+
+        <div id="friendpage_container" onScroll={() => toggleHeader()} style={{maxWidth: 700, margin: "auto", overflow: "scroll", height: "100%"}}>
+
           <div>
 
           <div style={{flex: 1, backgroundColor: "#1E2132"}}>
 
             <div style={{height: 270}}></div>
 
-          <div style={{height: "2rem"}}></div>
+          {<div style={{height: "2rem"}}></div>}
 
           {/* COUNTER */}
           <div style={{width: "90%", alignSelf: "center", margin: "auto"}}>
@@ -295,7 +297,7 @@ const toggleHeader = () => {
                   
                     <div style={{flex: 1, justifyContent: "center"}}>
                         <div style={{opacity: 1, transform: [{translateX: 0}]}}>
-                          {friendConfig.shareTypeCounters ? <p style={styles.small_counter}>{user.joint_counter}</p> : <p>icon{/* <MaterialIcons name="lock" style={styles.lock_icon}/> */}</p>}
+                          {friendConfig.shareTypeCounters ? <p style={styles.small_counter}>{user.joint_counter}</p> : <p>icon</p>}
                         </div>
                         <p style={styles.small_label}>JOINT</p>
                         <img style={styles.small_image} src={require('../../../../../../data/img/joint.png')}/>
@@ -303,7 +305,7 @@ const toggleHeader = () => {
 
                     <div style={{flex: 1, justifyContent: "center"}}>
                      <div style={{opacity: 1, transform: [{translateX: 0}]}}>
-                     {friendConfig.shareTypeCounters ? <p style={styles.small_counter}>{user.bong_counter}</p> : <p>icon{/* <MaterialIcons name="lock" style={styles.lock_icon}/> */}</p>}
+                     {friendConfig.shareTypeCounters ? <p style={styles.small_counter}>{user.bong_counter}</p> : <p>icon</p>}
                       </div>
                         <p style={styles.small_label}>BONG</p>
                         <img style={styles.small_image} src={require('../../../../../../data/img/bong.png')}/>
@@ -311,7 +313,7 @@ const toggleHeader = () => {
 
                     <div style={{flex: 1, justifyContent: "center"}}>
                       <div style={{opacity: 1, transform: [{translateX: 0}]}}>
-                      {friendConfig.shareTypeCounters ? <p style={styles.small_counter}>{user.vape_counter}</p> : <p>icon{/* <MaterialIcons name="lock" style={styles.lock_icon}/> */}</p>}
+                      {friendConfig.shareTypeCounters ? <p style={styles.small_counter}>{user.vape_counter}</p> : <p>icon</p>}
                       </div>
                         <p style={styles.small_label}>VAPE</p>
                         <img style={styles.small_image} src={require('../../../../../../data/img/vape.png')}/>
@@ -319,7 +321,7 @@ const toggleHeader = () => {
 
                     <div style={{flex: 1, justifyContent: "center"}}>
                      <div style={{opacity: 1, transform: [{translateX: 0}]}}>
-                      {friendConfig.shareTypeCounters ? <p style={styles.small_counter}>{user.pipe_counter}</p> : <p>icon {/* <MaterialIcons name="lock" style={styles.lock_icon}/> */}</p>}
+                      {friendConfig.shareTypeCounters ? <p style={styles.small_counter}>{user.pipe_counter}</p> : <p>icon</p>}
                       </div>
                         <p style={styles.small_label}>PFEIFE</p>
                         <img style={styles.small_image} src={require('../../../../../../data/img/pipe.png')}/>
@@ -327,7 +329,7 @@ const toggleHeader = () => {
 
                     <div style={{flex: 1, justifyContent: "center"}}>
                       <div style={{opacity: 1, transform: [{translateX: 0}]}}>
-                      {friendConfig.shareTypeCounters ? <p style={styles.small_counter}>{user.cookie_counter}</p> : <p>icon {/* <MaterialIcons name="lock" style={styles.lock_icon}/> */}</p>}
+                      {friendConfig.shareTypeCounters ? <p style={styles.small_counter}>{user.cookie_counter}</p> : <p>icon </p>}
                       </div>
                         <p style={styles.small_label}>EDIBLE</p>
                         <img style={styles.small_image} src={require('../../../../../../data/img/cookie.png')}/>
@@ -342,12 +344,11 @@ const toggleHeader = () => {
               <div style={{height: "2rem"}}></div>
 
               {/**LAST ACTIVITY */}
-               
 
-              <div style={{position: "relative", width: "100%", alignSelf: "center", flex: 4}}>
-                <div style={{width: "90%", alignSelf: "center", backgroundColor: "green", margin: "auto"}}>
-                
+              <div style={{width: "90%", alignSelf: "center", margin: "auto"}}>
                 <p style={styles.label}>{language.friendpage_last_activity}</p>
+                <>
+                
                 {user.last_entry_latitude != null ?<>
                 <div style={{ height: "1rem"}}></div>
                 <div style={styles.activity_container}>
@@ -355,7 +356,7 @@ const toggleHeader = () => {
                 {!loading ? <>
                 <div style={{borderBottomLeftRadius: 15, borderBottomRightRadius: 15, overflow: "hidden"}}>
 
-                  <div style={{width: "100%", height: "40%", position: "absolute", zIndex: 2, top: 0, flexDirection: "row", padding: "2rem"}}>
+                  <div style={{width: "100%", height: "40%", zIndex: 2, top: 0, flexDirection: "row", padding: "2rem"}}>
                     {friendConfig.shareLastEntry ? <>
                     <div style={{flex: 2, alignItems: "center"}}>
                       <TypeImage type={user.last_entry_type} x={40}/>
@@ -367,53 +368,17 @@ const toggleHeader = () => {
                       <div style={{flex: 1}}>
                         <p style={styles.date}>{chopTimeStamp(user.last_entry_timestamp)}</p>
                       </div>
-                    </div></> : <p>icon {/* <MaterialIcons name="lock" style={styles.lock_icon}/> */}</p> }
+                    </div></> : <p>icon</p> }
                   </div>
-
-                  {/* <LinearGradient style={{width: "100%", height: friendConfig.shareGPS ? "70%" : "100%", position: "absolute", zIndex: 1, top: 0, justifyContent: "center"}} colors={["rgba(0,0,0,0.9)","rgba(0,0,0,0)"]}>
-                    {!friendConfig.shareGPS ? <p>icon</p> : null}
-                  </LinearGradient> */}
-
-                  {/* <MapView 
-                    style={{height: 200, width: "100%", zIndex: -1}}
-                    customMapStyle={mapStyle}
-                    scrollEnabled={false}
-                    region={friendConfig.shareGPS ? {
-                      latitude: user.last_entry_latitude + 0.005,
-                      longitude: user.last_entry_longitude,
-                      longitudeDelta: 0.1,
-                      latitudeDelta: 0.1
-                    } : {
-                      latitude: 50.228293,
-                      longitude:  10.812738,
-                      longitudeDelta: 1000,
-                      latitudeDelta: 1000
-                    }}
-                    loadingBackgroundColor={"#1E2132"}
-                  >  
-                  <Marker
-                    tracksViewChanges={false}
-                    key={uuidv4()}
-                    coordinate={{
-                      latitude: user.last_entry_latitude,
-                      longitude: user.last_entry_longitude,
-                    }}
-                  >
-                      <CustomMarker
-                        photoUrl={user.photoUrl}
-                        type={user.last_entry_type}
-                        withOutDate={true}
-                      />
-                  </Marker>
-                  </MapView> */}
+            
                 </div>
                 </> : <CustomLoader x={50} color={"#0080FF"}/>}
                 </div>
                 </>: <Empty title={"Nutzer hat keine letzten Einträge"}/>}
-                </div>
+                </>
                 <div style={{height: "2rem"}}></div>
                 {loading ? null : <> 
-                {friendConfig.shareGPS && user.last_entry_latitude != null ? <Button title={language.show_on_map} color={"#484F78"} fontColor={"white"} hovercolor={"rgba(255,255,255,0.25)"} onPress={() => setShowMap(true)}/> : null}</>}
+                {friendConfig.shareGPS && user.last_entry_latitude != null ? <Button title={language.show_on_map} color={"#484F78"} fontColor={"white"} hovercolor={shadeColor("#484F78",-25)} onPress={() => setShowMap(true)} borderradius={10}/> : null}</>}
               </div>
 
 

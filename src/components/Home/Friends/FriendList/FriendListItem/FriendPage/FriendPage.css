@@ -8,14 +8,14 @@
 .banner_container {
     transform: translate(-50%,0);
     height: 250px;
-    transition: 0.5s;
+    transition: 0.25s;
 }
 
 .banner_container_small {
     transform: translate(-50%,0);
     height: 80px;
     overflow: hidden;
-    transition: 0.5s;
+    transition: 0.25s;
 }
 
 .profile_image {
@@ -25,7 +25,7 @@
     max-width: 100px;
     border-radius: 15px;
     z-index: 10;
-    transition: 0.5s;
+    transition: 0.25s;
 }
 
 .profile_image_small {
@@ -35,7 +35,7 @@
     max-width: 60px;
     border-radius: 10px;
     z-index: 10;
-    transition: 0.5s;
+    transition: 0.25s;
     margin-left: 4rem;
     margin-top: 2rem;
 }
