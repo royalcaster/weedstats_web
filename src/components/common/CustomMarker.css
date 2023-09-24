@@ -1,0 +1,15 @@
+.image_container {
+    position: absolute;
+    transform: translate(-45%, -50px);
+}
+
+.info_container {
+    position: absolute;
+    display: flex;
+    flex-direction: row;
+    align-self: center;
+    border-radius: 10px;
+    transform: translate(-45%,-85px);
+    justify-content: center;
+    align-items: center;
+}

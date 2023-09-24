@@ -6,7 +6,11 @@ import ProfileImage from "./ProfileImage";
 import TypeImage from "./TypeImage";
 import { UserContext } from "../../data/UserContext";
 
-const CustomMarker = ({ username, photoUrl, type, timestamp,  }) => {
+import moment from "moment/moment";
+
+import './CustomMarker.css'
+
+const CustomMarker = ({ username, photoUrl, type, timestamp, onClick }) => {
 
     //Context
     const user = useContext(UserContext)
@@ -26,47 +30,31 @@ const CustomMarker = ({ username, photoUrl, type, timestamp,  }) => {
     },[region]); */
 
     return (
-        <div>
-            <div style={styles.container}>
-                    
-                     
-                    <div style={{display: "flex",flexDirection: "row", alignSelf: "center", backgroundColor: username == user.username ? "#484F78" : "#131520", padding: 5, marginBottom: -10, paddingBottom: 10, borderRadius: 10, paddingRight: 5, paddingLeft: 5}}>
-                        <TypeImage type={type} x={30} backgroundColor={"rgba(0,0,0,0)"}/>
+            <div onClick={() => onClick()} style={{cursor: "pointer"}}>
+                    <div className="info_container" style={{backgroundColor: username == user.username ? "#484F78" : "#131520"}}>
                         <div style={{width: 5}}></div>
-                        <p style={{color: "white", fontSize: "0.6rem", fontFamily: "Poppins"}}> {new Date(timestamp).toUTCString().substring(5,16)}{"\n"}{new Date(timestamp).toUTCString().substring(16,22)}</p>
+                        <TypeImage type={type} x={40}/>
+                        <p style={{color: "white", fontSize: "0.6rem", fontFamily: "Poppins", textAlign: "right"}}> {moment(timestamp).format("l").toString()} {/* {new Date(timestamp).toUTCString().substring(5,16)} */}{"\n"}{new Date(timestamp).toUTCString().substring(16,22)}</p>
+                        <div style={{width: 5}}></div>
                     </div>
 
-                    <div style={styles.image}>
-                        <ProfileImage x={50} url={photoUrl} type={1} circleColor={username == user.username ? "#484F78" : "#131520"} circle={false}/>
-                    </div>
+                    <div className="image_container">
+                        <ProfileImage x={50} url={photoUrl} type={1} circleColor={username == user.username ? "#484F78" : "#131520"} circle={true}/>
+                    </div> 
                     <div style={styles.dot}></div>
             </div>
-        </div>
     );
 }
 
 const styles = {
-    container: {
-        height: 100,
-        display: "flex",
-        flexDirection: "column"
-    },
-    image: {
-        width: 57,
-        height: 57,
-        backgroundColor: "#1E2132",
-        alignItems: "center",
-        borderRadius: 100,
-        paddingTop: 3.5,
-        alignSelf: "center"
-    },
     dot: {
         width: 10,
         height: 10,
         backgroundColor: "#0080FF",
         borderRadius: 50,
         marginTop: -5,
-        alignSelf: "center"
+        alignSelf: "center",
+        position: "absolute"
     }
 };
 

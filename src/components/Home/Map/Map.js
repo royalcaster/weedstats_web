@@ -20,7 +20,7 @@ import { mapStyle } from "../../../data/CustomMapStyle";
 import { UserContext } from "../../../data/UserContext";
 import { LanguageContext } from "../../../data/LanguageContext";
 import { FriendListContext } from "../../../data/FriendListContext";
-import { getLocalData } from "../../../data/Service";
+import { getLocalData, shadeColor } from "../../../data/Service";
 import TypeImage from "../../common/TypeImage";
 import IconButton from "../../common/IconButton";
 
@@ -44,10 +44,7 @@ const Map = ({ getFriendList }) => {
   const [markers, setMarkers] = useState([]);
   const [showMakerList, setShowMarkerList] = useState(false);
   const [showDonation, setShowDonation] = useState(false);
-  const [center, setCenter] = useState({lat: -20, lng: -7});
-
-  //ref
-  const mapRef = useRef(null);
+  const [center, setCenter] = useState();
 
   /* const { isLoaded } = useJsApiLoader({
     id: 'google-map-script',
@@ -62,6 +59,7 @@ const Map = ({ getFriendList }) => {
     map.fitBounds(bounds);
 
     setMap(map)
+    map.panTo({lat: friendList[0].last_entry_latitude, lng: friendList[0].last_entry_longitude});
   }, [])
 
   const onUnmount = React.useCallback(function callback(map) {
@@ -78,12 +76,7 @@ const Map = ({ getFriendList }) => {
 
   useEffect(() => {
     init();
-    console.debug(friendList[1]);
   }, []);
-
-  useEffect(() => {
-    console.debug(center);
-  }, [center]);
 
   useEffect(() => {
     if (markers.length != 0) {
@@ -100,6 +93,8 @@ const Map = ({ getFriendList }) => {
       setLoading(false);
     }
   },[markers]);
+
+  
 
   useEffect(() => {
     if (localData != null) {
@@ -324,15 +319,15 @@ const Map = ({ getFriendList }) => {
         >
           <GoogleMap
             mapContainerClassName="map_container"
-            center={{
-              lat: center.lat,
-              lng: center.lng
-            }}
-            ref={mapRef}
             zoom={12}
             options={{
-              disableDefaultUI: true
+              disableDefaultUI: true,
+              gestureHandling: "greedy"
             }}
+            onLoad={onLoad}
+            onUnmount={onUnmount}
+            clickableIcons={false}
+            
           >
             {loading ? null :
                 <>
@@ -342,12 +337,13 @@ const Map = ({ getFriendList }) => {
                   position={{lat: friend.last_entry_latitude, lng: friend.last_entry_longitude}}
                   mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
                 >
-                  <CustomMarker 
+                  <CustomMarker
                     key={Math.random()} 
                     username={friend.username} 
                     photoUrl={friend.photoUrl}
                     timestamp={friend.last_entry_timestamp}
                     type={friend.last_entry_type}
+                    onClick={() => map.panTo({lat: friend.last_entry_latitude, lng: friend.last_entry_longitude})}
                   />
                 </OverlayView>
                   })}
@@ -446,10 +442,11 @@ const Map = ({ getFriendList }) => {
 
           <div style={styles.iconbutton_container}>
             <div style={{flex: 1}}>
-              <IconButton backgroundColor={"#F2338C"} icon={view == "heatmap" ? <FaUserFriends /> : <BiMap />} onPress={() => {view == "heatmap" ? setView("friends") : setShowDonation(true)}}/>
+              <IconButton x={20} backgroundColor={"#F2338C"} hoverColor={shadeColor("#F2338C",-25)} icon={view == "heatmap" ? <FaUserFriends style={{color: "white"}}/> : <BiMap style={{color: "white"}}/>} onPress={() => {view == "heatmap" ? setView("friends") : setShowDonation(true)}}/>
             </div>
+            <div style={{height: 10}}></div>
             <div style={{flex: 1}}>
-              <IconButton backgroundColor={"#1E2132"} icon={<FaMapMarked />} onPress={toggleMapType}/>
+              <IconButton x={20} backgroundColor={"#1E2132"} hoverColor={shadeColor("#1E2132",-25)} icon={<FaMapMarked style={{color: "white"}}/>} onPress={toggleMapType}/>
             </div>
           </div>
           </>
@@ -511,11 +508,10 @@ const styles = {
   iconbutton_container: {
     flexDirection: "row",
     alignSelf: "center",
-    right: 0,
+    right: 10,
     bottom: "2rem",
     position: "absolute",
-    justifyContent: "space-between",
-    width: "35%",
+    justifyContent: "space-between"
   },
   iconbutton_container_left: {
     display: "flex",
