@@ -7,6 +7,7 @@ import CustomMarker from "../../common/CustomMarker";
 import Empty from '../../common/Empty';
 import MarkerList from "./MarkerList/MarkerList";
 import Donation from "../Main/Donation/Donation";
+import CustomLoader from '../../common/CustomLoader'
 
 //Third Party
 import { FaUserFriends, FaMapMarked } from 'react-icons/fa'
@@ -38,26 +39,20 @@ const Map = ({ getFriendList }) => {
   const [view, setView] = useState("friends");
   const [localData, setLocalData] = useState([]);
   const [localDataLoaded, setLocalDataLoaded] = useState(false);
-  const [mapType, setMapType] = useState("standard");
+  const [mapType, setMapType] = useState("roadmap");
   const [region, setRegion] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [markers, setMarkers] = useState([]);
   const [showMakerList, setShowMarkerList] = useState(false);
   const [showDonation, setShowDonation] = useState(false);
   const [center, setCenter] = useState();
-
-  /* const { isLoaded } = useJsApiLoader({
-    id: 'google-map-script',
-    googleMapsApiKey: "AIzaSyB5qQ0ApePizK0VrhpKrNlTLmn4aLgEU6o"
-  }) */
-
+  const [markers, setMarkers] = useState([])
   const [map, setMap] = useState(null);
 
   const onLoad = React.useCallback(function callback(map) {
     // This is just an example of getting and using the map instance!!! don't just blindly copy!
     const bounds = new window.google.maps.LatLngBounds(center);
     map.fitBounds(bounds);
-
+    console.log("loading map");
     setMap(map)
     map.panTo({lat: friendList[0].last_entry_latitude, lng: friendList[0].last_entry_longitude});
   }, [])
@@ -69,17 +64,12 @@ const Map = ({ getFriendList }) => {
   //Ref
   const mapViewRef = createRef();
 
-  async function init() {
-    fillMarkers(); //Freunde + deren letzte Einträge
-    /* setLocalData(filterNull(await getLocalData(user, () => null))); //Einträge des Users für Heatmap */
-  }
-
   useEffect(() => {
-    init();
+    fillMarkers();
   }, []);
 
   useEffect(() => {
-    if (markers.length != 0) {
+    if (friendList.length != 0) {
       setCenter({
         lat: friendList[0].last_entry_latitude,
         lng: friendList[0].last_entry_longitude
@@ -92,40 +82,45 @@ const Map = ({ getFriendList }) => {
       });
       setLoading(false);
     }
-  },[markers]);
-
-  
+  },[]);
 
   useEffect(() => {
+    console.debug(loading);
+    console.debug(map);
+  },[loading, map]);
+
+  /* useEffect(() => {
     if (localData != null) {
       setLocalDataLoaded(true);
     }
-  },[localData]);
+  },[localData]); */
 
   useEffect(() => {
     if (view == "heatmap" && localData.length != 0) {
-      setRegion({
+      /* setRegion({
         latitude: localData[localData.length-1].latitude,
         longitude: localData[localData.length-1].longitude,
         latitudeDelta: 0.25,
         longitudeDelta: 0.25
-      });
+      }); */
     }
 
-    if (view == "friends" && markers.length != 0) {
-      setRegion({
-        latitude: markers[0].latitude,
-        longitude: markers[0].longitude,
+    if (view == "friends" && friendList.length != 0) {
+      /* setRegion({
+        latitude: markers[0].last_entry_latitude,
+        longitude: markers[0].last_entry_longitude,
         latitudeDelta: 0.25,
         longitudeDelta: 0.25
-      });
+      }); */
     }
   },[view]);
 
   const fillMarkers = () => {
     setLoading(true);
-    setCenter({lat: friendList[1].last_entry_latitude, lng: friendList[1].last_entry_longitude})
-    if (user.last_entry_type != null) {
+
+    // wenn vorhanden, Nutzer als ersten Eintrag hinzufügen
+    if (user.last_entry_latitude != null) {
+      setCenter({lat: user.last_entry_latitude, lng: user.last_entry_longitude})
       setMarkers([{
         latitude: user.last_entry_latitude,
         longitude: user.last_entry_longitude,
@@ -135,30 +130,35 @@ const Map = ({ getFriendList }) => {
         username: user.username
       }]);
     }
-    friendList.forEach((friend) => {
-      if (
-          friend.config.shareLastEntry && 
-          friend.config.shareGPS &&
-          friend.last_entry_latitude != null &&
-          friend.last_entry_longitude != null &&
-          friend.last_entry_timestamp != null &&
-          friend.last_entry_type != null
-        ) {
-        setMarkers(oldMarkers => [...oldMarkers, {
-          latitude: friend.last_entry_latitude,
-          longitude: friend.last_entry_longitude,
-          timestamp: friend.last_entry_timestamp,
-          type: friend.last_entry_type,
-          photoUrl: friend.photoUrl,
-          username: friend.username
-        }])
-      }
-    });
+
+    //danach Restliche Freunde hinzufügen (wenn config es zulässt)
+    if (friendList.length !== 0) {
+      friendList.forEach((friend) => {
+        if (
+            friend.config.shareLastEntry && 
+            friend.config.shareGPS &&
+            friend.last_entry_latitude != null &&
+            friend.last_entry_longitude != null &&
+            friend.last_entry_timestamp != null &&
+            friend.last_entry_type != null
+          ) {
+          setMarkers(oldMarkers => [...oldMarkers, {
+            latitude: friend.last_entry_latitude,
+            longitude: friend.last_entry_longitude,
+            timestamp: friend.last_entry_timestamp,
+            type: friend.last_entry_type,
+            photoUrl: friend.photoUrl,
+            username: friend.username
+          }])
+        }
+      });
+      setCenter({lat: friendList[0].last_entry_latitude, lng: friendList[0].last_entry_longitude})
+    }
     setLoading(false);
   }
 
   const toggleMapType = () => {
-    mapType == "standard" ? setMapType("hybrid") : setMapType("standard");
+    mapType == "roadmap" ? setMapType("hybrid") : setMapType("roadmap");
   }
 
   const chopTimeStamp = (timestamp) => {
@@ -166,191 +166,67 @@ const Map = ({ getFriendList }) => {
     return [a.toDateString(), a.toTimeString().substring(0, 5) + " Uhr"];
   };
 
-  const filterNull = (array) => {
+  /* const filterNull = (array) => {
     
     return array.filter((entry) => {
       
       return entry.latitude != null && entry.longitude != null;
     });
-  };
-
-  const renderItem = (item) => {
-    return (
-        <div
-          style={{ flexDirection: "row", height: "100%", alignItems: "center" }}
-        >
-          <div style={{ flex: 1 }}>
-            <ProfileImage url={item.photoUrl} x={100} type={2} />
-          </div>
-
-          <div
-            style={{
-              flex: 2,
-              flexDirection: "column",
-              paddingLeft: 15,
-              height: "80%"
-            }}
-          >
-            <div style={{ flex: 2 }}>
-              <p
-                style={{
-                  color: "white",
-                  fontFamily: "PoppinsMedium",
-                  height: "100%",
-                  textAlignVertical: "center",
-                  fontSize: "1.5rem"
-                }}
-              >
-                {item.username}
-              </p>
-            </div>
-            <div style={{ flex: 1 }}>
-              <p
-                style={{
-                  color: "rgba(255,255,255,0.75)",
-                  fontFamily: "PoppinsMedium",
-                  height: "100%",
-                  textAlignVertical: "center",
-                  fontSize: "1rem",
-                }}
-              >
-                {chopTimeStamp(item.timestamp)[0]}
-              </p>
-            </div>
-            <div style={{ flex: 1 }}>
-              <p
-                style={{
-                  color: "rgba(255,255,255,0.75)",
-                  fontFamily: "PoppinsMedium",
-                  height: "100%",
-                  textAlignVertical: "center",
-                  fontSize: "1rem",
-                }}
-              >
-                {chopTimeStamp(item.timestamp)[1]}
-              </p>
-            </div>
-          </div>
-
-          <TypeImage type={item.type}/>
-
-          <div style={{ flex: 1 }}>
-            {item.type == "joint" ? (
-              <img
-                style={{
-                  position: "relative",
-                  left: 0,
-                  height: 65,
-                  width: 20,
-                  alignSelf: "center",
-                }}
-                source={require("../../../data/img/joint.png")}
-              />
-            ) : null}
-            {item.type == "bong" ? (
-              <img
-                style={{
-                  position: "relative",
-                  left: 0,
-                  height: 65,
-                  width: 40,
-                  alignSelf: "center",
-                }}
-                source={require("../../../data/img/bong.png")}
-              />
-            ) : null}
-            {item.type == "vape" ? (
-              <img
-                style={{
-                  position: "relative",
-                  left: 0,
-                  height: 65,
-                  width: 40,
-                  alignSelf: "center",
-                }}
-                source={require("../../../data/img/vape.png")}
-              />
-            ) : null}
-            {item.type == "cookie" ? (
-              <img
-                style={{
-                  position: "relative",
-                  left: 0,
-                  height: 55,
-                  width: 50,
-                  alignSelf: "center",
-                }}
-                source={require("../../../data/img/cookie.png")}
-              />
-            ) : null}
-            {item.type == "pipe" ? (
-              <img
-                style={{
-                  position: "relative",
-                  left: 0,
-                  height: 65,
-                  width: 40,
-                  alignSelf: "center",
-                }}
-                source={require("../../../data/img/pipe.png")}
-              />
-            ) : null}
-          </div>
-        </div>
-    );
-  };
+  }; */
 
   const refreshMarkers = () => {
-    setLoading(true);
     fillMarkers();
-    setLoading(false);
     setShowMarkerList(true);
   }
 
   return (
+      <>
+      {showMakerList ? <MarkerList onRefresh={() => refreshMarkers()} markers={markers} onExit={() => setShowMarkerList(false)} setRegion={(region) => mapViewRef.current.animateCamera(region)}/> : null}
+      {showDonation ? <Donation onExit={() => setShowDonation(false)}/> : null}
+
     <div style={styles.container}>
-      <div style={{ alignItems: "center" }}>
-        
-        {showMakerList ? <MarkerList onRefresh={() => refreshMarkers()} markers={markers} onExit={() => setShowMarkerList(false)} setRegion={(region) => mapViewRef.current.animateCamera(region)}/> : null}
-        {showDonation ? <Donation onexit={() => setShowDonation(false)}/> : null}
+      <div style={{ alignItems: "center", height: "100%" }}>
 
+        {!loading ?
         <LoadScript
-          googleMapsApiKey="AIzaSyB5qQ0ApePizK0VrhpKrNlTLmn4aLgEU6o"
+        googleMapsApiKey="AIzaSyB5qQ0ApePizK0VrhpKrNlTLmn4aLgEU6o"
+      >
+        <GoogleMap
+          mapContainerClassName="map_container"
+          zoom={16}
+          options={{
+            disableDefaultUI: true,
+            gestureHandling: "greedy",
+            mapTypeId: mapType,
+            mapId: "a978e762b453a0fa"
+          }}
+          onLoad={onLoad}
+          onUnmount={onUnmount}
+          clickableIcons={false}
+          tilt={45}
         >
-          <GoogleMap
-            mapContainerClassName="map_container"
-            zoom={12}
-            options={{
-              disableDefaultUI: true,
-              gestureHandling: "greedy"
-            }}
-            onLoad={onLoad}
-            onUnmount={onUnmount}
-            clickableIcons={false}
-            
-          >
-            {loading ? null :
-                <>
+          {loading ? null :
+              <>
 
-                {friendList.map((friend) => {
-                    return  <OverlayView
-                  position={{lat: friend.last_entry_latitude, lng: friend.last_entry_longitude}}
-                  mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
-                >
-                  <CustomMarker
-                    key={Math.random()} 
-                    username={friend.username} 
-                    photoUrl={friend.photoUrl}
-                    timestamp={friend.last_entry_timestamp}
-                    type={friend.last_entry_type}
-                    onClick={() => map.panTo({lat: friend.last_entry_latitude, lng: friend.last_entry_longitude})}
-                  />
-                </OverlayView>
-                  })}
-                </>
-                }
-          </GoogleMap>
-        </LoadScript>
+              {friendList.map((friend) => {
+                  return  <OverlayView
+                position={{lat: friend.last_entry_latitude, lng: friend.last_entry_longitude}}
+                mapPaneName={OverlayView.OVERLAY_MOUSE_TARGET}
+              >
+                <CustomMarker
+                  key={Math.random()} 
+                  username={friend.username} 
+                  photoUrl={friend.photoUrl}
+                  timestamp={friend.last_entry_timestamp}
+                  type={friend.last_entry_type}
+                  onClick={() => {map.panTo({lat: friend.last_entry_latitude, lng: friend.last_entry_longitude}); map.setZoom(17)}}
+                />
+              </OverlayView>
+                })}
+              </>
+              }
+        </GoogleMap>
+      </LoadScript> : <CustomLoader />}
           
 
         {!loading && localDataLoaded ? (
@@ -439,33 +315,38 @@ const Map = ({ getFriendList }) => {
           <div style={{position: "absolute", backgroundColor: mapType == "standard" ? "rgba(0,0,0,0.5)" : "rgba(0,0,0,0.9)", height: "100%", width: "100%"}}>
             <Empty title={language.map_no_friends} tip={language.map_no_friends_tip}/>
           </div> : null}
-
-          <div style={styles.iconbutton_container}>
-            <div style={{flex: 1}}>
-              <IconButton x={20} backgroundColor={"#F2338C"} hoverColor={shadeColor("#F2338C",-25)} icon={view == "heatmap" ? <FaUserFriends style={{color: "white"}}/> : <BiMap style={{color: "white"}}/>} onPress={() => {view == "heatmap" ? setView("friends") : setShowDonation(true)}}/>
-            </div>
-            <div style={{height: 10}}></div>
-            <div style={{flex: 1}}>
-              <IconButton x={20} backgroundColor={"#1E2132"} hoverColor={shadeColor("#1E2132",-25)} icon={<FaMapMarked style={{color: "white"}}/>} onPress={toggleMapType}/>
-            </div>
-          </div>
           </>
         ) : null}
 
+          <div style={styles.iconbutton_container}>
+            <div style={{flex: 1}}>
+              <IconButton x={20} backgroundColor={"#F2338C"} hoverColor={shadeColor("#F2338C",-25)} icon={view == "heatmap" ? <FaUserFriends style={{color: "white"}}/> : <BiMap style={{color: "white", fontSize: "2rem"}}/>} onPress={() => {view == "heatmap" ? setView("friends") : setShowDonation(true)}}/>
+            </div>
+            <div style={{height: 10}}></div>
+            <div style={{flex: 1}}>
+              <IconButton x={20} backgroundColor={"#484F78"} hoverColor={shadeColor("#484F78",-25)} icon={<FaMapMarked style={{color: "white"}}/>} onPress={toggleMapType}/>
+            </div>
+          </div>
+
         {view == "friends" ? (
-          <div style={styles.iconbutton_container_left}>
-            <div style={styles.touchable2}>
-                <FaUserFriends style={{color: "white", fontSize: "1.5rem", textAlign: "center"}}/>
+          <>
+          <div style={styles.iconbutton_container_left} onClick={() => setShowMarkerList(true)}>
+            <div style={styles.touchable2} className="iconbutton_container_left">
+              <div style={{position: "absolute", height: "50%", width: "100%", bottom: 0}} className="gradient"></div>
+                <div style={{justifyContent: "center", display: "flex", marginTop: 10}}>
+                  <FaUserFriends style={{color: "white", fontSize: "1.5rem", textAlign: "center"}}/>
+                </div>
                 <div>
                   {markers.length != 0 ? markers.map((marker) => {
                     return <div key={Math.random()} style={{marginTop: "0.5rem"}}><ProfileImage x={50} url={marker.photoUrl} type={1} circle={user.username == marker.username} circleColor={user.username == marker.username ? "#484F78" : "#131520"}/></div>      
                   }) : null}
                 </div>
-                </div>
+            </div>
           </div>
+          </>
         ) : null}
       </div>
-    </div>
+    </div></>
   );
 };
 
@@ -522,16 +403,18 @@ const styles = {
     bottom: "15%",
     left: 0,
     position: "absolute",
-    backgroundColor: "#1E2132",
+    backgroundColor: "#484F78",
     borderTopRightRadius: 10,
     borderBottomRightRadius: 10,
     height: "30%",
     overflow: "hidden",
-    
+    cursor: "pointer"
   },
   touchable2: {
     padding: 10,
     width: "100%",
-    height: "100%"
+    height: "100%",
+    display: "flex",
+    flexDirection: "column"
   },
 };

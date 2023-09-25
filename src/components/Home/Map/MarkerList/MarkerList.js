@@ -40,26 +40,26 @@ const MarkerList = ({onExit, setRegion, markers, onRefresh}) => {
 
     return (
         <div style={styles.container}>
-            <div style={{height: 20}}></div>
-     
-            <div
-            style={{ width: "100%", flexDirection: "row"}}
-            >
-                <div style={{ flex: 1, alignItems: "center" }}>
-                    <BackButton onPress={() => console.log("BackButton in MarkerList implementieren!")} />
+            <div style={styles.content_container} className="content_container">
+                
+        <div style={{display: "flex", flexDirection: "row", alignContent: "center", alignItems: "center"}}>
+                <div style={{marginLeft: "1rem"}}>
+                    <BackButton onPress={() => onExit()} hoverColor={"rgba(255,255,255,0.25)"}/>
                 </div>
-                <div style={{ flex: 5, justifyContent: "center"}}>
-                    <p style={{color: "white", fontFamily: "PoppinsMedium",fontSize: 20, textAlign: "left"}}>
-                        {language.friends_friends} - {language.friendpage_last_activity}
-                    </p>
+                <div style={{width: "1rem"}}></div>
+                <div>
+                <p style={styles.heading}>{language.friends_friends} - {language.friendpage_last_activity}</p>
                 </div>
             </div>
-            
-            {
-                markers.length != 0 ? markers.sort((a,b) => a.timestamp < b.timestamp).map((marker) => {
-                    return <MarkerListItem key={uuidv4()} marker={marker} onPress={() => handlePress(marker)}/>
-                }) : <Empty title={language.map_no_friends} tip={language.map_no_friends_tip}/>
-            }
+
+                <div style={{overflowY: "scroll"}}>
+                    {
+                        markers.length != 0 ? markers.sort((a,b) => a.timestamp < b.timestamp).map((marker) => {
+                            return <MarkerListItem key={uuidv4()} marker={marker} onPress={() => handlePress(marker)}/>
+                        }) : <Empty title={language.map_no_friends} tip={language.map_no_friends_tip}/>
+                    }
+                </div>
+            </div>
         </div>
     );
 }
@@ -68,14 +68,22 @@ export default MarkerList
 
 const styles = {
     container: {
-        height: "90%",
         width: "100%",
+        height: "100%",
+        position: "absolute",
+        backgroundColor: "rgba(0,0,0,0.5)",
+        zIndex: 100,
+        display: "flex",
+        justifyContent: "center"
+    },
+    content_container: {
         backgroundColor: "#1E2132",
         zIndex: 10,
         position: "absolute",
-        bottom: 0,
         borderTopLeftRadius: 25,
-        borderTopRightRadius: 25
+        borderTopRightRadius: 25,
+        maxWidth: 700,
+        margin: "auto"
     },
     input: {
         backgroundColor: "#1E2132",
@@ -83,7 +91,6 @@ const styles = {
         alignSelf: "center",
         height: 60,
         borderRadius: 10,
-        paddingLeft: 20,
         color: "white",
         fontSize: 18,
         fontFamily: "PoppinsMedium",
@@ -95,5 +102,11 @@ const styles = {
         alignSelf: "center",
         borderRadius: 25,
         flexDirection: "column"
-    }
+    },
+    heading: {
+        color: "white",
+        fontSize: "1.5rem",
+        fontFamily: "Poppins",
+        textAlign: "left",
+      },
 };

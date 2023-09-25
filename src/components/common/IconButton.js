@@ -13,6 +13,7 @@ const IconButton = ({x, icon, onPress, backgroundColor, hoverColor }) => {
             width: x,
             padding: 20,
             borderRadius: 100,
+            display: "flex",
             justifyContent: "center",
             alignItems: "center", 
             backgroundColor: hover ? hoverColor : backgroundColor,

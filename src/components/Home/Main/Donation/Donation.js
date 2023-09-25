@@ -11,10 +11,6 @@ import { LanguageContext } from '../../../../data/LanguageContext';
 const Donation = ( { onExit } ) => {
 
     const language = useContext(LanguageContext)
-    
-    const hide = () => {
-       
-    }
 
     return (
         <div style={styles.container}>
@@ -53,11 +49,14 @@ export default Donation
 
 const styles = {
     container: {
+        position: "absolute",
         height: "100%",
         width: "100%",
         maxWidth: 700,
         padding: 5,
-        overflow: "scroll"
+        overflow: "scroll",
+        zIndex: 1000,
+        backgroundColor: "#1E2132"
     },
     text: {
         fontFamily: "Poppins",

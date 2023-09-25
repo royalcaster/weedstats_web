@@ -16,7 +16,7 @@ const MarkerListItem = ({ marker, onPress }) => {
 
     return (
             <div style={styles.container}>
-                <div style={{backgroundColor: "#131520", flexDirection: "row", backgroundColor: marker.username == user.username ? "#484F78" : "#131520"}}>
+                <div style={{backgroundColor: "#131520", display: "flex", flexDirection: "row", backgroundColor: marker.username == user.username ? "#484F78" : "#131520", width: "100%", alignItems: "center"}}>
                         {
                             marker ?
                             <>
@@ -24,7 +24,7 @@ const MarkerListItem = ({ marker, onPress }) => {
                                     <ProfileImage url={marker.photoUrl} x={60}/>
                                 </div>
 
-                                <div style={{flex: 3, flexDirection: "column", paddingVertical: 10}}>
+                                <div style={{flex: 3, flexDirection: "column"}}>
                                     <div style={{flex: 1, justifyContent: "center"}}>
                                         <p style={styles.username}>{marker.username}</p>
                                     </div>
@@ -53,16 +53,18 @@ const styles = {
         borderRadius: 10,
         width: "90%",
         alignSelf: "center",
-        marginVertical: 5
+        display: "flex",
     },
     username: {
         color: "white",
-        fontFamily: "PoppinsMedium",
-        fontSize: "1rem"
+        fontFamily: "Poppins",
+        fontSize: "1rem",
+        margin: 0
     },
     date: {
         color: "white",
-        fontFamily: "PoppinsMedium",
-        fontSize: "1rem"
+        fontFamily: "Poppins",
+        fontSize: "0.75rem",
+        margin: 0
     }
 };

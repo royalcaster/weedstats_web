@@ -31,7 +31,7 @@ const CustomMarker = ({ username, photoUrl, type, timestamp, onClick }) => {
 
     return (
             <div onClick={() => onClick()} style={{cursor: "pointer"}}>
-                    <div className="info_container" style={{backgroundColor: username == user.username ? "#484F78" : "#131520"}}>
+                    <div className="info_container" style={{backgroundColor: username == user.username ? "#484F78" : "#1E2132"}}>
                         <div style={{width: 5}}></div>
                         <TypeImage type={type} x={40}/>
                         <p style={{color: "white", fontSize: "0.6rem", fontFamily: "Poppins", textAlign: "right"}}> {moment(timestamp).format("l").toString()} {/* {new Date(timestamp).toUTCString().substring(5,16)} */}{"\n"}{new Date(timestamp).toUTCString().substring(16,22)}</p>
