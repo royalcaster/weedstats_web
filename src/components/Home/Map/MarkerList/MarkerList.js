@@ -12,6 +12,8 @@ import { FriendListContext } from "../../../../data/FriendListContext";
 import MarkerListItem from "./MarkerListItem/MarkerListItem";
 import { uuidv4 } from "@firebase/util";
 
+import "./MarkerList.css"
+
 const MarkerList = ({onExit, setRegion, markers, onRefresh}) => {
 
     //Context
@@ -27,19 +29,11 @@ const MarkerList = ({onExit, setRegion, markers, onRefresh}) => {
     const textInputRef = useRef(null);
 
     const handlePress = (marker) => {
-        setRegion({
-            center: {
-               latitude: marker.latitude,
-               longitude: marker.longitude,
-           },
-           pitch: 0,
-           zoom: 15
-        }, 1000);
-        console.log("onExit auf MarkerList");
+        setRegion(marker.latitude, marker.longitude);
     }
 
     return (
-        <div style={styles.container}>
+        <div style={styles.container} className="container">
             <div style={styles.content_container} className="content_container">
                 
         <div style={{display: "flex", flexDirection: "row", alignContent: "center", alignItems: "center"}}>
@@ -71,7 +65,7 @@ const styles = {
         width: "100%",
         height: "100%",
         position: "absolute",
-        backgroundColor: "rgba(0,0,0,0.5)",
+        backgroundColor: "rgba(0,0,0,0)",
         zIndex: 100,
         display: "flex",
         justifyContent: "center"

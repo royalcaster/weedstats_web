@@ -27,6 +27,7 @@ import IconButton from "../../common/IconButton";
 
 import './Map.css'
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const Map = ({ getFriendList }) => {
 
@@ -47,6 +48,9 @@ const Map = ({ getFriendList }) => {
   const [center, setCenter] = useState();
   const [markers, setMarkers] = useState([])
   const [map, setMap] = useState(null);
+
+  //navigation
+  const navigate = useNavigate();
 
   const onLoad = React.useCallback(function callback(map) {
     // This is just an example of getting and using the map instance!!! don't just blindly copy!
@@ -181,8 +185,14 @@ const Map = ({ getFriendList }) => {
 
   return (
       <>
-      {showMakerList ? <MarkerList onRefresh={() => refreshMarkers()} markers={markers} onExit={() => setShowMarkerList(false)} setRegion={(region) => mapViewRef.current.animateCamera(region)}/> : null}
-      {showDonation ? <Donation onExit={() => setShowDonation(false)}/> : null}
+      {showMakerList ? <MarkerList onRefresh={() => refreshMarkers()} markers={markers} onExit={() => setShowMarkerList(false)} setRegion={(lat, lng) => {setShowMarkerList(false); map.panTo({lat: lat, lng: lng}); map.setZoom(17)}}/> : null}
+      {showDonation ? 
+      <div style={{backgroundColor: "rgba(0,0,0,0.5)", height: "100vh", width: "100vw", position: "absolute", zIndex: 10, justifyContent: "center", display: "flex"}}>
+        <div style={{width: "100%", maxWidth: 700, height: "100%", position: "absolute", zIndex: 10}}>
+          <Donation onExit={() => setShowDonation(false)}/> 
+        </div>
+      </div>
+      : null}
 
     <div style={styles.container}>
       <div style={{ alignItems: "center", height: "100%" }}>
@@ -320,7 +330,7 @@ const Map = ({ getFriendList }) => {
 
           <div style={styles.iconbutton_container}>
             <div style={{flex: 1}}>
-              <IconButton x={20} backgroundColor={"#F2338C"} hoverColor={shadeColor("#F2338C",-25)} icon={view == "heatmap" ? <FaUserFriends style={{color: "white"}}/> : <BiMap style={{color: "white", fontSize: "2rem"}}/>} onPress={() => {view == "heatmap" ? setView("friends") : setShowDonation(true)}}/>
+              <IconButton x={20} backgroundColor={"#F2338C"} hoverColor={shadeColor("#F2338C",-25)} icon={view == "heatmap" ? <FaUserFriends style={{color: "white"}}/> : <BiMap style={{color: "white", fontSize: "2rem"}}/>} onPress={() => {view == "heatmap" ? setView("friends") : navigate("/home/counter/premium")}}/>
             </div>
             <div style={{height: 10}}></div>
             <div style={{flex: 1}}>
