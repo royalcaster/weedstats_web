@@ -20,7 +20,7 @@ import Languages from './data/languages.json'
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, deleteUser } from '@firebase/auth'
 import { app, firestore } from './data/FirebaseConfig'
 import { doc, getDoc, updateDoc, deleteDoc, setDoc } from "@firebase/firestore";
-import { createUsernameArray, downloadUser } from "./data/Service";
+import { createUsernameArray, downloadUser, customFetch } from "./data/Service";
 import package_object from '../package.json'
 import { ref, deleteObject } from '@firebase/storage'
 import { storage } from "./data/FirebaseConfig";
@@ -58,16 +58,9 @@ const App = () => {
   useEffect(() => {
     checkForUser();
     //------------- Hier Notifications registrieren
-
-    testFetch();
-
   },[]);
 
-  const testFetch = async () => {
-    const response = await fetch("https://weedstats-backend.ey.r.appspot.com/api/test");
-    const test = await response.json();
-    console.debug(test.msg);
-  }
+  const test = customFetch("/api/test");
 
   useEffect(() => {
     if (user != null) {
