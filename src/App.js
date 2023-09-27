@@ -59,9 +59,15 @@ const App = () => {
     checkForUser();
     //------------- Hier Notifications registrieren
 
-
+    testFetch();
 
   },[]);
+
+  const testFetch = async () => {
+    const response = await fetch("https://weedstats-backend.ey.r.appspot.com/api/test");
+    const test = await response.json();
+    console.debug(test.msg);
+  }
 
   useEffect(() => {
     if (user != null) {

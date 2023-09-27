@@ -262,8 +262,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
         new_entry.longitude = location.coords.longitude;
       }
     }
-
-    await writeLocalStorage(new_entry);
+    await writeEntryToDatabase(new_entry);
 
     const docRef = doc(firestore, "users", user.id);
     const docSnap = await getDoc(docRef);
@@ -277,31 +276,13 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
       main_counter: docSnap.data().joint_counter + docSnap.data().bong_counter + docSnap.data().vape_counter + docSnap.data().pipe_counter + docSnap.data().cookie_counter + 1,
     });
     setWriteComplete(true);
-    /* await updateDoc(docRef, {
-      [index + "_counter"]: docSnap.data()[index + "_counter"] + 1,
-      last_entry_latitude: new_entry.latitude,
-      last_entry_longitude: new_entry.longitude,
-      last_entry_timestamp: new_entry.timestamp,
-      last_entry_type: new_entry.type,
-      main_counter: docSnap.data().joint_counter + docSnap.data().bong_counter + docSnap.data().vape_counter + docSnap.data().pipe_counter + docSnap.data().cookie_counter + 1,
-    });
-
-    const docSnap_new = await getDoc(docRef);
-    onSetUser({
-      ...user,
-      main_counter: docSnap_new.data().main_counter,
-      joint_counter: docSnap_new.data().joint_counter, 
-      bong_counter: docSnap_new.data().bong_counter,
-      vape_counter: docSnap_new.data().vape_counter,
-      pipe_counter: docSnap_new.data().pipe_counter,
-      cookie_counter: docSnap_new.data().cookie_counter,
-      last_entry_timestamp: docSnap_new.data().last_entry_timestamp,
-      last_entry_type: docSnap_new.data().last_entry_type,
-      last_entry_latitude: docSnap_new.data().last_entry_latitude,
-      last_entry_longitude: docSnap_new.data().last_entry_longitude,
-    });
-    setWriteComplete(true); */
   };
+
+  //Schreibt entry in datenbank
+  const writeEntryToDatabase = (entry) => {
+    
+    console.debug(entry);
+  }
 
   //erstellt Einträge im lokalen Gerätespeicher
   const writeLocalStorage = async (new_entry) => {
@@ -316,7 +297,6 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
       console.log("Error:", e);
     } */
     await set(ref(db, 'users/' + user.id), new_entry);
-    console.debug(new_entry)
   };
 
   const sendCounterPushNotification = ( type ) => {
