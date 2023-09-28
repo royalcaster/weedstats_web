@@ -19,7 +19,7 @@ const Stats = () => {
   const language = useContext(LanguageContext)
 
   //State
-  const [localData, setLocalData] = useState([]);
+  const [localData, setLocalData] = useState(["test1", "test2", "test3"]);
   const [localDataLoaded, setLocalDataLoaded] = useState(false);
 
   useEffect( () => { 
@@ -29,7 +29,7 @@ const Stats = () => {
 
   const loadData = async () => {
     setLocalDataLoaded(false);
-    setLocalData(await getLocalData(user, () => setLocalDataLoaded(true)));
+    /* setLocalData(await getLocalData(user, () => setLocalDataLoaded(true))); */
   }
 
   // Zum Löschen einzelner Daten aus der History. Erstmal entfernt, da die Konsistenz der Daten nach aktuellem Stand darunter leidet
@@ -61,7 +61,7 @@ const Stats = () => {
         !localDataLoaded ? <CustomLoader x={50} color={"#484F78"}/> : 
         <>
           {
-            localData.length == 0 ? <div style={{height: "20%"}}><Empty title={language.short == "de" ? "Noch keine Einträge" : "No entries yet"} tip={language.short == "de" ? "Mache Einträge, um Statistiken zu sehen" : "Smoke something to see statistics"}/><Button title={language.short == "de" ? "Aktualisieren" : "Refresh"} color={"#484F78"} fontColor={"white"} hovercolor={"rgba(255,255,255,0.25)"} onPress={() => loadData()}/></div>
+            !localData ? <div style={{height: "100%"}}><Empty title={language.short == "de" ? "Noch keine Einträge" : "No entries yet"} tip={language.short == "de" ? "Mache Einträge, um Statistiken zu sehen" : "Smoke something to see statistics"}/><Button title={language.short == "de" ? "Aktualisieren" : "Refresh"} color={"#484F78"} fontColor={"white"} hovercolor={"rgba(255,255,255,0.25)"} onPress={() => loadData()}/></div>
             : <StatsDashboard localData={localData} onRefresh={() => loadData()}/>
           }
         </>

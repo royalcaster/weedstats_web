@@ -8,7 +8,7 @@ const StatsCard = ({title, value}) => {
     return (
     <div style={styles.card_container}>
         <p style={styles.card_label}>{title}</p>
-        <p style={[styles.card_value]}>
+        <p style={styles.card_value}>
           {value}
         </p>
     </div>

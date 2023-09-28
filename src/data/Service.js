@@ -51,7 +51,6 @@ export const getRelevantKeys = async (user) => {
 
 // Holt alle Einträge-Daten aus dem lokalen Speicher
 export const getLocalData = async (user, callback) => {
-  console.log("test");
   let buffer = [];
   try {
     const jsonData = await localStorage.multiGet(await getRelevantKeys(user));
@@ -60,7 +59,8 @@ export const getLocalData = async (user, callback) => {
       return a.number - b.number;
     });
     callback();
-    return buffer;
+    console.log("Hier Testarray rausnehmen!");
+    return ["test1", "test2", "test3"];
   } catch (e) {
     console.log("Fehler beim Laden der Einträge Daten aus dem Lokalen Speicher:", e);
   }

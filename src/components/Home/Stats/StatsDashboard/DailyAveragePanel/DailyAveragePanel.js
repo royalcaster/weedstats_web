@@ -16,6 +16,7 @@ const DailyAveragePanel = ({selectedType, value}) => {
       {selectedType == "main" ? <TypeImage x={60}/> : 
       <TypeImage type={selectedType} x={60}/>}
     </div>
+    
     <div style={{height: "1rem"}}></div>
 
     <div style={{alignSelf: "center"}}>
