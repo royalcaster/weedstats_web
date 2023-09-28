@@ -6,8 +6,6 @@ import { firestore } from "./FirebaseConfig";
 import toGermanDate from "./DateConversion";
 import { summary, streakRanges, trackRecord } from "date-streaks";
 
-require('dotenv').config()
-
 // Lädt das Nutzer-Objekt aus dem AsyncStorage
 const getLocalUser = async () => {
   try {
@@ -331,8 +329,21 @@ export const shadeColor = (color, percent) => {
 }
 
 export const customFetch = async (url) => {
-  const response = await fetch(process.env.BACKEND_URL + url);
-  console.debug(process.env.BACKEND_URL + url);
+  const response = await fetch(process.env.REACT_APP_BACKEND_URL + url);
   const test = await response.json();
   return test;
+}
+
+export const sendEntryToBackend = async (entry, callback) => {
+  await fetch(process.env.REACT_APP_BACKEND_URL + '/write-entry', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(entry),
+  })
+    .then((response) => response.status == 200 ? callback() : null)
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 }

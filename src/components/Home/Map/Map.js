@@ -21,7 +21,7 @@ import { mapStyle } from "../../../data/CustomMapStyle";
 import { UserContext } from "../../../data/UserContext";
 import { LanguageContext } from "../../../data/LanguageContext";
 import { FriendListContext } from "../../../data/FriendListContext";
-import { getLocalData, shadeColor } from "../../../data/Service";
+import { shadeColor } from "../../../data/Service";
 import TypeImage from "../../common/TypeImage";
 import IconButton from "../../common/IconButton";
 

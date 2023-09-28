@@ -32,6 +32,7 @@ import { FriendListContext } from './data/FriendListContext';
 //Third Party
 import { Spinner } from "react-activity";
 import "react-activity/dist/library.css";
+import useFetch from './data/useFetch';
 
 const App = () => {
 
@@ -40,6 +41,7 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [language, setLanguage] = useState(Languages.en);
   const [friendList, setFriendList] = useState([]);
+  /* const [test] = useFetch(process.env.REACT_APP_BACKEND_URL + "/api/test"); */
 
   //States für Frontend
   const [loading, setLoading] = useState(true);
@@ -59,8 +61,6 @@ const App = () => {
     checkForUser();
     //------------- Hier Notifications registrieren
   },[]);
-
-  const test = customFetch("/api/test");
 
   useEffect(() => {
     if (user != null) {
