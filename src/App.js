@@ -60,8 +60,6 @@ const App = () => {
     //------------- Hier Notifications registrieren
   },[]);
 
-  const test = customFetch("/api/test");
-
   useEffect(() => {
     if (user != null) {
       getFriendList();

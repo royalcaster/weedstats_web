@@ -25,7 +25,7 @@ const StatsDashboard = ({ localData, onRefresh }) => {
   //State
   const [selectedType, setSelectedType] = useState("main");
   const [selectedTime, setSelectedTime] = useState(0);
-  const [streakData, setStreakData] = useState(calcStreak(localData));
+/*   const [streakData, setStreakData] = useState(calcStreak(localData)); */
   const [showHistory, setShowHistory] = useState(false);
   const [showDonation, setShowDonation] = useState(false);
   const [refreshing, setRefreshing] = useState(false);
@@ -88,54 +88,40 @@ const StatsDashboard = ({ localData, onRefresh }) => {
   return (
     <>
 
-    {showHistory ? <History show={showHistory} onExit={() => setShowHistory(false)} history={localData}/> : null}
-    {showDonation ? <Donation onexit={() => setShowDonation(false)}/> : null}
+    {/* {showHistory ? <History show={showHistory} onExit={() => setShowHistory(false)} history={localData}/> : null} */}
+   {/*  {showDonation ? <Donation onexit={() => setShowDonation(false)}/> : null} */}
 
     <div style={styles.container}>
       <div style={{ opacity: 1, alignItems: "center"}}>
-        <div style={{ height: 50 }}></div>
         <div style={{flexDirection: "row", width: "100%", alignItems: "center"}}>
         <p style={styles.bold_heading}>{language.stats_overview}</p>
+        
         <div style={{flexDirection: "row",right: 10, top: -5, position: "absolute"}}>
         <div onClick={() => setShowDonation(true)}
             >
               <div style={{height: 50, backgroundColor: "#1E2132", width: 50 }}>
-                {/* <EvilIcons
-                  name="clock"
-                  style={{
-                    color: "#F2338C",
-                    fontSize: 30,
-                    height: "100%",
-                    textAlignVertical: "center",
-                    alignSelf: "center"
-                  }}
-                /> */}
+                
               </div>
             </div>
             </div>
+
         </div>
-        <div style={{ height: 20 }}></div>
 
         
 
         <div style={{ width: "90%"}}>
-          
-        <SelectorBar options={options_type} onPress={(value) => toggleSelection(value)} selectedType={selectedType}/>
-
+          <SelectorBar options={options_type} onPress={(value) => toggleSelection(value)} selectedType={selectedType}/>
         </div>
-
-        <div style={{ height: 30 }}></div>
 
         <div style={{ alignItems: "center", flex: 1, width: "90%" }}>
 
           <DailyAveragePanel 
             selectedType={selectedType} 
-            /* value={Math.round(calcDailyAverage(filterByType(localData, selectedType), localData) * 100) / 100} */
             value={Math.round(calcDailyAverage(filterByType(localData, selectedType), localData) * 100) / 100}
           />
 
-          {selectedType === "main" ? (
-            {/* <PieChart data={[
+         {/*  {selectedType === "main" ? (
+              <PieChart data={[
                 {
                   name: language.joint,
                   count: filterByMostRecent(
@@ -197,8 +183,8 @@ const StatsDashboard = ({ localData, onRefresh }) => {
               accessor={"count"}
               paddingLeft={"15"}
 
-            /> */}
-          ) : null}
+            />
+          ) : null} */}
 
           <div style={{ height: "2rem" }}></div>
           
@@ -216,31 +202,31 @@ const StatsDashboard = ({ localData, onRefresh }) => {
                 ) / 10}
             />
 
-            <StatsCard title={"Ø " + language.stats_month} value={Math.round(
+            {/* <StatsCard title={"Ø " + language.stats_month} value={Math.round(
                   calcDailyAverage(filterByType(localData, selectedType), localData) *
                     30.5 *
                     10
                 ) / 10}
-            />
+            /> */}
 
-            <StatsCard title={"Ø " + language.stats_year} value={Math.round(
+            {/* <StatsCard title={"Ø " + language.stats_year} value={Math.round(
                   calcDailyAverage(filterByType(localData, selectedType), localData) * 365
                 )}
-            />
+            /> */}
           </div>
 
           <div style={{height: "2rem"}}></div>
 
           <div style={{width: "100%"}}>
 
-          <p style={styles.card_label2}>
+          {/* <p style={styles.card_label2}>
             {selectedType === "main" ? language.activities : null}
             {selectedType === "joint" ? language.joint : null}
             {selectedType === "bong" ? language.bong : null}
             {selectedType === "vape" ? language.vape : null}
             {selectedType === "pipe" ? language.pipe : null}
             {selectedType === "cookie" ? language.cookie : null} {language.in_the_last}
-          </p>
+          </p> */}
           <div
             style={{
               flexDirection: "row",
@@ -255,10 +241,10 @@ const StatsDashboard = ({ localData, onRefresh }) => {
                 {language.stats_24h}
               </p>
               <p style={styles.card_value}>
-                {
+                {/* {
                   filterByMostRecent(filterByType(localData, selectedType), 1)
                     .length
-                }
+                } */}
               </p>
             </div>
             <div>
@@ -266,38 +252,23 @@ const StatsDashboard = ({ localData, onRefresh }) => {
                 {language.stats_7d}
               </p>
               <p
-                style={[
-                  styles.card_value,
-                  {
-                    borderTopColor: "#0080FF",
-                    borderTopWidth: 2,
-                    paddingRight: 10,
-                    paddingLeft: 10,
-                    marginTop: 0,
-                    textAlign: "center"
-                  },
-                ]}
-              >
-                {
+                className="card_value"
+                style={styles.card_value}>
+                {/* {
                   filterByMostRecent(filterByType(localData, selectedType), 7)
                     .length
-                }
+                } */}
               </p>
             </div>
             <div>
-              <p
-                style={[
-                  styles.card_label,
-                  { marginTop: 0, textAlign: "center" },
-                ]}
-              >
+              <p style={styles.card_label}>
                 {language.stats_30d}
               </p>
               <p style={styles.card_value2}>
-                {
+                {/* {
                   filterByMostRecent(filterByType(localData, selectedType), 30)
                     .length
-                }
+                } */}
               </p>
             </div>
           </div>
@@ -334,8 +305,8 @@ const StatsDashboard = ({ localData, onRefresh }) => {
 
           <div style={{ height: 30 }}></div>
 
-          <SelectorBar options={options_time} onPress={(value) => toggleSelection(value)} selectedType={selectedTime}/>
-
+{/*           <SelectorBar options={options_time} onPress={(value) => toggleSelection(value)} selectedType={selectedTime}/>
+ */}
           <div style={{ height: 20 }}></div>
 
            {/* <LineChart

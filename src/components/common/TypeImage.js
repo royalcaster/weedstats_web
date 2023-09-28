@@ -41,7 +41,7 @@ const TypeImage = ({ type, backgroundColor, x }) => {
         default: 
         return (
         <div style={{backgroundColor: backgroundColor ? backgroundColor : null, height: x, justifyContent: "center", display: "flex", width: x, borderRadius: 15}}>
-            <img src={require('../../data/img/logo.png')} alt={"Logo-Image"}  style={[{height: x-10, width: x-15, alignSelf: "center"}]} source={require('../../data/img/logo.png')}/>
+            <img src={require('../../data/img/logo.png')} alt={"Logo-Image"}  style={{height: x-20, width: x-15, alignSelf: "center"}} source={require('../../data/img/logo.png')}/>
         </div>
         )
     }
