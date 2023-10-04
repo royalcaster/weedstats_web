@@ -328,8 +328,7 @@ export const shadeColor = (color, percent) => {
 }
 
 export const customFetch = async (url) => {
-  const response = await fetch(process.env.BACKEND_URL + url);
-  console.debug(process.env.BACKEND_URL + url);
+  const response = await fetch(process.env.REACT_APP_BACKEND_URL + url);
   const test = await response.json();
   return test;
 }
@@ -364,4 +363,16 @@ export const getCookie = (cookieName) => {
 
 export const deleteCookie = ( ) => {
 document.cookie = "loggedIn=, email=, password=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+export const sendEntryToBackend = async (entry, callback) => {
+  await fetch(process.env.REACT_APP_BACKEND_URL + '/write-entry', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(entry),
+  })
+    .then((response) => response.status == 200 ? callback() : null)
+    .catch((error) => {
+      console.error('Error:', error);
+    });
 }

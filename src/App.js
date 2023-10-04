@@ -34,6 +34,7 @@ import { FriendListContext } from './data/FriendListContext';
 import { Spinner } from "react-activity";
 import "react-activity/dist/library.css";
 import { useLastLocation } from 'react-router-dom-last-location';
+import useFetch from './data/useFetch';
 
 const App = () => {
 
@@ -44,6 +45,7 @@ const App = () => {
   const [friendList, setFriendList] = useState([]);
   const location = useLocation();
   const lastLocation = useLastLocation();
+  /* const [test] = useFetch(process.env.REACT_APP_BACKEND_URL + "/api/test"); */
 
   //States für Frontend
   const [loading, setLoading] = useState(true);

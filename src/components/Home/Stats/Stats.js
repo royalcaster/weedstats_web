@@ -23,7 +23,7 @@ const Stats = () => {
   const [localDataLoaded, setLocalDataLoaded] = useState(false);
 
   useEffect( () => { 
-    loadData();
+    /* loadData(); */
     setLocalDataLoaded(true);
   }, []);
 

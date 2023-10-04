@@ -26,7 +26,7 @@ import { set, ref } from "@firebase/database";
 import { app, firestore, db } from "../../../data/FirebaseConfig";
 import CounterModal from "../../common/CounterModal";
 import { FriendListContext } from "../../../data/FriendListContext";
-import { getCounterNotificationTitle, shadeColor } from "../../../data/Service";
+import { getCounterNotificationTitle, sendEntryToBackend, shadeColor } from "../../../data/Service";
 import NewsPanel from "../../common/NewsPanel";
 import News from "../../../data/News";
 import UpdatePanel from "../../common/UpdatePanel";
@@ -262,7 +262,6 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
         new_entry.longitude = location.coords.longitude;
       }
     }
-    await writeEntryToDatabase(new_entry);
 
     const docRef = doc(firestore, "users", user.id);
     const docSnap = await getDoc(docRef);
@@ -275,7 +274,8 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
       last_entry_type: new_entry.type,
       main_counter: docSnap.data().joint_counter + docSnap.data().bong_counter + docSnap.data().vape_counter + docSnap.data().pipe_counter + docSnap.data().cookie_counter + 1,
     });
-    setWriteComplete(true);
+
+    await sendEntryToBackend(new_entry, () => setWriteComplete(true));
   };
 
   //Schreibt entry in datenbank

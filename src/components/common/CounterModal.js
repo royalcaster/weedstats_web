@@ -12,11 +12,6 @@ import { shadeColor } from "../../data/Service";
 const CounterModal = ({ onExit, writeComplete, sayingNr, borderColor, loadingColor}) => {
 
     const language = useContext(LanguageContext);
-
-    useEffect(() => {
-      console.log("modal");
-    });
-
     return (
       <>
         <div style={styles.container}>
