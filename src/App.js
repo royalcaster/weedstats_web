@@ -1,30 +1,31 @@
 import './App.css';
 import {
-  createBrowserRouter,
-  RouterProvider,
   Route,
-  Link,
-  createRoutesFromElements,
-  BrowserRouter,
   Routes
 } from "react-router-dom";
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useEffect, useState } from 'react';
 
 //Custom components
-import Home from './components/Home/Home'
 import Login from './components/Login/Login';
-import { useEffect, useState } from 'react';
+import Navbar from './components/common/Navbar';
+import Main from './components/Home/Main/Main'
+import Config from './components/Home/Config/Config'
+import Map from './components/Home/Map/Map'
+import Friends from './components/Home/Friends/Friends'
+import Stats from './components/Home/Stats/Stats'
+import CreatePanel from './components/Login/CreatePanel/CreatePanel';
 
 //Data
 import Languages from './data/languages.json'
 import { getAuth, signInWithEmailAndPassword, createUserWithEmailAndPassword, signOut, deleteUser } from '@firebase/auth'
 import { app, firestore } from './data/FirebaseConfig'
 import { doc, getDoc, updateDoc, deleteDoc, setDoc } from "@firebase/firestore";
-import { createUsernameArray, downloadUser, customFetch } from "./data/Service";
+import { createUsernameArray, downloadUser, customFetch, generateLoginCookie, getCookie, generateCookieString } from "./data/Service";
 import package_object from '../package.json'
 import { ref, deleteObject } from '@firebase/storage'
-import { storage } from "./data/FirebaseConfig";
 import { LanguageContext } from './data/LanguageContext';
+import { storage } from "./data/FirebaseConfig";
 import { UserContext } from './data/UserContext';
 import { ConfigContext } from './data/ConfigContext';
 import { FriendListContext } from './data/FriendListContext';
@@ -32,6 +33,7 @@ import { FriendListContext } from './data/FriendListContext';
 //Third Party
 import { Spinner } from "react-activity";
 import "react-activity/dist/library.css";
+import { useLastLocation } from 'react-router-dom-last-location';
 
 const App = () => {
 
@@ -40,6 +42,8 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [language, setLanguage] = useState(Languages.en);
   const [friendList, setFriendList] = useState([]);
+  const location = useLocation();
+  const lastLocation = useLastLocation();
 
   //States für Frontend
   const [loading, setLoading] = useState(true);
@@ -64,7 +68,17 @@ const App = () => {
     if (user != null) {
       getFriendList();
     }
+    console.debug(user);
   },[user]);
+
+  useEffect(() => {
+    console.debug(location.pathname);
+    console.debug(lastLocation);
+  },[location]);
+
+  /* useEffect(() => {
+    console.log(loading);
+  },[loading]); */
 
   useEffect(() => {
     if (config != null) {
@@ -75,17 +89,35 @@ const App = () => {
   //Sucht im AsyncStorage nach dem letzten User der sich eingeloggt hat und loggt sich bei Erfolg automatisch ein
   const checkForUser = async () => {
     try {
-      const accessToken = JSON.parse(await localStorage.getItem("accessToken"));
-      if (accessToken != null) {
-        handleLogin(accessToken.email, accessToken.password);
+      const initialLogin = getCookie("initialLogin");
+      const id = getCookie("id");
+      const email = getCookie("email");
+      const password = getCookie("password");
+      
+      if (initialLogin != "" && email != "" && password != "") {
+        if (initialLogin == "true") {
+          console.log(initialLogin);
+          handleLogin(email, password);
+          console.log("richtiger Login");
+        }
+        else {
+          var u = await downloadUser(id, false);
+          setConfig(u.config);
+          delete u.config;
+          setUser(u);
+          /* await refreshUser(u); */
+          console.log("schein-login");
+          setLoading(false);
+        }
       }
       else {
         navigate('/login');
         setLoading(false);
+        console.log("redirect");
       }
     }
     catch (error) {
-      console.log("Fehler beim Laden des angemeldeten Nutzers:" + error)
+      console.log("Fehler beim Laden des angemeldeten Nutzers: " + error)
     }
   }
 
@@ -96,10 +128,16 @@ const App = () => {
     .then(async (userCredential) => {
       // Signed in 
       const result = userCredential.user;
-      await localStorage.setItem("accessToken", JSON.stringify({
+      document.cookie = generateCookieString("initialLogin", "false", 3);
+      document.cookie = generateCookieString("id", result.uid, 3);
+      document.cookie = generateCookieString("email", email, 3);
+      document.cookie = generateCookieString("password", password, 3);
+      /* await localStorage.setItem("accessToken", JSON.stringify({
+        loggedIn: true,
+        id: result.uid,
         email: email,
         password: password
-      }));
+      })); */
       const docSnap = await getDoc(doc(firestore, "users", result.uid));
       if (docSnap.exists()) {
         setUser({
@@ -141,8 +179,8 @@ const App = () => {
         });
       }
       setWrongPassword(false);
+      navigate("/home/counter");
       setLoading(false);
-      navigate("/home")
     })
     .catch((error) => {
       const errorCode = error.code;
@@ -191,8 +229,15 @@ const App = () => {
   }
 
   const refreshUser = async ( settings ) => {
-    await updateDoc(doc(firestore, "users", user.id), settings);
-
+      /* if (user != null) {
+        await updateDoc(doc(firestore, "users", settings.id), settings);
+        
+      }
+      else {
+        await updateDoc(doc(firestore, "users", user.id), settings);
+        console.log(user.username);
+      } */
+    console.debug(settings);
     setUser({
       username: settings.username ? settings.username : user.username,
       id: settings.id ? settings.id : user.id,
@@ -430,6 +475,7 @@ const App = () => {
     localStorage.removeItem("accessToken");
     signOut(auth).then(() => {
       setUser(null);
+      navigate("/login");
       setLoading(false);
     }).catch((error) => {
       setLoading(false);
@@ -499,30 +545,36 @@ const App = () => {
       <Routes>
         <Route path="/" element={LoginComponent}/>
         <Route path="/login" element={LoginComponent}/>
+        <Route path="/create" element={<CreatePanel emailInUse={emailInUse} handleCreate={handleCreate} onExit={() => navigate("/login")}/>}/>
         <Route path="/home/*" element={
+          <>
           <UserContext.Provider value={user}>
           <ConfigContext.Provider value={config}>
           <FriendListContext.Provider value={friendList}>
-            <Home 
-            loadingParent={loading}
-            friendList={friendList}
-            handleLogOut={handleLogOut}
-            toggleLanguage={toggleLanguage}
-            deleteAccount={deleteAccount}
-            getFriendList={getFriendList}
-            loadSettings={loadSettings}
-            refreshUser={refreshUser}
-            handleIntroFinish={handleIntroFinish}
-            handleAuthenticatorSelect={handleAuthenticatorSelect}
-            onSetUser={(user) => setUser(user)}
+            <Routes>
+              <Route path="/stats" element={<Stats />} />
+              <Route path="/map" element={<Map />} />
+              <Route path="/counter" element={<Main onSetUser={(user) => setUser(user)} refreshUser={refreshUser}/>} />
+              <Route path="/config" element={<Config handleLogOut={handleLogOut} toggleLanguage={toggleLanguage} loadSettings={loadSettings} refreshUser={refreshUser} deleteAccount={deleteAccount}/>}/>
+              <Route path="/friends" element={<Friends friendList={friendList} refreshUser={refreshUser}/>} />
+            </Routes>
+
+            <Navbar 
+              onPressStats={() => navigate('/home/stats')}
+              onPressMap={() => navigate('/home/map')}
+              onPressCounter={() => navigate('/home/counter')}
+              onPressConfig={() => navigate('/home/config')}
+              onPressFriends={() => navigate('/home/friends')}
             />
           </FriendListContext.Provider>
           </ConfigContext.Provider>
-          </UserContext.Provider>} />
+          </UserContext.Provider>
+          </>
+        }/>
       </Routes>
     </LanguageContext.Provider>
     : 
-    <div style={{height: "100%", justifyContent: "center", display: "flex", alignItems: "center"}}>
+    <div style={{height: "100%", justifyContent: "center", display: "flex", alignItems: "center", width: "100%"}}>
       <Spinner color='#484F78' size={40}/>
     </div>}
   </div>

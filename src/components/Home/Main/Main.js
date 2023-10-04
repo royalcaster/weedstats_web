@@ -328,18 +328,8 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
         <div style={{zIndex: 3000, position: "absolute", height: "100%", width: "100%"}}>
           <Tutorial onDone={onDone} extraHeight={50}/>
         </div> : <> 
-          <div style={{height: "100%", width: "100%", maxWidth: 700, alignSelf: "center", overflow: "scroll"}}>
-          {loading ? (
-            <div
-              style={{
-                flex: 1,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <CustomLoader x={50} color={"#484F78"}/>
-            </div>
-          ) : (
+          <div style={{height: "100%", width: "100%", maxWidth: 700, alignSelf: "center", overflowX: "hidden"}}>
+          
             <>
               {counterOrder.length == 0 ? (
                 <div style={{height: "90%", justifyContent: "center"}}>
@@ -490,13 +480,12 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                 </div>
               </div>}
             </>
-          )}
           </div>
           </>}</>}/>
 
           <Route exact path='levels' element={<Levels onExit={() => navigate('/home/counter')}/>}/>
           <Route exact path='app-info' element={<AppInfo onExit={() => navigate('/home/counter')}/>}/>
-          <Route exact path='premium' element={<Donation onExit={() => navigate('/home/counter')}/>}/>
+          <Route path='/premium' element={<Donation onExit={() => navigate('/home/counter')}/>}/>
           <Route exact path='tutorial' element={<Tutorial onExit={() => navigate('/home/counter')}/>}/>
 
           </Routes>

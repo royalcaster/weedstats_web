@@ -240,12 +240,7 @@ const logOutModalContent = <div
 
         <CustomModal show={showLogOut} child={logOutModalContent}/>
 
-        {loading ? (
-          <div style={{ flex: 1, justifyContent: "center", alignItems: "center"}}>
-            <CustomLoader x={50} color={"#0080FF"}/>
-          </div>
-        ) : (
-          <div className="left" style={{height: "100%", position: "absolute", width: "100%", backgroundColor: "#1E2132", overflow: "scroll", maxWidth: 700, left: "50%"}}>
+          <div className="left" style={{height: "100%", position: "absolute", width: "100%", backgroundColor: "#1E2132", overflow: "scroll", maxWidth: 700, left: "50%", overflowX: "hidden"}}>
 
             <div style={{display: "flex"}}> 
               <div style={{flex: 1}}> 
@@ -485,8 +480,7 @@ const logOutModalContent = <div
               </div>
 
           <div style={{height: "12%"}}></div>
-          </div>   
-          )}
+          </div>
       </div>
     </>
   );
@@ -499,7 +493,8 @@ const styles = {
     width: "100%",
     height: "100%",
     backgroundColor: "#1E2132",
-    justifyContent: "center"
+    justifyContent: "center",
+    overflowX: "hidden"
   },
   heading: {
     color: "white",

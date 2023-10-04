@@ -5,17 +5,20 @@ import { LanguageContext } from "../../../data/LanguageContext";
 
 //CSS
 import './CreatePanel.css'
-import '../Login.css'
 import AuthInput from "../../common/AuthInput";
 
 //Third Party
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 import { shadeColor } from "../../../data/Service";
+import { useNavigate } from "react-router-dom";
 
 const CreatePanel = ({ handleCreate, onExit, emailInUse }) => {
 
     //Context
     const language = useContext(LanguageContext);
+
+    //navigation
+    const navigate = useNavigate();
     
     //State
     const [userName, setUserName] = useState("");
@@ -86,22 +89,21 @@ const CreatePanel = ({ handleCreate, onExit, emailInUse }) => {
     }
 
     return (
-        <div className="container" style={{overflow: "scroll"}}>
+        <div className="container_create" style={{overflowY: "scroll", overflowX: "hidden"}}>
 
-<div
+        <div className="content_container">
+
+        <div
         className="heading_container"
         style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
+          position: "relative",
           zIndex: 2,
           display: "flex",
           flexDirection: "row",
           width: "100%"
         }}
       >
-       <div style={{maxWidth: 500, display: "flex", flexDirection: "row", width: "100%", margin: "auto"}}> 
-        <div style={{width: "1rem"}}></div>
+       <div style={{maxWidth: 700, display: "flex", flexDirection: "row", width: "100%", margin: "auto"}}> 
         <img
           style={{ height: "3rem", width: "3rem", alignSelf: "center"}}
           src={require('../../../data/img/icon.png')}
@@ -122,9 +124,7 @@ const CreatePanel = ({ handleCreate, onExit, emailInUse }) => {
         </div>
       </div>
 
-        <div className="content_container">
-
-        <div style={{height: "3rem"}}></div>
+        <div style={{height: "1rem"}}></div>
 
         <p className="label" style={{fontSize: "2rem", fontWeight: 700}}>Create your account</p>
         <AuthInput onChange={(text) => setUserName(text)} value={userName} type={"text"} label={"Username"}/>
@@ -148,10 +148,11 @@ const CreatePanel = ({ handleCreate, onExit, emailInUse }) => {
         <div style={{height: "1rem"}}></div>
         <div style={{textAlign: "right"}}>
         <a className="toggle_link" onClick={() => setSecurePassword(!securePassword)}>{securePassword ? <><AiFillEye style={{marginBottom: -3}}/> {language.login_show_password}</> : <><AiFillEyeInvisible style={{marginBottom: -3}}/> {language.login_hide_password}</>}</a>
-        </div>
-
-        <div style={{height: "3rem"}}></div>
         
+        </div>
+        
+        <div style={{height: "1rem"}}></div>
+
         <div style={{width: "100%"}}>
         <Button
           fontColor={!emailIsValid || !passwordLengthValid || !passwordNumberValid || !passwordMatch || userName.length == 0 ? shadeColor("#ffffff",-25) : "white"}
@@ -170,12 +171,12 @@ const CreatePanel = ({ handleCreate, onExit, emailInUse }) => {
             title={"Cancel"}
             borderradius={10}
             color={"#484F78"}
-            onPress={() => onExit()}
+            onPress={() => navigate("/login")}
             hovercolor={shadeColor("#484F78",-25)}
             huge={true}
         />
         </div>
-
+        <div style={{height: "2rem"}}></div>
             </div>
         </div>
     )

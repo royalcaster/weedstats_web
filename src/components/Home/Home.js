@@ -28,21 +28,21 @@ import Stats from "./Stats/Stats";
   
   const Home = ({ onSetUser, onWriteComplete, friendList, handleLogOut, toggleLanguage, deleteAccount, getFriendList, loadSettings, refreshUser, handleIntroFinish, loadingParent }) => {
 
-    //Context
+    // Context
     const user = useContext(UserContext);
 
-    //Navigation
+    // Navigation
     const navigate = useNavigate();
     const location = useLocation();
 
-    useEffect(() => {
+    /* useEffect(() => {
       if (user == null) {
         navigate("/login")
       }
       else {
         navigate("/home/counter")
       }
-    },[]);
+    },[]); */
 
     return (
       
@@ -50,11 +50,11 @@ import Stats from "./Stats/Stats";
         <div style={{height: "92vh", width: "100%", top: 0, position: "absolute", justifyContent: "center", display: "flex"}}>
           {!loadingParent ?
             <Routes>
-              <Route index path="/counter/*" element={<Main onWriteComplete={onWriteComplete} onSetUser={onSetUser} refreshUser={refreshUser}/>} />
-              <Route exact path="/config" element={<Config handleLogOut={handleLogOut} toggleLanguage={toggleLanguage} loadSettings={loadSettings} refreshUser={refreshUser} deleteAccount={deleteAccount}/>}/>
-              <Route exact path="/map" element={<Map />} />
-              <Route exact path="/friends/*" element={<Friends friendList={friendList} refreshUser={refreshUser}/>} />
-              <Route exact path="/stats/*" element={<Stats />} />
+              <Route path="/counter/*" element={<Main onWriteComplete={onWriteComplete} onSetUser={onSetUser} refreshUser={refreshUser}/>} />
+              <Route path="/stats/*" element={<Stats />} />
+              <Route path="/config" element={<Config handleLogOut={handleLogOut} toggleLanguage={toggleLanguage} loadSettings={loadSettings} refreshUser={refreshUser} deleteAccount={deleteAccount}/>}/>
+              <Route path="/map" element={<Map />} />
+              <Route path="/friends/*" element={<Friends friendList={friendList} refreshUser={refreshUser}/>} />
             </Routes>
             : <Empty title={"loading app"}/>
           }
