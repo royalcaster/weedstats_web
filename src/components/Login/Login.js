@@ -9,7 +9,7 @@ import {
   BrowserRouter,
   Routes
 } from "react-router-dom";
-import { useNavigation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 //Data
 import { LanguageContext } from "../../data/LanguageContext";
@@ -29,7 +29,7 @@ import AuthInput from "../common/AuthInput";
 const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFound }) => {
 
   //navigation
-  const navigate = useNavigation()
+  const navigate = useNavigate();
 
   //Conp
   const language = useContext(LanguageContext);
@@ -79,24 +79,22 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
 
   return (
     <>
-    {showCreatePanel ? <CreatePanel emailInUse={emailInUse} handleCreate={handleCreate} onExit={() => setShowCreatePanel(false)}/> : null}
 
     <div className="login_container">
 
-       <div
+      <div className="content_container">
+
+      <div
         className="heading_container"
         style={{
-          position: "absolute",
-          top: 0,
-          left: 0,
+          position: "relative",
           zIndex: 2,
           display: "flex",
           flexDirection: "row",
           width: "100%"
         }}
       >
-       <div style={{maxWidth: 500, display: "flex", flexDirection: "row", width: "100%", margin: "auto"}}> 
-        <div style={{width: "1rem"}}></div>
+       <div style={{maxWidth: 700, display: "flex", flexDirection: "row", width: "100%", margin: "auto"}}> 
         <img
           style={{ height: "3rem", width: "3rem", alignSelf: "center"}}
           src={require('../../data/img/icon.png')}
@@ -117,7 +115,7 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
         </div>
       </div>
 
-      <div style={{ zIndex: 2, justifyContent: "center", width: "80%", maxWidth: 500, display: "flex", flexDirection: "column"}}>
+      <div style={{ zIndex: 2, justifyContent: "center", width: "100%", maxWidth: 500, display: "flex", flexDirection: "column"}}>
 
         <p className="label" style={{fontSize: "2rem", fontWeight: 700}}>Login</p>
 
@@ -141,7 +139,7 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
           title={language.login}
           borderradius={10}
           color={"#0080FF"}
-          onPress={() => {handleLogin(email, password, () => navigate("/home")); console.log(email, password);}}
+          onPress={() => {handleLogin(email, password, () => navigate("/home"))}}
           hovercolor={shadeColor("#0080FF", -25)}
           color2={"#004080"}
           huge={true}
@@ -152,10 +150,12 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
           title={"Create your account"}
           borderradius={10}
           color={"#484F78"}
-          onPress={() => setShowCreatePanel(true)}
+          onPress={() => navigate("/create")}
           hovercolor={shadeColor("#484F78", -25)}
           huge={true}
         />
+      </div>
+
       </div> 
 
     </div>

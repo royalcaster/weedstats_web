@@ -73,7 +73,6 @@ export const downloadUser = async ( id, config ) =>
   const docSnap = await getDoc(doc(firestore, "users", id));
 
   if (docSnap.exists()) {
-
     if (config) {
       return docSnap.data().config;
     }
@@ -334,6 +333,36 @@ export const customFetch = async (url) => {
   return test;
 }
 
+export const generateLoginCookie = (initialLogin, id, email, password) => {
+  const expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + 2); // Expires in 2 days
+  const expires = "expires=" + expirationDate.toUTCString();
+  return "initialLogin=" + initialLogin + ", id=" + id +", email=" + email + ", password=" + password +"; expires=" + expirationDate.toUTCString();
+}
+
+export const generateCookieString = (key, value, extraDays) => {
+  const expirationDate = new Date();
+  expirationDate.setDate(expirationDate.getDate() + extraDays); // Expires in 2 days
+  const expires = "expires=" + expirationDate.toUTCString();
+  return key + "=" + value + "; expires=" + expirationDate.toUTCString();
+}
+
+export const getCookie = (cookieName) => {
+  const name = cookieName + "=";
+  const decodedCookie = decodeURIComponent(document.cookie);
+  const cookieArray = decodedCookie.split(";");
+
+  for (let i = 0; i < cookieArray.length; i++) {
+    let cookie = cookieArray[i].trim();
+    if (cookie.indexOf(name) === 0) {
+      return cookie.substring(name.length, cookie.length);
+    }
+  }
+  return "";
+}
+
+export const deleteCookie = ( ) => {
+document.cookie = "loggedIn=, email=, password=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
 export const sendEntryToBackend = async (entry, callback) => {
   await fetch(process.env.REACT_APP_BACKEND_URL + '/write-entry', {
     method: 'POST',

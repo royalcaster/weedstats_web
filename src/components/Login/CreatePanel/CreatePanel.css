@@ -1,19 +1,18 @@
-.container {
-    position: absolute;
+.container_create {
     background-color: #131520;
-    height: 100%;
-    width: 100%;
-    z-index: 10;
+    flex: 1;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
     display: flex;
+    flex-direction: column;
 }
 
 .content_container {
-    background-color: #131520;
-    width: 95%;
+    width: 90%;
     max-width: 500px;
-    margin: auto;
     border-radius: 15px;
-    padding: 1.5rem;
+    padding: 2rem;
 }
 
 .textinput {
@@ -22,7 +21,6 @@
     padding: 15px;
     width: 80%;
     align-self: center;
-    margin-vertical: 5px;
     font-family: Poppins;
     font-size: 2rem;
     color: white
@@ -48,5 +46,4 @@
     color: white;
     font-size: 2rem;
     font-family: Poppins;
-    margin-vertical: 10px
 }

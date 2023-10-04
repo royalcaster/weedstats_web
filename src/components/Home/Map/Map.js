@@ -58,15 +58,17 @@ const Map = ({ getFriendList }) => {
     map.fitBounds(bounds);
     console.log("loading map");
     setMap(map)
-    map.panTo({lat: friendList[0].last_entry_latitude, lng: friendList[0].last_entry_longitude});
-  }, [])
+    }, [])
 
   const onUnmount = React.useCallback(function callback(map) {
     setMap(null)
   }, [])
 
-  //Ref
-  const mapViewRef = createRef();
+  useEffect(() => {
+    if (friendList.length !== 0 && map) {
+      map.panTo({lat: friendList[0].last_entry_latitude, lng: friendList[0].last_entry_longitude});
+    }
+  },[friendList]);
 
   useEffect(() => {
     fillMarkers();

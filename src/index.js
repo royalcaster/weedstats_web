@@ -7,15 +7,18 @@ import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import { LastLocationProvider } from 'react-router-dom-last-location';
+
+import './components/common/CustomScrollBar.css'
 
 const router = createBrowserRouter([
   {
     path: "*",
-    element: (<App />)
+    element: (<LastLocationProvider><App /></LastLocationProvider>)
   }
 ]);
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(<RouterProvider router={router} />);
+root.render(<RouterProvider router={router}/>);
 
 reportWebVitals();

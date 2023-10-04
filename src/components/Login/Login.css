@@ -8,6 +8,13 @@
     flex-direction: column;
 }
 
+.content_container {
+    width: 90%;
+    max-width: 500px;
+    border-radius: 15px;
+    padding: 2rem;
+}
+
 .login_pressable {
     border-width: 2px;
     border-radius: 100px;
