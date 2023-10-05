@@ -78,6 +78,7 @@ const styles = {
     width: "100%",
     justifyContent: "center",
     height: "100%",
-    backgroundColor: "#1E2132"
+    backgroundColor: "#1E2132",
+    overflowX: "hidden"
   }
 };

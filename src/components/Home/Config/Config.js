@@ -507,7 +507,6 @@ const styles = {
     marginLeft: "1rem",
     marginBottom: 0,
     marginTop: 0
-    
   },
   heading_modal: {
     color: "white",

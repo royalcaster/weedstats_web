@@ -1,0 +1,65 @@
+{
+    "de": {
+        "short": "de",
+
+        "sign_in": "Anmelden",
+        "get_started": "Konto erstellen",
+
+        "navbar_idea": "Idee",
+        "navbar_features": "Funktionen",
+        "navbar_support": "Unterstützen",
+        "navbar_get_the_app": "Hol dir die App",
+
+        "idea_heading": "Idee",
+        "idea_text": "Hier steht etwas über die Idee von WeedStats, bitte noch ausfüllen Hallo Hier.",
+
+        "features_heading": "Funktionen",
+        "features_text": "Benutze die Tabs, um dir die verschiedenen Funktionen in Aktion anzusehen.",
+        "features_main": ["durch Erhöhen der Counter deine Freunde benachrichtigen", "im Level aufsteigen"],
+        "features_stats": ["Statistiken und Maßzahlen für deinen Konsum", "Strähnen und Pausen", "gesamter Verlauf deiner Aktivitäten"],
+        "features_map": ["letzte Aktivitäten deiner Freunde", "Heatmap deines Konsums"],
+        "features_config": ["Counter aktivieren und deaktivieren", "Einstellungen zu Datenschutz und Privatsphäre treffen"],
+        "features_friends": ["Freunde besuchen", "Freundschaftsanfragen beantworten", "Dein Konto einsehen", "Tutorial wiederholen", "WeedStats unterstützen"],
+
+        "support_heading": "Unterstützen",
+        "support_text": "WeedStats ist im Moment ein Hobbyprojekt. Wenn du den Entwicklern gern etwas zurückgeben möchtest, dann kannst du über die Premium-Version von WeedStats nachdenken. Für einmalige 0,99€ erhälst du nicht nur eine komplett werbefreie Version von WeedStats, sondern ebenso zusätzliche Features und erhöhte Priorität, falls es Probleme mit deinem Konto geben sollte. \n \n test",
+
+        "get_the_app_heading": "Hol dir die App",
+        "get_the_app_text": "WeedStats ist erhältlich im Google-PlayStore (Android) und im App-Store (iOS).",
+
+        "impressum_heading": "Impressum",
+        "impressum_text": "Hier steht etwas über die Idee von WeedStats, bitte noch ausfüllen Hallo Hier."
+    },
+
+    "en": {
+        "short": "en",
+
+        "sign_in": "Sign in",
+        "get_started": "Create account",
+
+        "navbar_idea": "Idea",
+        "navbar_features": "Features",
+        "navbar_support": "Support",
+        "navbar_get_the_app": "Get the app",
+
+        "idea_heading": "Idea",
+        "idea_text": "Hier steht etwas über die Idee von WeedStats, bitte noch ausfüllen Hallo Hier.",
+
+        "features_heading": "Features",
+        "features_text": "Use the tabs below to see features in action.",
+        "features_main": ["Notify your friends by increasing the counters", "Climb Levels"],
+        "features_stats": ["Statistics and metrics for your consumption", "Streaks and breaks", "Entire history of your activities"],
+        "features_map": ["Recent activities of your friends", "Heatmap of your consumption"],
+        "features_config": ["Activate and deactivate counters", "Make settings for data protection and privacy"],
+        "features_friends": ["Visit friends", "Answer friend requests", "View your account", "Rewatch tutorial", "Support WeedStats"],
+
+        "support_heading": "Support",
+        "support_text": "Hier steht etwas über die Idee von WeedStats, bitte noch ausfüllen Hallo Hier.",
+
+        "get_the_app_heading": "Get the app",
+        "get_the_app_text": "WeedStats is available on Google-PlayStore (Android) and on App-Store (iOS).",
+
+        "impressum_heading": "Impressum",
+        "impressum_text": "Hier steht etwas über die Idee von WeedStats, bitte noch ausfüllen Hallo Hier."
+    }
+}

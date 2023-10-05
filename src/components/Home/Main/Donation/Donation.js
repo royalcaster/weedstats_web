@@ -53,8 +53,8 @@ const styles = {
         height: "100%",
         width: "100%",
         maxWidth: 700,
-        padding: 5,
-        overflow: "scroll",
+        overflowY: "scroll",
+        overflowX: "hidden",
         zIndex: 1000,
         backgroundColor: "#1E2132"
     },

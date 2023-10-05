@@ -8,6 +8,8 @@ import LevelImage from "../../../common/LevelImage";
 //Service
 import { LanguageContext } from "../../../../data/LanguageContext";
 
+import './Levels.css'
+
 const Levels = ({ onExit }) => {
 
   //Context
@@ -30,7 +32,6 @@ const Levels = ({ onExit }) => {
 
       <div style={{height: "1rem"}}></div>
 
-
       {language.levels.map((level, index) => {
         return (
           <div
@@ -40,11 +41,13 @@ const Levels = ({ onExit }) => {
               borderRadius: 10,
               width: "90%",
               backgroundColor: level.colors[0],
+              backgroundColor: "#131520",
               flex: 1,
               flexDirection: "row",
               alignItems: "center",
-              borderColor: index == language.levels.length - 1 ? "#E6C743" : null,
-              borderWidth: index == language.levels.length - 1 ? 3 : null,
+              borderColor: level.colors[0],
+              borderWidth: 2,
+              borderStyle: "solid",
               maxWidth: 700,
               display: "flex",
               marginLeft: "auto",
@@ -53,9 +56,10 @@ const Levels = ({ onExit }) => {
               paddingTop: 5,
               paddingBottom: 5
             }}
+            className="level_container"
           >
             <LevelImage index={index} style={styles.lvl_img} />
-            <div style={{ marginLeft: 15 }}>
+            <div style={{ marginLeft: 15}}>
               <p style={styles.lvl_name}>{level.name}</p>
               {index != language.levels.length - 1 ? (
                 <p style={styles.lvl_bounds}>
@@ -68,6 +72,7 @@ const Levels = ({ onExit }) => {
           </div>
         );
       })}
+      <div style={{height: "5rem"}}></div>
       </div>
     </div>
   );
@@ -81,7 +86,8 @@ const styles = {
     width: "100%",
     maxWidth: 700,
     padding: 5,
-    overflow: "scroll"
+    overflowY: "scroll",
+    overflowX: "hidden"
   },
   heading: {
     color: "white",
@@ -96,14 +102,14 @@ const styles = {
     marginTop: -10
   },
   lvl_name: {
-    fontSize: "1.5rem",
+    fontSize: "1rem",
     fontFamily: "Poppins",
     color: "white",
     margin: 0
   },
   lvl_bounds: {
     fontFamily: "Poppins",
-    fontSize: "1rem",
+    fontSize: "0.75rem",
     margin: 0,
     color: "white",
   }

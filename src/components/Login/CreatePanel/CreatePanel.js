@@ -10,7 +10,7 @@ import AuthInput from "../../common/AuthInput";
 //Third Party
 import { AiFillEye, AiFillEyeInvisible } from 'react-icons/ai'
 import { shadeColor } from "../../../data/Service";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 const CreatePanel = ({ handleCreate, onExit, emailInUse }) => {
 
@@ -84,45 +84,43 @@ const CreatePanel = ({ handleCreate, onExit, emailInUse }) => {
         }
     }
 
-    const hide = () => {
-        console.log("exit createpanel");
-    }
-
     return (
         <div className="container_create" style={{overflowY: "scroll", overflowX: "hidden"}}>
 
-        <div className="content_container">
+        <div className="create_content_container">
 
         <div
-        className="heading_container"
-        style={{
-          position: "relative",
-          zIndex: 2,
-          display: "flex",
-          flexDirection: "row",
-          width: "100%"
-        }}
-      >
-       <div style={{maxWidth: 700, display: "flex", flexDirection: "row", width: "100%", margin: "auto"}}> 
-        <img
-          style={{ height: "3rem", width: "3rem", alignSelf: "center"}}
-          src={require('../../../data/img/icon.png')}
-          alt="WeedStats Logo"
-        />
-        <p
+          className="heading_container"
           style={{
-            color: "white",
-            fontSize: "1.5rem",
-            fontFamily: "Poppins",
-            textAlign: "center",
-            fontWeight: 700, 
-            marginLeft: "1rem"
+            position: "relative",
+            zIndex: 2,
+            display: "flex",
+            flexDirection: "row",
+            width: "100%",
+            cursor: "pointer"
           }}
-        >
-          WeedStats
-        </p>
-        </div>
-      </div>
+          onClick={() => navigate("/about")}
+          >
+          <div style={{maxWidth: 700, display: "flex", flexDirection: "row", width: "100%", margin: "auto"}}> 
+            <img
+              style={{ height: "3rem", width: "3rem", alignSelf: "center"}}
+              src={require('../../../data/img/icon.png')}
+              alt="WeedStats Logo"
+            />
+            <p
+              style={{
+                color: "white",
+                fontSize: "1.5rem",
+                fontFamily: "Poppins",
+                textAlign: "center",
+                fontWeight: 700, 
+                marginLeft: "1rem"
+              }}
+            >
+              WeedStats
+            </p>
+            </div>
+          </div>
 
         <div style={{height: "1rem"}}></div>
 
@@ -153,7 +151,7 @@ const CreatePanel = ({ handleCreate, onExit, emailInUse }) => {
         
         <div style={{height: "1rem"}}></div>
 
-        <div style={{width: "100%"}}>
+        <div style={{width: "100%", justifyContent: "center", display: "flex", flexDirection: "column"}}>
         <Button
           fontColor={!emailIsValid || !passwordLengthValid || !passwordNumberValid || !passwordMatch || userName.length == 0 ? shadeColor("#ffffff",-25) : "white"}
           title={"Create my account"}
@@ -165,19 +163,10 @@ const CreatePanel = ({ handleCreate, onExit, emailInUse }) => {
           disabled={!emailIsValid || !passwordLengthValid || !passwordNumberValid || !passwordMatch || userName.length == 0}
           huge={true}
         />
-        <div style={{height: "1rem"}}></div>
-        <Button
-            fontColor={"white"}
-            title={"Cancel"}
-            borderradius={10}
-            color={"#484F78"}
-            onPress={() => navigate("/login")}
-            hovercolor={shadeColor("#484F78",-25)}
-            huge={true}
-        />
+        <Link to={"/login"} className="toggle_link" style={{alignSelf: "center", marginTop: 10}}>Already have an account? Sign in</Link>
         </div>
         <div style={{height: "2rem"}}></div>
-            </div>
+        </div>
         </div>
     )
 }

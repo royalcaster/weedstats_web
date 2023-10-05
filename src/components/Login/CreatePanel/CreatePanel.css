@@ -1,21 +1,20 @@
 .container_create {
     background-color: #131520;
-    flex: 1;
+    width: 100%;
     justify-content: center;
     align-items: center;
     align-content: center;
-    display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
-.content_container {
+.create_content_container {
     width: 90%;
     max-width: 500px;
-    border-radius: 15px;
-    padding: 2rem;
+    margin: auto;
 }
 
-.textinput {
+/* .textinput {
     background-color: #131520;
     border-radius: 10px;
     padding: 15px;
@@ -24,7 +23,8 @@
     font-family: Poppins;
     font-size: 2rem;
     color: white
-}
+} */
+
 .label {
     color: white;
     font-size: 1.5rem;
@@ -46,4 +46,16 @@
     color: white;
     font-size: 2rem;
     font-family: Poppins;
+}
+
+.toggle_link {
+    color: #0080FF;
+    cursor: pointer;
+    align-self: flex-end;
+    width: fit-content;
+    text-decoration: none;
+}
+
+.toggle_link:hover {
+    text-decoration: underline;
 }
