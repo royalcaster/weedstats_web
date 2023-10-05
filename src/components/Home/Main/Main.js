@@ -16,6 +16,7 @@ import AppInfo from './AppInfo/AppInfo'
 //Third Party
 import moment from "moment";
 import { compare, compareVersions } from 'compare-versions';
+import { v4 } from "uuid";
 
 //Service
 import sayings from '../../../data/Sayings.json'
@@ -207,9 +208,11 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
     sendCounterPushNotification(index);
     setBorderColor(color);
     let new_entry = {
+      entry_id: v4(),
+      user_id: user.id,
       number: user.main_counter + 1,
+      timestamp: new Date().toISOString().slice(0, 19).replace('T', ' '), // Current datetime in YYYY-MM-DD HH:mm:ss format,
       type: index,
-      timestamp: Date.now(),
       latitude: null,
       longitude: null,
     };
