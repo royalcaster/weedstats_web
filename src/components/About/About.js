@@ -49,10 +49,12 @@ const About = () => {
             navLinks={["#idea", "#features", "#support", "#gettheapp"]}
           />
       </header>
+
+      <div style={{height: "4rem"}}></div>
     
       <HeroShot language={language}/>
 
-      <Idea language={language} />
+      {/* <Idea language={language} /> */}
 
       <Features language={language} />
 

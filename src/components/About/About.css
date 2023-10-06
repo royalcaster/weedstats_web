@@ -231,6 +231,11 @@ p {
   border-bottom-left-radius: 0px;
 }
 
+.heroshot_smartphone_container {
+  justify-content: center;
+  display: flex;
+}
+
 /* MOBIL */
 @media only screen and (max-width: 800px) {
   .navbar_link_container {
@@ -254,10 +259,6 @@ p {
     margin-top: 20px;
     max-width: 80px;
   }
-  
-  .heroshot_smartphone_container {
-    display: none;
-  }
 
   .impressum_flex_container {
     flex-direction: column;
@@ -266,6 +267,11 @@ p {
   }
 
   .heroshot_button_container {
+    flex-direction: column;
+  }
+
+  .heroshot_gif_container {
+    background-image: none;
     flex-direction: column;
   }
 }
@@ -292,6 +298,7 @@ p {
 
   .heroshot_gif_container {
     background-image: none;
+    flex-direction: row;
   }
 
   .content_heading {
