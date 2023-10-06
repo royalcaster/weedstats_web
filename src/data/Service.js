@@ -363,6 +363,8 @@ export const getCookie = (cookieName) => {
 
 export const deleteCookie = ( ) => {
 document.cookie = "loggedIn=, email=, password=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;"
+}
+
 export const sendEntryToBackend = async (entry, callback) => {
   await fetch(process.env.REACT_APP_BACKEND_URL + '/write-entry', {
     method: 'POST',
