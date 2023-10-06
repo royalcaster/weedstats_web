@@ -54,7 +54,7 @@ const styles = {
         flexDirection: "row",
         justifyContent: "space-around",
         backgroundColor: "#131520",
-        borderRadius: 100
+        borderRadius: 10
     },
     item_container: {
         backgroundColor: "#131520",

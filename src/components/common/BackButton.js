@@ -12,15 +12,21 @@ const BackButton = ({onPress, hoverColor}) => {
     const [hover, setHover] = useState(false);
 
     return (
-        <button className="backbutton" onMouseEnter={() => setHover(true)} onMouseLeave={() => setHover(false)} onClick={() => onPress()} style={{
-            width: 50,
-            height: 50,
-            backgroundColor: hover ? hoverColor : "rgba(0,0,0,0)",
-            borderRadius: 25,
-            outline: "none",
-            borderWidth: 0,
-            justifyContent: "center"
-        }}><BiArrowBack style={styles.icon_back}/></button>
+            <div
+            onMouseEnter={() => setHover(true)}
+            onMouseLeave={() => setHover(false)}
+            style={{
+                height: 30,
+                width: 30,
+                padding: 10,
+                borderRadius: 100,
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center", 
+                backgroundColor: hover ? hoverColor : "rgba(0,0,0,0)",
+                borderWidth: 0,
+                cursor: "pointer"
+            }} onClick={() => onPress()}><BiArrowBack style={styles.icon_back}/></div>
     );
 }
 

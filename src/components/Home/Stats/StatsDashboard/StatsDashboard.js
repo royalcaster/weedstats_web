@@ -92,20 +92,19 @@ const StatsDashboard = ({ localData, onRefresh }) => {
    {/*  {showDonation ? <Donation onexit={() => setShowDonation(false)}/> : null} */}
 
     <div style={styles.container}>
-      <div style={{ opacity: 1, alignItems: "center"}}>
-        <div style={{flexDirection: "row", width: "100%", alignItems: "center"}}>
-        <p style={styles.bold_heading}>{language.stats_overview}</p>
-        
-        <div style={{flexDirection: "row",right: 10, top: -5, position: "absolute"}}>
-        <div onClick={() => setShowDonation(true)}
-            >
-              <div style={{height: 50, backgroundColor: "#1E2132", width: 50 }}>
-                
-              </div>
-            </div>
-            </div>
 
+      <div style={styles.content_container}>
+
+      <div style={{ opacity: 1, alignItems: "center"}}>
+        
+      <div style={{display: "flex"}}> 
+        <div style={{flex: 1}}> 
+          <p style={styles.bold_heading}>{language.stats_overview}</p>
         </div>
+        <div style={{flex: 1}}> 
+          <p>History Icon</p>
+        </div>
+      </div>
 
         
 
@@ -389,6 +388,7 @@ const StatsDashboard = ({ localData, onRefresh }) => {
         </div> 
       </div>
       <div style={{height: "5rem"}}></div>
+      </div>
     </div>
     </>
   );
@@ -401,15 +401,19 @@ const styles = {
     backgroundColor: "#1E2132",
     width: "100%",
   },
+  content_container: {
+    maxWidth: 700,
+    margin: "auto"
+  },
   heading: {
-    fontFamily: "PoppinsBlack",
+    fontFamily: "Poppins",
     color: "#c4c4c4",
     fontSize: 20,
     marginLeft: 10,
   },
   card_label: {
     color: "white",
-    fontFamily: "PoppinsLight",
+    fontFamily: "Poppins",
     fontSize: 14,
     marginTop: 5,
     textAlign: "left",
@@ -418,7 +422,7 @@ const styles = {
   },
   card_label2: {
     color: "white",
-    fontFamily: "PoppinsLight",
+    fontFamily: "Poppins",
     fontSize: 14,
     marginTop: 5,
     textAlign: "left",
@@ -432,14 +436,14 @@ const styles = {
   },
   card_value: {
     color: "white",
-    fontFamily: "PoppinsBlack",
+    fontFamily: "Poppins",
     fontSize: 30,
     marginTop: -10,
     textAlign: "left",
   },
   card_value2: {
     color: "white",
-    fontFamily: "PoppinsBlack",
+    fontFamily: "Poppins",
     fontSize: 30,
     marginTop: -10,
     textAlign: "left",
@@ -467,8 +471,21 @@ const styles = {
   },
   bold_heading: {
     color: "white",
-    fontFamily: "PoppinsBlack",
+    fontFamily: "Poppins",
     fontSize: "2rem",
-    marginLeft: "2rem"
-  }
+    fontWeight: 700,
+    marginLeft: "1rem"
+  },
+  heading: {
+    color: "white",
+    fontSize: "1.3rem",
+    fontFamily: "Poppins",
+    marginLeft: "1rem",
+    textAlign: "left",
+    textAlignVertical: "center",
+    fontSize: "2.5",
+    marginLeft: "1rem",
+    marginBottom: 0,
+    marginTop: 0
+  },
 };

@@ -35,6 +35,7 @@ import { Spinner } from "react-activity";
 import "react-activity/dist/library.css";
 import { useLastLocation } from 'react-router-dom-last-location';
 import useFetch from './data/useFetch';
+import About from './components/About/About';
 
 const App = () => {
 
@@ -541,13 +542,14 @@ const App = () => {
   const LoginComponent = <Login handleLogin={handleLogin} handleCreate={handleCreate} wrongPassword={wrongPassword} emailInUse={emailInUse} userNotFound={userNotFound}/>;
 
   return (
-  <div style={{backgroundColor: "#1E2132", height: "100vh", width: "100vw", display: "flex", justifyContent: "center"}}>
+  <div style={{backgroundColor: "#1E2132", height: "100vh", width: "100vw", display: "flex", justifyContent: "center", overflow: "hidden"}}>
     {!loading ? 
     <LanguageContext.Provider value={language}>
       <Routes>
         <Route path="/" element={LoginComponent}/>
         <Route path="/login" element={LoginComponent}/>
         <Route path="/create" element={<CreatePanel emailInUse={emailInUse} handleCreate={handleCreate} onExit={() => navigate("/login")}/>}/>
+        <Route path="/about" element={<UserContext.Provider value={user}><About /></UserContext.Provider>}/>
         <Route path="/home/*" element={
           <>
           <UserContext.Provider value={user}>
@@ -556,7 +558,7 @@ const App = () => {
             <Routes>
               <Route path="/stats" element={<Stats />} />
               <Route path="/map" element={<Map />} />
-              <Route path="/counter" element={<Main onSetUser={(user) => setUser(user)} refreshUser={refreshUser}/>} />
+              <Route path="/counter/*" element={<Main onSetUser={(user) => setUser(user)} refreshUser={refreshUser}/>} />
               <Route path="/config" element={<Config handleLogOut={handleLogOut} toggleLanguage={toggleLanguage} loadSettings={loadSettings} refreshUser={refreshUser} deleteAccount={deleteAccount}/>}/>
               <Route path="/friends" element={<Friends friendList={friendList} refreshUser={refreshUser}/>} />
             </Routes>

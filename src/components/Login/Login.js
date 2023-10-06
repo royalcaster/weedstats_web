@@ -1,19 +1,9 @@
 //React
 import { useContext, useState, useRef, useEffect } from "react";
-import {
-  createBrowserRouter,
-  RouterProvider,
-  Route,
-  Link,
-  createRoutesFromElements,
-  BrowserRouter,
-  Routes
-} from "react-router-dom";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 //Data
 import { LanguageContext } from "../../data/LanguageContext";
-import CreatePanel from './CreatePanel/CreatePanel'
 
 //Custom Components
 import Button from "../common/Button";
@@ -82,7 +72,7 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
 
     <div className="login_container">
 
-      <div className="content_container">
+       <div className="login_content_container">
 
       <div
         className="heading_container"
@@ -91,8 +81,10 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
           zIndex: 2,
           display: "flex",
           flexDirection: "row",
-          width: "100%"
+          width: "100%",
+          cursor: "pointer"
         }}
+        onClick={() => navigate("/about")}
       >
        <div style={{maxWidth: 700, display: "flex", flexDirection: "row", width: "100%", margin: "auto"}}> 
         <img
@@ -115,8 +107,6 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
         </div>
       </div>
 
-      <div style={{ zIndex: 2, justifyContent: "center", width: "100%", maxWidth: 500, display: "flex", flexDirection: "column"}}>
-
         <p className="label" style={{fontSize: "2rem", fontWeight: 700}}>Login</p>
 
         <AuthInput label={"E-Mail Adress"} onBlur={() => checkForSpace()} onChange={(text) => setEmail(text)} value={email} type={"email"}/>
@@ -125,15 +115,15 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
 
         <AuthInput label={"Password"} onBlur={() => checkForSpace()} onChange={(text) => setPassword(text)} value={password} type={securePassword ? "password" : "text"}/>
 
-        <div style={{height: "1rem"}}></div>
-        <a className="toggle_link" onClick={() => setSecurePassword(!securePassword)}>{securePassword ? <><AiFillEye style={{marginBottom: -3}}/> {language.login_show_password}</> : <><AiFillEyeInvisible style={{marginBottom: -3}}/> {language.login_hide_password}</>}</a>
+        <div style={{height: "1rem"}}></div>        
+        <div style={{display: "flex"}}>
+          <a onClick={() => setSecurePassword(!securePassword)} className="toggle_link" style={{textAlign: "right", width: "100%"}}>{securePassword ? <><AiFillEye style={{marginBottom: -3}}/> {language.login_show_password}</> : <><AiFillEyeInvisible style={{marginBottom: -3}}/> {language.login_hide_password}</>}</a>
+        </div>
 
         {wrongPassword ? <p style={{color: "#FC2044", pAlign: "center"}}>{language.login_wrong_password}</p> : null }
-      </div>
 
       <div style={{height: "2rem"}}></div>
-
-      <div style={{ zIndex: 2, justifyContent: "center", width: "100%", display: "flex", flexDirection: "column", maxWidth: 500}}>
+      
       <Button
           fontColor={"white"}
           title={language.login}
@@ -144,19 +134,13 @@ const Login = ({ handleLogin, handleCreate, wrongPassword, emailInUse, userNotFo
           color2={"#004080"}
           huge={true}
       />
-      <p style={{fontFamily: "Poppins", color: "white", fontSize: "1rem", textAlign: "center"}}>OR</p>
-      <Button
-          fontColor={"white"}
-          title={"Create your account"}
-          borderradius={10}
-          color={"#484F78"}
-          onPress={() => navigate("/create")}
-          hovercolor={shadeColor("#484F78", -25)}
-          huge={true}
-        />
+      <div style={{height: "0.5rem"}}></div>
+      <div style={{display: "flex"}}>
+        <a onClick={() => navigate("/create")} className="toggle_link" style={{textAlign: "center", width: "100%"}}>Don't have an account? Create one</a>
       </div>
 
-      </div> 
+
+      </div>  
 
     </div>
 </>

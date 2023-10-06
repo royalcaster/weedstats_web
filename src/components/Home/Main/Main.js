@@ -439,7 +439,7 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                     </div>
                     <div style={{flex: 1, justifyContent: "center", display: "flex"}}>
                       <Button
-                        onPress={() => navigate('/home/counter/app-info')}
+                        onPress={() => navigate('/home/counter/info')}
                         title={" App-Info"}
                         icon={<AiFillInfoCircle style={{fontSize: "1.25rem", marginBottom: -4}}/>}
                         borderradius={10}
@@ -479,17 +479,29 @@ const Main = ({ sendPushNotification, toggleNavbar, refreshUser }) => {
                     </div>
                     
                 </div>
-                <div style={{height: "2rem"}}></div>
+                <div style={{height: 10}}></div>
+                <Button
+                  onPress={() => navigate('/about')}
+                  title={" " + "Homepage"}
+                  icon={<img style={{height: 10, width: 10}} src={require('../../../data/img/logo_bw.png')} />}
+                  borderradius={10}
+                  color={"#131520"}
+                  fontColor={"white"}
+                  hovercolor={shadeColor("#131520",-25)}
+                  small={true}
+                  color2={"#F2338C"}
+                />
+                <div style={{height: "5rem"}}></div>
                 </div>
               </div>}
             </>
           </div>
           </>}</>}/>
 
-          <Route exact path='levels' element={<Levels onExit={() => navigate('/home/counter')}/>}/>
-          <Route exact path='app-info' element={<AppInfo onExit={() => navigate('/home/counter')}/>}/>
-          <Route path='/premium' element={<Donation onExit={() => navigate('/home/counter')}/>}/>
-          <Route exact path='tutorial' element={<Tutorial onExit={() => navigate('/home/counter')}/>}/>
+          <Route exact path='/levels' element={<Levels onExit={() => navigate('/home/counter')}/>}/>
+          <Route exact path='/info' element={<AppInfo onExit={() => navigate('/home/counter')}/>}/>
+          <Route exact path='/premium' element={<Donation onExit={() => navigate('/home/counter')}/>}/>
+          <Route exact path='/tutorial' element={<Tutorial onExit={() => navigate('/home/counter')}/>}/>
 
           </Routes>
     </>
@@ -503,6 +515,7 @@ const styles = {
     flex: 5,
     backgroundColor: "#1E2132",
     width: "100%",
+    overflow: "hidden"
   },
   main_heading: {
     color: "white",

@@ -1,18 +1,17 @@
 .login_container {
     background-color: #131520;
-    flex: 1;
+    width: 100%;
     justify-content: center;
     align-items: center;
     align-content: center;
-    display: flex;
     flex-direction: column;
+    overflow-x: hidden;
 }
 
-.content_container {
+.login_content_container {
     width: 90%;
     max-width: 500px;
-    border-radius: 15px;
-    padding: 2rem;
+    margin: auto;
 }
 
 .login_pressable {
@@ -104,8 +103,9 @@
 .toggle_link {
     color: #0080FF;
     cursor: pointer;
-    align-self: flex-end;
+    align-self: flex-start;
     width: fit-content;
+    text-decoration: none;
 }
 
 .toggle_link:hover {
